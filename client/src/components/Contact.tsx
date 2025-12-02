@@ -139,10 +139,10 @@ export default function Contact() {
             </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Email</h3>
             <a
-              href="mailto:hello@fintrack.com"
+              href="mailto:hello@Smart Budget Manager.com"
               className="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
             >
-              hello@fintrack.com
+              hello@Smart Budget Manager.com
             </a>
           </div>
 

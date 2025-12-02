@@ -75,7 +75,7 @@ export default function Hero() {
 
             <img
               src="https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=800"
-              alt="FinTrack Dashboard Preview"
+              alt="Smart Budget Manager Dashboard Preview"
               className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
                 isHovered ? 'opacity-40 scale-110' : 'opacity-20'
               }`}

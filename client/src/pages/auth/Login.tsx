@@ -127,7 +127,7 @@ export default function Login() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-white/60 dark:bg-gray-800/60 text-gray-600 dark:text-gray-400">
-                New to FinTrack?
+                New to Smart Budget Manager?
               </span>
             </div>
           </div>

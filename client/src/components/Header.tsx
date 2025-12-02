@@ -30,7 +30,7 @@ export default function Header() {
             <div className="absolute inset-0 bg-orange-500 blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
           </div>
           <span className="text-2xl font-bold bg-linear-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
-            FinTrack
+            Smart Budget Manager
           </span>
         </button>
 

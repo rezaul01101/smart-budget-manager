@@ -25,7 +25,7 @@ export default function Footer() {
               <div className="absolute inset-0 bg-orange-500 blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
             </div>
             <span className="text-2xl font-bold bg-linear-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
-              FinTrack
+              Smart Budget Manager
             </span>
           </div>
 
@@ -73,7 +73,7 @@ export default function Footer() {
       <div className="pt-8 border-t border-gray-200 dark:border-gray-700/50">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            © {new Date().getFullYear()} FinTrack. All rights reserved.
+            © {new Date().getFullYear()} Smart Budget Manager. All rights reserved.
           </p>
 
           <div className="flex items-center space-x-6 text-sm">

@@ -39,7 +39,7 @@ export default function Register() {
               Create Account
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
-              Join FinTrack and start managing your finances
+              Join Smart Budget Manager and start managing your finances
             </p>
           </div>
 
