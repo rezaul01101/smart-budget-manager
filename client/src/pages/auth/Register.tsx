@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import { Wallet, Mail, Lock, User, ArrowRight, Eye, EyeOff, CheckCircle } from 'lucide-react';
+import { Mail, Lock, User, ArrowRight, Eye, EyeOff, CheckCircle } from 'lucide-react';
 
-interface RegisterProps {
-  onNavigate: (page: 'home' | 'login' | 'register' | 'dashboard') => void;
-}
 
-export default function Register({ onNavigate }: RegisterProps) {
+export default function Register() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -25,7 +22,6 @@ export default function Register({ onNavigate }: RegisterProps) {
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
-    onNavigate('dashboard');
   };
 
   const passwordStrength = formData.password.length > 0 ? Math.min(formData.password.length / 2, 100) : 0;
@@ -260,7 +256,7 @@ export default function Register({ onNavigate }: RegisterProps) {
 
           <button
             type="button"
-            onClick={() => onNavigate('login')}
+            onClick={() => {}}
             className="w-full bg-white/80 dark:bg-gray-700/50 text-gray-900 dark:text-white font-semibold py-4 px-6 rounded-full border-2 border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             Sign In

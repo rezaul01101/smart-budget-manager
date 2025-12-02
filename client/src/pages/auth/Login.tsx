@@ -2,11 +2,9 @@ import { useState } from 'react';
 import { Mail, Lock, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router';
 
-interface LoginProps {
-  onNavigate: (page: 'home' | 'login' | 'register' | 'dashboard') => void;
-}
 
-export default function Login({ onNavigate }: LoginProps) {
+
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -14,7 +12,6 @@ export default function Login({ onNavigate }: LoginProps) {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    onNavigate('dashboard');
   };
 
   return (

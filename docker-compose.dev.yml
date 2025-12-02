@@ -20,7 +20,7 @@ services:
     stdin_open: true
     tty: true
     networks:
-      - bdm-dev-network
+      - bdm-network
 networks:
-  bdm-dev-network:
+  bdm-network:
     driver: bridge

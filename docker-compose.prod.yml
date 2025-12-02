@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.prod
+    container_name: bdm-client-prod
+    ports:
+      - "3001:3001"   # Expose to host
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - bdm-network
+
+networks:
+  bdm-network:
+    driver: bridge
