@@ -37,8 +37,20 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
     data: response,
   });
 });
+const loginTest = catchAsync(async (req: Request, res: Response) => {
+
+  console.log('Login test endpoint hit');
+  
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "User registered successfully !",
+    data: {},
+  });
+});
 
 export const AuthController = {
   loginUser,
   registerUser,
+  loginTest
 };

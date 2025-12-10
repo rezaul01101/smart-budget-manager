@@ -5,6 +5,10 @@ import validateRequest from "../../middlewares/validateRequest";
 
 const router = express.Router();
 router.post(
+  "/test",
+  AuthController.loginTest
+);
+router.post(
   "/login",
   validateRequest(AuthValidation.loginZodSchema),
   AuthController.loginUser

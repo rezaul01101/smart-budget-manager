@@ -1,29 +1,12 @@
-# Build stage
 FROM node:24-alpine AS build
-
 WORKDIR /app
-
-# Copy package files
 COPY package*.json ./
 RUN npm install
-
-# Copy project files
 COPY . .
-
-# Build vite app
 RUN npm run build
 
-# Production stage
 FROM node:24-alpine
-
 WORKDIR /app
-
-# Install serve
-RUN npm install -g serve
-
-# Copy built app
 COPY --from=build /app/dist ./dist
-
 EXPOSE 3001
-
-CMD ["serve", "-s", "dist", "-l", "3001"]
+CMD ["npx", "serve", "-s", "dist", "-l", "3001"]
