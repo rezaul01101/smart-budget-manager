@@ -1,52 +1,52 @@
 
 import config from "../../../config";
 import bcrypt from "bcrypt";
-// import ApiError from "../../../errors/ApiError";
+import ApiError from "../../../errors/ApiError";
 import httpStatus from "http-status";
-// import { ILoginUser, ILoginUserResponse } from "./auth.interface";
-// import { createToken } from "./auth.utils";
+import { ILoginUser, ILoginUserResponse } from "./auth.interface";
+import { createToken } from "./auth.utils";
 import { prisma } from "../../../shared/prisma";
 import { User } from "../../../generated/prisma/client";
 
-// const loginUser = async (payload: ILoginUser) => {
-//   const { email, password } = payload;
+const loginUser = async (payload: ILoginUser) => {
+  const { email, password } = payload;
 
-//   //checking exists user by email
-//   const isUserExist = await prisma.user.findUnique({
-//     where: {
-//       email: email,
-//     },
-//   });
+  //checking exists user by email
+  const isUserExist = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
 
-//   if (!isUserExist) {
-//     throw new ApiError(httpStatus.NOT_FOUND, "User does not exist");
-//   }
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User does not exist");
+  }
 
-//   if (
-//     isUserExist.password &&
-//     !(await bcrypt.compare(password, isUserExist.password))
-//   ) {
-//     throw new ApiError(httpStatus.UNAUTHORIZED, "Password is incorrect");
-//   }
+  if (
+    isUserExist.password &&
+    !(await bcrypt.compare(password, isUserExist.password))
+  ) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Password is incorrect");
+  }
 
-//   //create access token & refresh token
-//   const accessToken = createToken(
-//     { email: email, id: isUserExist.id,name:isUserExist?.name},
-//     config.jwt.secret as string,
-//     config.jwt.expires_in as string
-//   );
+  //create access token & refresh token
+  const accessToken = createToken(
+    { email: email, id: isUserExist.id,name:isUserExist?.name},
+    config.jwt.secret as string,
+    config.jwt.expires_in as string
+  );
 
-//   const refreshToken = createToken(
-//     { email: email, id: isUserExist?.id,name:isUserExist?.name },
-//     config.jwt.refresh_secret as string,
-//     config.jwt.refresh_expires_in as string
-//   );
+  const refreshToken = createToken(
+    { email: email, id: isUserExist?.id,name:isUserExist?.name },
+    config.jwt.refresh_secret as string,
+    config.jwt.refresh_expires_in as string
+  );
 
-//   return {
-//     accessToken,
-//     refreshToken,
-//   };
-// };
+  return {
+    accessToken,
+    refreshToken,
+  };
+};
 const insertIntoDB = async (data: User): Promise<User> => {
   const { password, ...user } = data;
 
@@ -58,11 +58,10 @@ const insertIntoDB = async (data: User): Promise<User> => {
       },
     });
     if (existUser) {
-      throw new Error("Already exists this user. Please try again other email");
-      // throw new error(
-      //   httpStatus.BAD_REQUEST,
-      //   "Already exists this user. Please try again other email"
-      // );
+      throw new ApiError(
+        httpStatus.BAD_REQUEST,
+        "Already exists this user. Please try again other email"
+      );
     }
   }
 
@@ -82,5 +81,6 @@ const insertIntoDB = async (data: User): Promise<User> => {
   return result;
 };
 export const AuthService = {
-  insertIntoDB
+  insertIntoDB,
+  loginUser
 };
