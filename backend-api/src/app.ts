@@ -7,8 +7,8 @@ import express, {
   Response,
 } from "express";
 import httpStatus from "http-status";
-// import cookieParser from "cookie-parser";
-// import routes from "./app/routes";
+import cookieParser from "cookie-parser";
+import routes from "./app/routes";
 // import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import path from "path";
 const app: Application = express();
@@ -23,7 +23,7 @@ app.use(
     credentials: true,
   })
 );
-// app.use(cookieParser());
+app.use(cookieParser());
 
 //parser
 app.use(express.json());
@@ -35,7 +35,7 @@ app.get("/upload/:imageName", function (req, res) {
   res.sendFile(filepath);
 });
 
-// app.use("/api/v1", routes);
+app.use("/api/v1", routes);
 
 //global error handler
 // app.use(globalErrorHandler);
