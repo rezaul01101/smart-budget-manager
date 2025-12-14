@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/Users/rezaulhoque/Rezaul/web/Contabovps/budget-manager--app/backend-api/logs/winston/errors/.ce524031e7575f790c760d11e9b211ea66905582-audit.json",
+    "files": [
+        {
+            "date": 1765712935452,
+            "name": "/Users/rezaulhoque/Rezaul/web/Contabovps/budget-manager--app/backend-api/logs/winston/errors/2025-14-12-17-error.log",
+            "hash": "70ca62c913dd73ca36ef8fb0cba084c9c81c44453cf67d30b59caac40b8fca68"
+        }
+    ],
+    "hashType": "sha256"
+}
