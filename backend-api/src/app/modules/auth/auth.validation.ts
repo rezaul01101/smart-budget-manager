@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { email, z } from 'zod';
 
 const loginZodSchema = z.object({
   body: z.object({
@@ -23,8 +23,27 @@ const registerZodSchema = z.object({
     }),
   }),
 });
+const forgotZodSchema = z.object({
+  body: z.object({
+    email: z.string({
+      error: 'Email is required',
+    })
+  }),
+});
+const otpVerifyZodSchema = z.object({
+  body: z.object({
+    email: z.string({
+      error: 'Email is required',
+    }),
+    otp: z.string({
+      error: 'Otp is required',
+    }),
+  }),
+});
 
 export const AuthValidation = {
     loginZodSchema,
-    registerZodSchema
+    registerZodSchema,
+    forgotZodSchema,
+    otpVerifyZodSchema
   };

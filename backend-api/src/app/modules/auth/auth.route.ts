@@ -15,5 +15,15 @@ router.post(
   validateRequest(AuthValidation.registerZodSchema),
   AuthController.registerUser
 );
+router.post(
+  "/forgot-password",
+  validateRequest(AuthValidation.forgotZodSchema),
+  AuthController.forgotPassword
+);
+router.post(
+  "/otp-verify",
+  validateRequest(AuthValidation.otpVerifyZodSchema),
+  AuthController.otpVerify
+);
 
 export const AuthRoutes = router;

@@ -7,3 +7,7 @@ export type ILoginUserResponse = {
   accessToken: string;
   refreshToken?: string;
 };
+export type IUserOtpCheck = {
+  email: string;
+  otp?: string;
+};

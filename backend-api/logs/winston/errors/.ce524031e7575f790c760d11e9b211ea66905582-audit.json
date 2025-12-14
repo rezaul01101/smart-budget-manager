@@ -9,6 +9,11 @@
             "date": 1765712935452,
             "name": "/Users/rezaulhoque/Rezaul/web/Contabovps/budget-manager--app/backend-api/logs/winston/errors/2025-14-12-17-error.log",
             "hash": "70ca62c913dd73ca36ef8fb0cba084c9c81c44453cf67d30b59caac40b8fca68"
+        },
+        {
+            "date": 1765721267273,
+            "name": "/Users/rezaulhoque/Rezaul/web/Contabovps/budget-manager--app/backend-api/logs/winston/errors/2025-14-12-20-error.log",
+            "hash": "8da8d210c56f350a43018bcbe16ba18957c95727823281e163c30d81399671c8"
         }
     ],
     "hashType": "sha256"

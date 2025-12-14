@@ -384,7 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  PasswordResetOtp: 'PasswordResetOtp'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user"
+    modelProps: "user" | "passwordResetOtp"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -478,6 +479,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PasswordResetOtp: {
+      payload: Prisma.$PasswordResetOtpPayload<ExtArgs>
+      fields: Prisma.PasswordResetOtpFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PasswordResetOtpFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PasswordResetOtpFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload>
+        }
+        findFirst: {
+          args: Prisma.PasswordResetOtpFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PasswordResetOtpFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload>
+        }
+        findMany: {
+          args: Prisma.PasswordResetOtpFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload>[]
+        }
+        create: {
+          args: Prisma.PasswordResetOtpCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload>
+        }
+        createMany: {
+          args: Prisma.PasswordResetOtpCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PasswordResetOtpCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload>[]
+        }
+        delete: {
+          args: Prisma.PasswordResetOtpDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload>
+        }
+        update: {
+          args: Prisma.PasswordResetOtpUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload>
+        }
+        deleteMany: {
+          args: Prisma.PasswordResetOtpDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PasswordResetOtpUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PasswordResetOtpUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload>[]
+        }
+        upsert: {
+          args: Prisma.PasswordResetOtpUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PasswordResetOtpPayload>
+        }
+        aggregate: {
+          args: Prisma.PasswordResetOtpAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePasswordResetOtp>
+        }
+        groupBy: {
+          args: Prisma.PasswordResetOtpGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PasswordResetOtpGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PasswordResetOtpCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PasswordResetOtpCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -529,6 +604,19 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const PasswordResetOtpScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  otp: 'otp',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PasswordResetOtpScalarFieldEnum = (typeof PasswordResetOtpScalarFieldEnum)[keyof typeof PasswordResetOtpScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -712,6 +800,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  passwordResetOtp?: Prisma.PasswordResetOtpOmit
 }
 
 /* Types for Logging */

@@ -36,8 +36,30 @@ const registerUser = catchAsync(async (req: Request, res: Response) => {
     data: response,
   });
 });
+const forgotPassword = catchAsync(async (req: Request, res: Response) => {
+  const { email } = req.body;
+  const response = await AuthService.forgotPassword(email);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "OTP has been sent",
+    data: response,
+  });
+});
+const otpVerify = catchAsync(async (req: Request, res: Response) => {
+  const { ...data } = req.body;
+  const response = await AuthService.otpVeriyCheck(data);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "This is valid otp",
+    data: response,
+  });
+});
 
 export const AuthController = {
   loginUser,
   registerUser,
+  forgotPassword,
+  otpVerify
 };
