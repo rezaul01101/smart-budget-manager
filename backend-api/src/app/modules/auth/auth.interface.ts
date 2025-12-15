@@ -9,5 +9,10 @@ export type ILoginUserResponse = {
 };
 export type IUserOtpCheck = {
   email: string;
-  otp?: string;
+  otp: string;
+};
+export type UpdatePassword = {
+  email: string;
+  otp: string;
+  password:string;
 };

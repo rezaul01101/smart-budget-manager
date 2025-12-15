@@ -56,10 +56,22 @@ const otpVerify = catchAsync(async (req: Request, res: Response) => {
     data: response,
   });
 });
+const updatePassword = catchAsync(async (req: Request, res: Response) => {
+  const { ...data } = req.body;
+  const response = await AuthService.updatePassword(data);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Password updated successfully",
+    data: response,
+  });
+});
+
 
 export const AuthController = {
   loginUser,
   registerUser,
   forgotPassword,
-  otpVerify
+  otpVerify,
+  updatePassword
 };

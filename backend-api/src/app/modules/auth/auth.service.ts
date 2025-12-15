@@ -6,6 +6,7 @@ import {
   ILoginUser,
   ILoginUserResponse,
   IUserOtpCheck,
+  UpdatePassword,
 } from "./auth.interface";
 import { createToken } from "./auth.utils";
 import { prisma } from "../../../shared/prisma";
@@ -164,9 +165,56 @@ const otpVeriyCheck = async (data: IUserOtpCheck) => {
   return true;
 };
 
+const updatePassword = async (data: UpdatePassword) => {
+  const { email, otp, password } = data;
+
+  //find user using email
+  const existEmail = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+  if (!existEmail) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "Please provide valid email");
+  }
+
+  //check otp valid
+  const otpRecord = await prisma.passwordResetOtp.findFirst({
+    where: {
+      userId: existEmail.id,
+      otp: otp,
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  if (!otpRecord) {
+    throw new ApiError(
+      httpStatus.BAD_REQUEST,
+      "Please provide valid email or otp"
+    );
+  }
+  //generate password to encrypt password
+  const encodedPassword = await bcrypt.hash(
+    password,
+    Number(config.bycrypt_salt_rounds)
+  );
+
+  //password update
+  const updatePassword = await prisma.user.update({
+    where: { id: existEmail.id },
+    data: { password: encodedPassword },
+  });
+
+  if (!updatePassword) {
+    return false;
+  }
+  return true;
+};
+
 export const AuthService = {
   insertIntoDB,
   loginUser,
   forgotPassword,
   otpVeriyCheck,
+  updatePassword,
 };

@@ -25,5 +25,10 @@ router.post(
   validateRequest(AuthValidation.otpVerifyZodSchema),
   AuthController.otpVerify
 );
+router.post(
+  "/update-password",
+  validateRequest(AuthValidation.updatePasswordZodSchema),
+  AuthController.updatePassword
+);
 
 export const AuthRoutes = router;
