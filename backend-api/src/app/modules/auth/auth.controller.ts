@@ -3,6 +3,9 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import { AuthService } from "./auth.service";
 import config from "../../../config";
+import ApiError from "../../../errors/ApiError";
+import { createToken, verifyToken } from "./auth.utils";
+import { JwtPayload } from "jsonwebtoken";
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body;
@@ -65,12 +68,57 @@ const updatePassword = catchAsync(async (req: Request, res: Response) => {
     data: response,
   });
 });
+const refreshToken = catchAsync(
+  async (req: Request, res: Response) => {
+    const refreshToken = req.cookies.refreshToken;
 
+    if (!refreshToken) {
+      throw new ApiError(401, "Refresh token missing");
+    }
+
+    let decoded: JwtPayload;
+
+    try {
+      decoded = verifyToken(refreshToken, config.jwt.refresh_secret as string);
+    } catch {
+      throw new ApiError(401, "Invalid or expired refresh token");
+    }
+
+    // Generate new tokens
+    const accessToken = createToken(
+      { email: decoded.email, id: decoded.id, name: decoded.name },
+      config.jwt.secret as string,
+      config.jwt.expires_in as string
+    );
+
+    const newRefreshToken = createToken(
+      { email: decoded.email, id: decoded.id, name: decoded.name },
+      config.jwt.refresh_secret as string,
+      config.jwt.refresh_expires_in as string
+    );
+
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+      secure: config.env === "production",
+      sameSite: "none",
+    });
+
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: "Token refreshed successfully",
+      data: {
+        accessToken,
+      },
+    });
+  }
+);
 
 export const AuthController = {
   loginUser,
   registerUser,
   forgotPassword,
   otpVerify,
-  updatePassword
+  updatePassword,
+  refreshToken,
 };

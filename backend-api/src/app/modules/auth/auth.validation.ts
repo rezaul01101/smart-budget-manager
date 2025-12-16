@@ -57,6 +57,14 @@ const updatePasswordZodSchema = z.object({
       .min(8, "Password must be at least 8 characters"),
   }),
 });
+const refreshTokenSchema = z.object({
+  body: z.object({
+    refreshToken: z.string({
+      error: "Refresh token is required",
+    }),
+  }),
+});
+
 
 export const AuthValidation = {
   loginZodSchema,
@@ -64,5 +72,6 @@ export const AuthValidation = {
   forgotZodSchema,
   otpVerifyZodSchema,
   updatePasswordZodSchema,
+  refreshTokenSchema
   
 };
