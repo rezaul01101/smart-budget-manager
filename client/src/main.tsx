@@ -8,6 +8,8 @@ import Register from "./pages/auth/Register";
 import App from "./App";
 import Login from "./pages/auth/Login";
 import Providers from "./lib/Providers";
+import ProtectedLayout from "./lib/ProtectedLayout";
+import Dashboard from "./pages/protected/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,15 @@ const router = createBrowserRouter([
       { path: "", element: <Home /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
+      // Protected routes
+      {
+        element: <ProtectedLayout />, // ✅ All nested routes protected
+        children: [
+          { path: "dashboard", element: <Dashboard /> },
+          // { path: "profile", element: <Profile /> },
+          // { path: "settings", element: <Settings /> },
+        ],
+      },
     ],
   },
 ]);
