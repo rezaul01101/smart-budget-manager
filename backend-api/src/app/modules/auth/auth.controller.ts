@@ -13,9 +13,10 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
 
   const { refreshToken, accessToken } = result;
   res.cookie("refreshToken", refreshToken, {
-    secure: config.env === "production",
+    secure: false,
     httpOnly: true,
-    sameSite: "none",
+    sameSite: "lax",
+    path:"/",
     maxAge: 1000 * 60 * 60 * 24 * 365,
   });
   sendResponse(res, {
@@ -98,10 +99,12 @@ const refreshToken = catchAsync(
     );
 
     res.cookie("refreshToken", newRefreshToken, {
-      httpOnly: true,
-      secure: config.env === "production",
-      sameSite: "none",
-    });
+    secure: false,
+    httpOnly: true,
+    sameSite: "lax",
+    path:"/",
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+  });
 
     sendResponse(res, {
       statusCode: 200,

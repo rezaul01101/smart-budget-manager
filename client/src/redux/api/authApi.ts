@@ -16,6 +16,7 @@ export const authApi = baseApi.injectEndpoints({
       query: () => ({
         url: `${AUTH_URL}/refresh-token`,
         method: "POST",
+        credentials: "include",
       }),
       async onQueryStarted(_, { queryFulfilled }) {
         const { data } = await queryFulfilled;

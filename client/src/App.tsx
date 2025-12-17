@@ -5,8 +5,11 @@ import { useRefreshTokenMutation } from "./redux/api/authApi";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "./redux/features/authSlice";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const [refreshToken] = useRefreshTokenMutation();
@@ -16,8 +19,16 @@ const App = () => {
       .unwrap()
       .then((res) => {
         dispatch(setAccessToken(res.data.accessToken));
+
+        // 🔥 Only redirect if user is on auth pages
+        if (location.pathname === "/login") {
+          navigate("/dashboard", { replace: true });
+        }
+      })
+      .catch(() => {
+        // stay on login
       });
-  }, [dispatch, refreshToken]);
+  }, [dispatch, refreshToken, navigate, location.pathname]);
 
   return (
     <div className="relative min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-slate-100 dark:from-gray-900 dark:via-slate-900 dark:to-gray-900">
