@@ -236,7 +236,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={formData.password !== formData.confirmPassword}
-              className="w-full bg-linear-to-r from-orange-500 to-amber-500 text-white font-semibold py-4 px-6 rounded-full shadow-xl hover:shadow-2xl hover:shadow-orange-500/40 transition-all duration-300 transform hover:scale-[1.02] inline-flex items-center justify-center group disabled:opacity-50 disabled:cursor-not-allowed"
+              className="cursor-pointer w-full bg-linear-to-r from-orange-500 to-amber-500 text-white font-semibold py-4 px-6 rounded-full shadow-xl hover:shadow-2xl hover:shadow-orange-500/40 transition-all duration-300 transform hover:scale-[1.02] inline-flex items-center justify-center group disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Create Account
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -257,7 +257,7 @@ export default function Register() {
           <button
             type="button"
             onClick={() => {}}
-            className="w-full bg-white/80 dark:bg-gray-700/50 text-gray-900 dark:text-white font-semibold py-4 px-6 rounded-full border-2 border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="cursor-pointer w-full bg-white/80 dark:bg-gray-700/50 text-gray-900 dark:text-white font-semibold py-4 px-6 rounded-full border-2 border-gray-200 dark:border-gray-700 hover:border-orange-500 dark:hover:border-orange-500 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             Sign In
           </button>

@@ -28,7 +28,7 @@ export default function Login() {
       dispatch(setAccessToken(res.data.accessToken));
       navigate("/dashboard");
     } catch (err) {
-      console.error("Login failed:", err);
+      console.error("Login failed:", error,err);
     }
   };
 
@@ -131,7 +131,7 @@ export default function Login() {
 
             <button
               type="submit"
-              className="w-full bg-linear-to-r from-orange-500 to-amber-500 text-white font-semibold py-4 px-6 rounded-full shadow-xl hover:shadow-2xl hover:shadow-orange-500/40 transition-all duration-300 transform hover:scale-[1.02] inline-flex items-center justify-center group"
+              className="cursor-pointer w-full bg-linear-to-r from-orange-500 to-amber-500 text-white font-semibold py-4 px-6 rounded-full shadow-xl hover:shadow-2xl hover:shadow-orange-500/40 transition-all duration-300 transform hover:scale-[1.02] inline-flex items-center justify-center group"
             >
               Sign In
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />

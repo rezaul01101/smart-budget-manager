@@ -5,27 +5,33 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Home from "./pages/Home";
 import Register from "./pages/auth/Register";
-import App from "./App";
 import Login from "./pages/auth/Login";
 import Providers from "./lib/Providers";
 import ProtectedLayout from "./lib/ProtectedLayout";
 import Dashboard from "./pages/protected/Dashboard";
+import DashboardLayout from "./layouts/DashboardLayout";
+import PublicLayout from "./layouts/PublicLayout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
+    element: <PublicLayout />,
     children: [
-      { path: "", element: <Home /> },
-      { path: "login", element: <Login /> },
-      { path: "register", element: <Register /> },
-      // Protected routes
+      { path: "/", element: <Home /> },
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
+    ],
+  },
+
+  // 🔐 Protected area
+  {
+    element: <ProtectedLayout />,
+    children: [
       {
-        element: <ProtectedLayout />, // ✅ All nested routes protected
+        element: <DashboardLayout />,
         children: [
-          { path: "dashboard", element: <Dashboard /> },
-          // { path: "profile", element: <Profile /> },
-          // { path: "settings", element: <Settings /> },
+          { path: "/dashboard", element: <Dashboard /> },
+          // { path: "/dashboard/profile", element: <Profile /> },
+          // { path: "/dashboard/settings", element: <Settings /> },
         ],
       },
     ],
