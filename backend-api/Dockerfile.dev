@@ -1,0 +1,18 @@
+FROM node:20-alpine
+
+# Create app directory
+WORKDIR /app
+
+# Install dependencies first (better cache)
+COPY package*.json ./
+
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Expose backend port
+EXPOSE 5002
+
+# Start dev server with hot reload
+CMD ["npm", "run", "dev"]

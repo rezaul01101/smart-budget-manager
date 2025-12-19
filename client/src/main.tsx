@@ -11,6 +11,9 @@ import ProtectedLayout from "./lib/ProtectedLayout";
 import Dashboard from "./pages/protected/Dashboard";
 import DashboardLayout from "./layouts/DashboardLayout";
 import PublicLayout from "./layouts/PublicLayout";
+import Transactions from "./pages/protected/Transactions";
+import Income from "./pages/protected/Income";
+import Expenses from "./pages/protected/Expenses";
 
 const router = createBrowserRouter([
   {
@@ -30,8 +33,9 @@ const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
           { path: "/dashboard", element: <Dashboard /> },
-          // { path: "/dashboard/profile", element: <Profile /> },
-          // { path: "/dashboard/settings", element: <Settings /> },
+          { path: "/transactions", element: <Transactions /> },
+          { path: "/income", element: <Income /> },
+          { path: "/expenses", element: <Expenses /> },
         ],
       },
     ],
