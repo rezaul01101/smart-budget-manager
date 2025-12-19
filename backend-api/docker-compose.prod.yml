@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  backend:
+    image: backend-api-prod
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "5002:5002"
+    env_file:
+      - .env.prod
+    restart: unless-stopped
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: smart_money_management
+      POSTGRES_USER: sbm
+      POSTGRES_PASSWORD: adminsbm
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_prod_data:
