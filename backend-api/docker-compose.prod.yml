@@ -9,7 +9,7 @@ services:
     ports:
       - "5002:5002"
     env_file:
-      - .env.prod
+      - .env
     restart: unless-stopped
     depends_on:
       - postgres

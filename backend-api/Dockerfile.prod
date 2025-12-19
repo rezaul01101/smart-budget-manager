@@ -21,6 +21,7 @@ RUN npm install --only=production
 # Copy built files and prisma
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/prisma.config.ts ./
 
 EXPOSE 5002
 
