@@ -13,6 +13,6 @@ COPY . .
 
 # Expose backend port
 EXPOSE 5002
-
+EXPOSE 5555
 # Start dev server with hot reload
 CMD ["npm", "run", "dev"]
