@@ -16,7 +16,7 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
     secure: false,
     httpOnly: true,
     sameSite: "lax",
-    path:"/",
+    path: "/",
     maxAge: 1000 * 60 * 60 * 24 * 365,
   });
   sendResponse(res, {
@@ -69,53 +69,67 @@ const updatePassword = catchAsync(async (req: Request, res: Response) => {
     data: response,
   });
 });
-const refreshToken = catchAsync(
-  async (req: Request, res: Response) => {
-    const refreshToken = req.cookies.refreshToken;
+const refreshToken = catchAsync(async (req: Request, res: Response) => {
+  const refreshToken = req.cookies.refreshToken;
 
-    if (!refreshToken) {
-      throw new ApiError(401, "Refresh token missing");
-    }
+  if (!refreshToken) {
+    throw new ApiError(401, "Refresh token missing");
+  }
 
-    let decoded: JwtPayload;
+  let decoded: JwtPayload;
 
-    try {
-      decoded = verifyToken(refreshToken, config.jwt.refresh_secret as string);
-    } catch {
-      throw new ApiError(401, "Invalid or expired refresh token");
-    }
+  try {
+    decoded = verifyToken(refreshToken, config.jwt.refresh_secret as string);
+  } catch {
+    throw new ApiError(401, "Invalid or expired refresh token");
+  }
 
-    // Generate new tokens
-    const accessToken = createToken(
-      { email: decoded.email, id: decoded.id, name: decoded.name },
-      config.jwt.secret as string,
-      config.jwt.expires_in as string
-    );
+  // Generate new tokens
+  const accessToken = createToken(
+    { email: decoded.email, id: decoded.id, name: decoded.name },
+    config.jwt.secret as string,
+    config.jwt.expires_in as string
+  );
 
-    const newRefreshToken = createToken(
-      { email: decoded.email, id: decoded.id, name: decoded.name },
-      config.jwt.refresh_secret as string,
-      config.jwt.refresh_expires_in as string
-    );
+  const newRefreshToken = createToken(
+    { email: decoded.email, id: decoded.id, name: decoded.name },
+    config.jwt.refresh_secret as string,
+    config.jwt.refresh_expires_in as string
+  );
 
-    res.cookie("refreshToken", newRefreshToken, {
+  res.cookie("refreshToken", newRefreshToken, {
     secure: false,
     httpOnly: true,
     sameSite: "lax",
-    path:"/",
+    path: "/",
     maxAge: 1000 * 60 * 60 * 24 * 365,
   });
 
-    sendResponse(res, {
-      statusCode: 200,
-      success: true,
-      message: "Token refreshed successfully",
-      data: {
-        accessToken,
-      },
-    });
-  }
-);
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Token refreshed successfully",
+    data: {
+      accessToken,
+    },
+  });
+});
+
+const logOut = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user;
+  // clear cookie
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "strict",
+  });
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "You are logout successfully",
+    data: "",
+  });
+});
 
 export const AuthController = {
   loginUser,
@@ -124,4 +138,5 @@ export const AuthController = {
   otpVerify,
   updatePassword,
   refreshToken,
+  logOut,
 };

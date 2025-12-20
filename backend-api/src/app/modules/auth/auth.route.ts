@@ -2,6 +2,7 @@ import express from "express";
 import { AuthController } from "./auth.controller";
 import validateRequest from "../../middlewares/validateRequest";
 import { AuthValidation } from "./auth.validation";
+import auth from "../../middlewares/auth";
 
 const router = express.Router();
 router.post(
@@ -9,7 +10,6 @@ router.post(
   validateRequest(AuthValidation.loginZodSchema),
   AuthController.loginUser
 );
-
 router.post(
   "/register",
   validateRequest(AuthValidation.registerZodSchema),
@@ -33,6 +33,11 @@ router.post(
 router.post(
   "/refresh-token",
   AuthController.refreshToken
+);
+router.get(
+  "/logout",
+  auth("user"),
+  AuthController.logOut
 );
 
 export const AuthRoutes = router;

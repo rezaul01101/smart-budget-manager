@@ -20,3 +20,9 @@ export type TransactionTypes = {
   saving:string
   goal:string
 };
+
+const USER_ROLE = {
+  superAdmin: "superAdmin",
+  user: "user",
+} as const;
+export type TUserRole = keyof typeof USER_ROLE;
