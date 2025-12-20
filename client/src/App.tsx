@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "./redux/features/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
+import { setUserInfo } from "./redux/features/user/userSlice";
+import { decodedToken } from "./utils/jwt";
 
 const App = () => {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ const App = () => {
       .unwrap()
       .then((res) => {
         dispatch(setAccessToken(res.data.accessToken));
+        dispatch(setUserInfo(decodedToken(res.data.accessToken)));
 
         // 🔥 Only redirect if user is on auth pages
         if (location.pathname === "/login") {

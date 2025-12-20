@@ -5,6 +5,8 @@ import { useUserLoginMutation } from "../../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "../../redux/features/authSlice";
+import { setUserInfo } from "../../redux/features/user/userSlice";
+import { decodedToken } from "../../utils/jwt";
 
 export default function Login() {
   const [userLogin, { isLoading, error }] = useUserLoginMutation();
@@ -26,9 +28,10 @@ export default function Login() {
       };
       const res = await userLogin(data).unwrap();
       dispatch(setAccessToken(res.data.accessToken));
+      dispatch(setUserInfo(decodedToken(res.data.accessToken)));
       navigate("/dashboard");
     } catch (err) {
-      console.error("Login failed:", error,err);
+      console.error("Login failed:", error, err);
     }
   };
 

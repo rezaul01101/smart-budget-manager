@@ -2,8 +2,10 @@ import { Bell, Search, User, LogOut, Menu } from "lucide-react";
 import { useState } from "react";
 import { useUserLogoutMutation } from "../../redux/api/authApi";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { setAccessToken } from "../../redux/features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { clearAccessToken } from "../../redux/features/authSlice";
+import type { RootState } from "../../redux/store";
+
 
 interface TopbarProps {
   onMenuClick: () => void;
@@ -16,12 +18,14 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
 
   const [showUserMenu, setShowUserMenu] = useState(false);
 
+  const userInfo = useSelector((state: RootState) => state.user.userInfo);
+
   const handleLogout = async () => {
     try {
       await logout({}).unwrap();
 
       // clear client-side auth
-      dispatch(setAccessToken(""));
+      dispatch(clearAccessToken());
       setShowUserMenu(false);
 
       navigate("/");
@@ -66,8 +70,8 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
                 <User className="w-5 h-5 text-white" />
               </div>
               <div className="text-left hidden md:block">
-                <p className="text-sm font-medium text-white">John Doe</p>
-                <p className="text-xs text-gray-400">john@example.com</p>
+                <p className="text-sm font-medium text-white">{userInfo?.name}</p>
+                <p className="text-xs text-gray-400">{userInfo?.email}</p>
               </div>
             </button>
 
