@@ -38,7 +38,7 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
           <div className="relative">
             <button
               onClick={() => setShowUserMenu(!showUserMenu)}
-              className="flex items-center gap-2 md:gap-3 p-2 rounded-lg hover:bg-gray-800 transition-colors shrink-0"
+              className="flex items-center gap-2 md:gap-3 p-2 rounded-lg hover:bg-gray-800 transition-colors shrink-0 cursor-pointer"
             >
               <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
                 <User className="w-5 h-5 text-white" />
@@ -51,11 +51,11 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
 
             {showUserMenu && (
               <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg py-2 z-50">
-                <button className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 flex items-center gap-2 text-sm">
+                <button className="cursor-pointer w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 flex items-center gap-2 text-sm">
                   <User className="w-4 h-4" />
                   Profile
                 </button>
-                <button className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 flex items-center gap-2 text-sm">
+                <button className="cursor-pointer w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 flex items-center gap-2 text-sm">
                   <LogOut className="w-4 h-4" />
                   Logout
                 </button>

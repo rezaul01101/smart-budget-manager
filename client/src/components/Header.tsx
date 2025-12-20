@@ -6,6 +6,7 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -35,45 +36,28 @@ export default function Header() {
         </button>
 
         <nav className="hidden md:flex items-center space-x-1 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 rounded-full py-2 px-3 shadow-lg">
-          {/* {["Home", "Features", "About", "Contact"].map((item) => (
-            <Link
-              key={item}
-              to="/"
-              className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-gray-100 dark:hover:bg-gray-700/60 rounded-full px-5 py-2 transition-all duration-300 font-medium"
-            >
-              {item}
-            </Link>
-          ))} */}
           <Link
             to="/"
             className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-gray-100 dark:hover:bg-gray-700/60 rounded-full px-5 py-2 transition-all duration-300 font-medium"
           >
             Home
           </Link>
-          <Link
-            to="/#Features"
-            className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-gray-100 dark:hover:bg-gray-700/60 rounded-full px-5 py-2 transition-all duration-300 font-medium"
-          >
-            Features
-          </Link>
-          <Link
-            to="/#About"
-            className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-gray-100 dark:hover:bg-gray-700/60 rounded-full px-5 py-2 transition-all duration-300 font-medium"
-          >
-            About
-          </Link>
-          <Link
-            to="/#Contact"
-            className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-gray-100 dark:hover:bg-gray-700/60 rounded-full px-5 py-2 transition-all duration-300 font-medium"
-          >
-            Contact
-          </Link>
+          {["Features", "About", "Contact"].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="text-gray-600 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-gray-100 dark:hover:bg-gray-700/60 rounded-full px-5 py-2 transition-all duration-300 font-medium"
+            >
+              {item}
+            </a>
+          ))}
         </nav>
 
         <div className="flex items-center space-x-4">
-           <Link
-            to={'/login'}
-             className="cursor-pointer hidden sm:block bg-linear-to-r from-orange-500 to-amber-500 text-white font-semibold py-2.5 px-6 rounded-full shadow-lg hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 transform hover:scale-105">
+          <Link
+            to={"/login"}
+            className="cursor-pointer hidden sm:block bg-linear-to-r from-orange-500 to-amber-500 text-white font-semibold py-2.5 px-6 rounded-full shadow-lg hover:shadow-xl hover:shadow-orange-500/30 transition-all duration-300 transform hover:scale-105"
+          >
             Get Started
           </Link>
 
