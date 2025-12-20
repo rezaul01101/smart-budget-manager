@@ -12,10 +12,11 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user"],
     }),
-    userLogout: build.query({
+    userLogout: build.mutation({
       query: () => ({
         url: `${AUTH_URL}/logout`,
-        method: "GET",
+        method: "POST", // best practice
+        credentials: "include", // IMPORTANT if refresh token is in cookie
       }),
     }),
     refreshToken: build.mutation({
@@ -32,4 +33,8 @@ export const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useUserLoginMutation,useRefreshTokenMutation,useUserLogoutQuery } = authApi;
+export const {
+  useUserLoginMutation,
+  useRefreshTokenMutation,
+  useUserLogoutMutation,
+} = authApi;

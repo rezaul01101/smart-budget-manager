@@ -34,7 +34,7 @@ router.post(
   "/refresh-token",
   AuthController.refreshToken
 );
-router.get(
+router.post(
   "/logout",
   auth("user"),
   AuthController.logOut

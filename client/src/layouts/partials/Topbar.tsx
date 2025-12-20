@@ -1,12 +1,34 @@
-import { Bell, Search, User, LogOut, Menu } from 'lucide-react';
-import { useState } from 'react';
+import { Bell, Search, User, LogOut, Menu } from "lucide-react";
+import { useState } from "react";
+import { useUserLogoutMutation } from "../../redux/api/authApi";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { setAccessToken } from "../../redux/features/authSlice";
 
 interface TopbarProps {
   onMenuClick: () => void;
 }
 
 export default function Topbar({ onMenuClick }: TopbarProps) {
+  const [logout, { isLoading }] = useUserLogoutMutation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [showUserMenu, setShowUserMenu] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await logout({}).unwrap();
+
+      // clear client-side auth
+      dispatch(setAccessToken(""));
+      setShowUserMenu(false);
+
+      navigate("/");
+    } catch (err) {
+      console.error("Logout failed", err);
+    }
+  };
 
   return (
     <header className="bg-[#1a2332] border-b border-gray-800 px-4 md:px-6 py-4 sticky top-0 z-20">
@@ -55,9 +77,13 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
                   <User className="w-4 h-4" />
                   Profile
                 </button>
-                <button className="cursor-pointer w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 flex items-center gap-2 text-sm">
+                <button
+                  onClick={handleLogout}
+                  disabled={isLoading}
+                  className="cursor-pointer w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 flex items-center gap-2 text-sm"
+                >
                   <LogOut className="w-4 h-4" />
-                  Logout
+                  {isLoading ? "Logging out..." : "Logout"}
                 </button>
               </div>
             )}
