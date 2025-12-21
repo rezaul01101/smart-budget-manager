@@ -8,7 +8,7 @@ import {
   // Settings,
   X
 } from 'lucide-react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
@@ -41,10 +41,10 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         }`}
       >
         <div className="p-6 flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <Link to={'/'} className="flex items-center gap-2 cursor-pointer">
             <Wallet className="w-8 h-8 text-orange-500" />
             <span className="text-white font-bold text-lg">Smart Budget</span>
-          </div>
+          </Link>
           <button
             onClick={() => setIsOpen(false)}
             className="md:hidden p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"

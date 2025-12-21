@@ -14,6 +14,7 @@ import PublicLayout from "./layouts/PublicLayout";
 import Transactions from "./pages/protected/Transactions";
 import Income from "./pages/protected/Income";
 import Expenses from "./pages/protected/Expenses";
+import AddLedger from "./pages/protected/AddLedger";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
           { path: "/transactions", element: <Transactions /> },
           { path: "/income", element: <Income /> },
           { path: "/expenses", element: <Expenses /> },
+          { path: "/add-ledger", element: <AddLedger /> },
         ],
       },
     ],

@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
+    "@schedule-x/calendar": "^3.5.1",
+    "@schedule-x/events-service": "^3.5.1",
+    "@schedule-x/react": "^3.5.0",
+    "@schedule-x/theme-default": "^3.5.1",
     "@tailwindcss/vite": "^4.1.17",
     "axios": "^1.13.2",
     "i": "^0.3.7",
@@ -23,7 +27,8 @@
     "react-router": "^7.9.6",
     "react-router-dom": "^7.9.6",
     "tailwindcss": "^4.1.17",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "temporal-polyfill": "^0.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
