@@ -39,7 +39,7 @@ const availableColors = [
 
 const AddLedger = () => {
   const navigate = useNavigate();
-  const [showAddForm, setShowAddForm] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     type: 'expense',
@@ -52,7 +52,6 @@ const AddLedger = () => {
 
     console.log('New Category:', formData);
 
-    setShowAddForm(false);
     setFormData({
       name: '',
       type: 'expense',
@@ -73,7 +72,7 @@ const AddLedger = () => {
               <ArrowLeft className="w-6 h-6" />
             </button>
             <h1 className="text-2xl md:text-3xl font-bold text-white">
-              Add Category
+              Add Ledger
             </h1>
           </div>
         </div>
@@ -81,12 +80,12 @@ const AddLedger = () => {
         
           <div className="bg-[#1a2332] rounded-lg p-6 md:p-8 border border-gray-800 mb-6">
             <h2 className="text-xl font-bold text-white mb-6">
-              Create New Category
+              Create New Ledger
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Category Name
+                  Ledger Name
                 </label>
                 <input
                   type="text"
@@ -144,7 +143,7 @@ const AddLedger = () => {
                         onClick={() =>
                           setFormData({ ...formData, icon: iconOption.name })
                         }
-                        className={`p-3 rounded-lg border-2 transition-all ${
+                        className={`p-3 rounded-lg border-2 transition-all cursor-pointer ${
                           formData.icon === iconOption.name
                             ? 'border-orange-500 bg-orange-500/10'
                             : 'border-gray-700 hover:border-gray-600'
@@ -169,7 +168,7 @@ const AddLedger = () => {
                       onClick={() =>
                         setFormData({ ...formData, color: colorOption.value })
                       }
-                      className={`p-3 rounded-lg border-2 transition-all ${
+                      className={`cursor-pointer p-3 rounded-lg border-2 transition-all ${
                         formData.color === colorOption.value
                           ? 'border-white'
                           : 'border-transparent hover:border-gray-600'
