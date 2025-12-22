@@ -10,4 +10,8 @@
  */
 export type * from './models/User'
 export type * from './models/PasswordResetOtp'
+export type * from './models/Account'
+export type * from './models/Ledger'
+export type * from './models/Transaction'
+export type * from './models/Budget'
 export type * from './commonInputTypes'

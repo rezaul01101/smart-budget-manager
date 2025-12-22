@@ -74,6 +74,26 @@
             "date": 1766368052000,
             "name": "/app/logs/winston/errors/2025-22-12-01-error.log",
             "hash": "2e77990bcbde0d1a01071c1c3078a874c7e06c9944205b8c6d42eddfb7f095f5"
+        },
+        {
+            "date": 1766375311197,
+            "name": "/app/logs/winston/errors/2025-22-12-03-error.log",
+            "hash": "a8903b9c5767a0184e4fed7a218db96cf9d76c83287c795bb58b193f4162587d"
+        },
+        {
+            "date": 1766413882353,
+            "name": "/app/logs/winston/errors/2025-22-12-14-error.log",
+            "hash": "6343f499680a5f9349bb49be27ef5f07cc3f572f21a181db86fd27591020ad24"
+        },
+        {
+            "date": 1766417775716,
+            "name": "/app/logs/winston/errors/2025-22-12-15-error.log",
+            "hash": "4622458bdcfab597633433836508d30cd36cd106863739b48a0eb4190730ec3f"
+        },
+        {
+            "date": 1766419205919,
+            "name": "/app/logs/winston/errors/2025-22-12-16-error.log",
+            "hash": "5b0f6c2ad4e7e6ea530ab32f143b3f893a81cf13df1475600688bd46c2c7e787"
         }
     ],
     "hashType": "sha256"

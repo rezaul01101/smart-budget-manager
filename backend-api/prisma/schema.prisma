@@ -26,8 +26,6 @@ model User {
   accounts          Account[]
   ledgers           Ledger[]
   budgets           Budget[]
-
-  @@map("users")
 }
 
 model PasswordResetOtp {

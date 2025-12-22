@@ -1,0 +1,35 @@
+import { prisma } from "../../../shared/prisma";
+import { User } from "../../../generated/prisma/client";
+import { LedgerType } from "./ledger.interface";
+
+const createLedgerService = async (ledgerData: LedgerType, user: User) => {
+  const { name, type, icon, color } = ledgerData;
+
+  const result = await prisma.ledger.create({
+    data: {
+      userId: user.id,
+      name: name,
+      type: type,
+      icon: icon,
+      color: color,
+    },
+  });
+
+  return result;
+};
+const getLedgersService = async (user: User) => {
+  const { id } = user;
+
+  const result = await prisma.ledger.findMany({
+    where: {
+      userId: id,
+    },
+  });
+
+  return result;
+};
+
+export const LedgerService = {
+  createLedgerService,
+  getLedgersService,
+};

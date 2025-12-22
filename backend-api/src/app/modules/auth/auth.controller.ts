@@ -6,6 +6,7 @@ import config from "../../../config";
 import ApiError from "../../../errors/ApiError";
 import { createToken, verifyToken } from "./auth.utils";
 import { JwtPayload } from "jsonwebtoken";
+import httpStatus from "http-status";
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const { ...loginData } = req.body;
@@ -117,6 +118,9 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
 
 const logOut = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;
+  if (!user) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, "You are not authorized");
+  }
   // clear cookie
   res.clearCookie("refreshToken", {
     httpOnly: true,
