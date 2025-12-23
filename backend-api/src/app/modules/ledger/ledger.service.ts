@@ -17,6 +17,28 @@ const createLedgerService = async (ledgerData: LedgerType, user: User) => {
 
   return result;
 };
+const updateLedgerService = async (
+  ledgerId: number,
+  ledgerData: LedgerType,
+  user: User
+) => {
+  const { name, type, icon, color } = ledgerData;
+
+  const result = await prisma.ledger.update({
+    where: {
+      id: ledgerId,
+      userId: user.id,
+    },
+    data: {
+      name: name,
+      type: type,
+      icon: icon,
+      color: color,
+    },
+  });
+
+  return result;
+};
 const getLedgersService = async (user: User) => {
   const { id } = user;
 
@@ -28,8 +50,22 @@ const getLedgersService = async (user: User) => {
 
   return result;
 };
+const deleteLedgerService = async (ledgerId: number, user: User) => {
+  const { id } = user;
+
+  const result = await prisma.ledger.delete({
+    where: {
+      id: ledgerId,
+      userId: id,
+    },
+  });
+
+  return result;
+};
 
 export const LedgerService = {
   createLedgerService,
   getLedgersService,
+  updateLedgerService,
+  deleteLedgerService,
 };

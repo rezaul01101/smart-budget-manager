@@ -18,5 +18,16 @@ router.get(
   auth("user"),
   LedgerController.getLedgers
 );
+router.put(
+  "/update/:id",
+  auth("user"),
+  LedgerController.updateLedger
+);
+router.delete(
+  "/delete/:id",
+  auth("user"),
+  LedgerController.deleteLedger
+);
+
 
 export const LedgerRoute = router;
