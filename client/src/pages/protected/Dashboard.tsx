@@ -27,6 +27,7 @@ import {
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import LedgerCard from "../../components/LedgerCard";
 
 const expenseCategories = [
   {
@@ -136,8 +137,8 @@ const Dashboard = () => {
     category: (typeof expenseCategories)[0];
   }) => (
     <Link
-      to={''}
-      className={`rounded-xl p-4 md:p-6 border transition-all hover:scale-105 ${category.bgColor} cursor-pointer`}
+      to={""}
+      className={`rounded-xl p-4 md:p-6 border transition-all hover:scale-105 ${category?.color} cursor-pointer`}
     >
       <div className="flex flex-col items-center justify-center gap-4">
         <div
@@ -202,7 +203,7 @@ const Dashboard = () => {
 
           <div className="flex items-center gap-2">
             <Link
-              to={'/add-ledger'}
+              to={"/add-ledger"}
               className="p-2 md:px-4 md:py-2 rounded-lg bg-linear-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 transition-all flex items-center gap-2"
             >
               <Plus className="w-5 h-5 text-white" />
@@ -236,13 +237,14 @@ const Dashboard = () => {
             />
           </button>
 
-          {expenseOpen && (
+          <LedgerCard />
+          {/* {expenseOpen && (
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
               {expenseCategories.map((category) => (
                 <CategoryCard key={category.name} category={category} />
               ))}
             </div>
-          )}
+          )} */}
         </div>
 
         <div className="bg-[#1a2332] rounded-lg p-4 md:p-6 border border-gray-800">
