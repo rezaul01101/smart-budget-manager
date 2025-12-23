@@ -29,6 +29,7 @@ const updateLedger = catchAsync(async (req: Request, res: Response) => {
   const ledgerId = req.params.id as unknown as number;
   const { ...ledgerData } = req.body;
 
+
   const result = await LedgerService.updateLedgerService(
     ledgerId,
     ledgerData,

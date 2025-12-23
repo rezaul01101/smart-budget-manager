@@ -21,6 +21,7 @@ router.get(
 router.put(
   "/update/:id",
   auth("user"),
+  validateRequest(LedgerValidation.updateLedgerZodSchema),
   LedgerController.updateLedger
 );
 router.delete(

@@ -55,7 +55,7 @@ const AddLedger = () => {
 
     try {
       const res = await createLedger(formData).unwrap();
-      if (res){
+      if (res) {
         navigate(-1);
       }
     } catch (err) {
@@ -116,7 +116,7 @@ const AddLedger = () => {
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, type: "EXPENSE" })}
-                  className={`p-4 rounded-lg border-2 transition-all ${
+                  className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
                     formData.type === "EXPENSE"
                       ? "border-orange-500 bg-orange-500/10"
                       : "border-gray-700 hover:border-gray-600"
@@ -127,7 +127,7 @@ const AddLedger = () => {
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, type: "INCOME" })}
-                  className={`p-4 rounded-lg border-2 transition-all ${
+                  className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
                     formData.type === "INCOME"
                       ? "border-green-500 bg-green-500/10"
                       : "border-gray-700 hover:border-gray-600"

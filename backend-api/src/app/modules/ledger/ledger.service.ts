@@ -26,8 +26,8 @@ const updateLedgerService = async (
 
   const result = await prisma.ledger.update({
     where: {
-      id: ledgerId,
-      userId: user.id,
+      id: Number(ledgerId),
+      userId: Number(user.id),
     },
     data: {
       name: name,

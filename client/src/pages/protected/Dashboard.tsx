@@ -29,65 +29,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import LedgerCard from "../../components/LedgerCard";
 
-const expenseCategories = [
-  {
-    name: "Food & Drink",
-    amount: 2250,
-    icon: UtensilsCrossed,
-    bgColor: "bg-yellow-900/30 border-yellow-800",
-  },
-  {
-    name: "Transport",
-    amount: 0,
-    icon: Bus,
-    bgColor: "bg-blue-900/30 border-blue-800",
-  },
-  {
-    name: "Home Bills",
-    amount: 0,
-    icon: Droplet,
-    bgColor: "bg-orange-900/30 border-orange-800",
-  },
-  {
-    name: "Self-Care",
-    amount: 0,
-    icon: Sparkles,
-    bgColor: "bg-purple-900/30 border-purple-800",
-  },
-  {
-    name: "Shopping",
-    amount: 0,
-    icon: ShoppingBag,
-    bgColor: "bg-pink-900/30 border-pink-800",
-  },
-  {
-    name: "Health",
-    amount: 720,
-    icon: Heart,
-    bgColor: "bg-emerald-900/30 border-emerald-800",
-  },
-];
-
-const incomeCategories = [
-  {
-    name: "Salary",
-    amount: 0,
-    icon: Briefcase,
-    bgColor: "bg-teal-900/30 border-teal-800",
-  },
-  {
-    name: "Freelance",
-    amount: 0,
-    icon: HeartAlt,
-    bgColor: "bg-cyan-900/30 border-cyan-800",
-  },
-  {
-    name: "Investment",
-    amount: 0,
-    icon: TrendingUp,
-    bgColor: "bg-green-900/30 border-green-800",
-  },
-];
 
 const periods = ["Monthly", "Weekly", "Yearly"];
 
@@ -122,57 +63,9 @@ const Dashboard = () => {
   const [expenseOpen, setExpenseOpen] = useState(true);
   const [incomeOpen, setIncomeOpen] = useState(true);
 
-  const totalExpense = expenseCategories.reduce(
-    (sum, cat) => sum + cat.amount,
-    0
-  );
-  const totalIncome = incomeCategories.reduce(
-    (sum, cat) => sum + cat.amount,
-    0
-  );
+  const totalExpense = 0
+  const totalIncome = 0
 
-  const CategoryCard = ({
-    category,
-  }: {
-    category: (typeof expenseCategories)[0];
-  }) => (
-    <Link
-      to={""}
-      className={`rounded-xl p-4 md:p-6 border transition-all hover:scale-105 ${category?.color} cursor-pointer`}
-    >
-      <div className="flex flex-col items-center justify-center gap-4">
-        <div
-          className={`w-12 md:w-16 h-12 md:h-16 rounded-full flex items-center justify-center ${
-            category.bgColor.includes("yellow")
-              ? "bg-yellow-500"
-              : category.bgColor.includes("blue")
-              ? "bg-blue-500"
-              : category.bgColor.includes("orange")
-              ? "bg-orange-500"
-              : category.bgColor.includes("purple")
-              ? "bg-purple-500"
-              : category.bgColor.includes("pink")
-              ? "bg-pink-500"
-              : category.bgColor.includes("emerald")
-              ? "bg-emerald-500"
-              : category.bgColor.includes("teal")
-              ? "bg-teal-500"
-              : category.bgColor.includes("cyan")
-              ? "bg-cyan-500"
-              : "bg-green-500"
-          }`}
-        >
-          <category.icon className="w-6 md:w-8 h-6 md:h-8 text-white" />
-        </div>
-        <h3 className="text-white font-semibold text-sm md:text-base text-center">
-          {category.name}
-        </h3>
-        <p className="text-white font-bold text-lg md:text-2xl">
-          ${category.amount.toLocaleString()}
-        </p>
-      </div>
-    </Link>
-  );
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-1 gap-3 md:gap-4">
@@ -266,14 +159,14 @@ const Dashboard = () => {
               }`}
             />
           </button>
-
+{/* 
           {incomeOpen && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {incomeCategories.map((category) => (
                 <CategoryCard key={category.name} category={category} />
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </div>
       {/* <div>
