@@ -11,17 +11,7 @@ import "@schedule-x/theme-default/dist/index.css";
 import {
   ChevronDown,
   ChevronLeft,
-  ChevronRight,
   Wallet,
-  UtensilsCrossed,
-  Bus,
-  Droplet,
-  Sparkles,
-  ShoppingBag,
-  Heart,
-  Briefcase,
-  Heart as HeartAlt,
-  TrendingUp,
   Plus,
 } from "lucide-react";
 

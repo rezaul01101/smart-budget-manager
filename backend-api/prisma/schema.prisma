@@ -26,6 +26,7 @@ model User {
   accounts          Account[]
   ledgers           Ledger[]
   budgets           Budget[]
+  transactions     Transaction[]
 }
 
 model PasswordResetOtp {
@@ -77,11 +78,13 @@ model Transaction {
   description String?
 
   // Relations
-  accountId Int
-  account   Account @relation(fields: [accountId], references: [id])
+  accountId Int?
+  account   Account? @relation(fields: [accountId], references: [id])
 
   ledgerId Int
   ledger   Ledger @relation(fields: [ledgerId], references: [id])
+  userId   Int
+  user     User    @relation(fields: [userId], references: [id])
 }
 
 // Budget targets for specific ledgers per month

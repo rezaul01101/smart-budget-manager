@@ -3,6 +3,7 @@ import * as LucideIcons from "lucide-react";
 import { Link } from "react-router";
 import { useLedgerListQuery } from "../redux/api/ledgerApi";
 import type { LedgerType } from "../interfaces/interface";
+import { ledgerColorClasses } from "../constants/constants";
 
 const LedgerCard = () => {
   const { data: ledgers, isLoading, error } = useLedgerListQuery({});
@@ -19,12 +20,19 @@ const LedgerCard = () => {
         const iconName = ledger.icon as IconName;
         const IconComponent = (LucideIcons[iconName] ||
           LucideIcons.HelpCircle) as React.ComponentType<{ className: string }>;
+        const colorClass =
+          ledgerColorClasses[ledger.color] || ledgerColorClasses.green;
 
         return (
           <Link
             key={index}
-            to={"/transaction-entry?category=" + ledger.name + "&type=" + ledger.type.toLowerCase()}
-            className={`rounded-xl p-4 md:p-6 border transition-all hover:scale-105 bg-${ledger?.color}-900/30 border-${ledger?.color}-800  cursor-pointer`}
+            to={
+              "/transaction-entry?category=" +
+              ledger.name +
+              "&type=" +
+              ledger.type.toLowerCase()
+            }
+            className={`rounded-xl p-4 md:p-6 border ${colorClass} transition-all hover:scale-105  cursor-pointer`}
           >
             <div className="flex flex-col items-center justify-center gap-4">
               <div
@@ -54,7 +62,7 @@ const LedgerCard = () => {
                 {ledger.name}
               </h3>
               <p className="text-white font-bold text-lg md:text-2xl">
-                $323
+                ৳ {ledger?.amount.toLocaleString()}
                 {/* ${ledger?.amount.toLocaleString()} */}
               </p>
             </div>

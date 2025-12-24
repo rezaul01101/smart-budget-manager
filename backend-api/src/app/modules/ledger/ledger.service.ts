@@ -41,12 +41,23 @@ const updateLedgerService = async (
 };
 const getLedgersService = async (user: User) => {
   const { id } = user;
-
-  const result = await prisma.ledger.findMany({
+  const ledgers = await prisma.ledger.findMany({
     where: {
       userId: id,
     },
+    include: {
+      transactions: {
+        select: {
+          amount: true,
+        },
+      },
+    },
   });
+  // calculate sum per ledger
+  const result = ledgers.map((ledger) => ({
+    ...ledger,
+    amount: ledger.transactions.reduce((sum, tx) => sum + Number(tx.amount), 0),
+  }));
 
   return result;
 };

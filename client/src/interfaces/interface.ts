@@ -3,5 +3,5 @@ export type LedgerType = {
   amount:number
   icon:string   
   type:"INCOME" | "EXPENSE"
-  color:string
+  color:string,
 }
