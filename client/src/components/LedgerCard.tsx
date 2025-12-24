@@ -36,25 +36,24 @@ const LedgerCard = () => {
           >
             <div className="flex flex-col items-center justify-center gap-4">
               <div
-                className={`w-12 md:w-16 h-12 md:h-16 rounded-full flex items-center justify-center ${
-                  ledger?.color.includes("yellow")
+                className={`w-12 md:w-16 h-12 md:h-16 rounded-full flex items-center justify-center ${ledger?.color.includes("yellow")
                     ? "bg-yellow-500"
                     : ledger?.color.includes("blue")
-                    ? "bg-blue-500"
-                    : ledger?.color.includes("orange")
-                    ? "bg-orange-500"
-                    : ledger?.color.includes("purple")
-                    ? "bg-purple-500"
-                    : ledger?.color.includes("pink")
-                    ? "bg-pink-500"
-                    : ledger?.color.includes("emerald")
-                    ? "bg-emerald-500"
-                    : ledger?.color.includes("teal")
-                    ? "bg-teal-500"
-                    : ledger?.color.includes("cyan")
-                    ? "bg-cyan-500"
-                    : "bg-green-500"
-                }`}
+                      ? "bg-blue-500"
+                      : ledger?.color.includes("orange")
+                        ? "bg-orange-500"
+                        : ledger?.color.includes("purple")
+                          ? "bg-purple-500"
+                          : ledger?.color.includes("pink")
+                            ? "bg-pink-500"
+                            : ledger?.color.includes("emerald")
+                              ? "bg-emerald-500"
+                              : ledger?.color.includes("teal")
+                                ? "bg-teal-500"
+                                : ledger?.color.includes("cyan")
+                                  ? "bg-cyan-500"
+                                  : "bg-green-500"
+                  }`}
               >
                 <IconComponent className="w-6 md:w-8 h-6 md:h-8 text-white" />
               </div>
@@ -62,7 +61,7 @@ const LedgerCard = () => {
                 {ledger.name}
               </h3>
               <p className="text-white font-bold text-lg md:text-2xl">
-                ৳ {ledger?.amount.toLocaleString()}
+                ৳{ledger?.amount.toLocaleString()}
                 {/* ${ledger?.amount.toLocaleString()} */}
               </p>
             </div>
