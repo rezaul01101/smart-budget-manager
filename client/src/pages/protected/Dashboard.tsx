@@ -5,7 +5,7 @@
 //   createViewMonthGrid,
 //   createViewWeek,
 // } from "@schedule-x/calendar";
-import { createEventsServicePlugin } from "@schedule-x/events-service";
+// import { createEventsServicePlugin } from "@schedule-x/events-service";
 import "temporal-polyfill/global";
 import "@schedule-x/theme-default/dist/index.css";
 import {
@@ -15,7 +15,7 @@ import {
   Plus,
 } from "lucide-react";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
 import LedgerCard from "../../components/LedgerCard";
 
@@ -23,7 +23,7 @@ import LedgerCard from "../../components/LedgerCard";
 const periods = ["Monthly", "Weekly", "Yearly"];
 
 const Dashboard = () => {
-  const eventsService = useState(() => createEventsServicePlugin())[0];
+  // const eventsService = useState(() => createEventsServicePlugin())[0];
 
   // const calendar = useCalendarApp({
   //   views: [
@@ -44,10 +44,10 @@ const Dashboard = () => {
   //   plugins: [eventsService],
   // });
 
-  useEffect(() => {
-    // get all events
-    eventsService.getAll();
-  }, [eventsService]);
+  // useEffect(() => {
+    
+  //   eventsService.getAll();
+  // }, [eventsService]);
 
   const [selectedPeriod, setSelectedPeriod] = useState("Monthly");
   const [expenseOpen, setExpenseOpen] = useState(true);
