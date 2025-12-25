@@ -19,6 +19,13 @@ export const authApi = baseApi.injectEndpoints({
         credentials: "include", // IMPORTANT if refresh token is in cookie
       }),
     }),
+    userRegister: build.mutation({
+      query: (registerData) => ({
+        url: `${AUTH_URL}/register`,
+        method: "POST",
+        body: registerData,
+      }),
+    }),
     refreshToken: build.mutation({
       query: () => ({
         url: `${AUTH_URL}/refresh-token`,
@@ -37,4 +44,5 @@ export const {
   useUserLoginMutation,
   useRefreshTokenMutation,
   useUserLogoutMutation,
+  useUserRegisterMutation
 } = authApi;

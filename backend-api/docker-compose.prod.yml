@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.8"
 
 services:
   backend:
@@ -19,8 +19,8 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: smart_money_management
-      POSTGRES_USER: sbm
-      POSTGRES_PASSWORD: adminsbm
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
     volumes:
       - postgres_prod_data:/var/lib/postgresql/data
 

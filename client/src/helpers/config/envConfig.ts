@@ -1,6 +1,4 @@
-export const getBaseUrl = ():string => {
-    return "http://sbmapi.buildbeam.xyz/api/v1"
-}
-export const baseUrl = ():string => {
-    return "http://sbmapi.buildbeam.xyz/"
-}
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+export const getAPIBaseUrl = `${BASE_URL}/api/v1`;
+
+export const baseurl = `${BASE_URL}`;
