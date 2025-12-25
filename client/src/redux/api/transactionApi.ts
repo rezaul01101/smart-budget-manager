@@ -1,9 +1,9 @@
 import { baseApi } from "./baseApi";
-const BaseUrl = "/ledger";
+const BaseUrl = "/transaction";
 
-export const ledgerApi = baseApi.injectEndpoints({
+export const transactionApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    createLedger: build.mutation({
+    createTransaction: build.mutation({
       query: (data) => ({
         url: `${BaseUrl}/create`,
         method: "POST",
@@ -11,14 +11,13 @@ export const ledgerApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["ledger"],
     }),
-    LedgerList: build.query({
+    transactionList: build.query({
       query: () => ({
         url: `${BaseUrl}/list`,
         method: "GET",
       }),
-      providesTags: ["ledger"],
     }),
   }),
 });
 
-export const { useCreateLedgerMutation, useLedgerListQuery } = ledgerApi;
+export const { useCreateTransactionMutation, useTransactionListQuery } = transactionApi;

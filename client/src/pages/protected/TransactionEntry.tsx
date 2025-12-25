@@ -1,30 +1,41 @@
-import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, Save } from 'lucide-react';
+import { useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { ArrowLeft, Save } from "lucide-react";
+import { useCreateTransactionMutation } from "../../redux/api/transactionApi";
 
 const TransactionEntry = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [searchParams] = useSearchParams();
+  const [createTransaction, { isLoading, error }] =
+    useCreateTransactionMutation();
 
-  const categoryName = searchParams.get('category') || '';
-  const categoryType = searchParams.get('type') || 'expense';
+  const categoryName = searchParams.get("ledger") || "";
+  const categoryType = searchParams.get("type") || "expense";
 
   const [formData, setFormData] = useState({
-    amount: '',
-    description: '',
-    date: new Date().toISOString().split('T')[0],
+    amount: "",
+    description: "",
+    date: new Date().toISOString().split("T")[0],
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    console.log('Transaction Data:', {
-      ...formData,
-      category: categoryName,
-      type: categoryType,
-    });
-
-    navigate('/');
+    try {
+      const data = {
+        amount: Number(formData?.amount),
+        date: formData?.date,
+        description: formData?.description,
+        ledgerId: Number(id),
+      };
+      const res = await createTransaction(data).unwrap();
+      if (res) {
+        navigate(-1);
+      }
+    } catch (err) {
+      console.error("Login failed:", error, err);
+    }
   };
 
   return (
@@ -38,7 +49,7 @@ const TransactionEntry = () => {
             <ArrowLeft className="w-6 h-6" />
           </button>
           <h1 className="text-2xl md:text-3xl font-bold text-white">
-            Add {categoryType === 'income' ? 'Income' : 'Expense'}
+            Add {categoryType === "income" ? "Income" : "Expense"}
           </h1>
         </div>
 
@@ -46,7 +57,7 @@ const TransactionEntry = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
-                Category
+                Ledger
               </label>
               <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
                 <p className="text-white font-semibold">{categoryName}</p>
@@ -117,7 +128,7 @@ const TransactionEntry = () => {
                 className="flex-1 px-6 py-3 rounded-lg bg-linear-to-r from-orange-500 to-orange-600 text-white font-semibold hover:from-orange-600 hover:to-orange-700 transition-all flex items-center justify-center gap-2"
               >
                 <Save className="w-5 h-5" />
-                Save 
+                {isLoading ? "Saving..." : "Save"}
               </button>
             </div>
           </form>

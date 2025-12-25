@@ -1,4 +1,5 @@
 export type LedgerType = {
+  id: string | number
   name:string
   amount:number
   icon:string   

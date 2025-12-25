@@ -39,7 +39,7 @@ const router = createBrowserRouter([
           { path: "/income", element: <Income /> },
           { path: "/expenses", element: <Expenses /> },
           { path: "/add-ledger", element: <AddLedger /> },
-          { path: "/transaction-entry", element: <TransactionEntry /> },
+          { path: "/transaction-entry/:id", element: <TransactionEntry /> },
         ],
       },
     ],
