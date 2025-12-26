@@ -74,7 +74,7 @@ const LedgerCard = ({ type }: { type: string }) => {
               className={`absolute top-2 right-2 w-7 h-7 text-white rounded-sm  flex items-center justify-center cursor-pointer ${ledgerListIconColorClass}`}
             >
               <Link
-                to={`/ledger/${ledger.id}/transactions`}
+                to={`/ledger/${ledger.id}/transactions?ledger=${ledger.name}&type=${ledger.type.toLowerCase()}`}
                 className=" transition-all"
               >
                 <LucideIcons.List className="w-5 h-5 " />

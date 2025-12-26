@@ -12,8 +12,8 @@ export const transactionApi = baseApi.injectEndpoints({
       invalidatesTags: ["ledger"],
     }),
     transactionList: build.query({
-      query: () => ({
-        url: `${BaseUrl}/list`,
+      query: (query: string) => ({
+        url: `${BaseUrl}/list${query}`,
         method: "GET",
       }),
     }),
