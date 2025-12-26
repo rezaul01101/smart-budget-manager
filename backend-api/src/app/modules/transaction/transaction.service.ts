@@ -23,10 +23,11 @@ const createTransactionService = async (
   return result;
 };
 
-const getAllTransactionsService = async (user: User) => {
+const getAllTransactionsService = async (user: User, ledgerId?: string) => {
   const result = await prisma.transaction.findMany({
     where: {
       userId: user.id,
+      ledgerId: ledgerId ? Number(ledgerId) : undefined,
     },
     orderBy: {
       date: 'desc',

@@ -25,6 +25,7 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_dev_data:/var/lib/postgresql/data
+      - ./bkp:/backup # Optional: for database backups
 
 volumes:
   postgres_dev_data:

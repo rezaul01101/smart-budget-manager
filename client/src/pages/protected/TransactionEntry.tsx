@@ -70,7 +70,7 @@ const TransactionEntry = () => {
               </label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg">
-                  $
+                  ৳
                 </span>
                 <input
                   type="number"

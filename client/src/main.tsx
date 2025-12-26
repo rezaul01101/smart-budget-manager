@@ -16,6 +16,8 @@ import Income from "./pages/protected/Income";
 import Expenses from "./pages/protected/Expenses";
 import AddLedger from "./pages/protected/AddLedger";
 import TransactionEntry from "./pages/protected/TransactionEntry";
+import LedgerTransactions from "./pages/protected/LedgerTransactions";
+
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,7 @@ const router = createBrowserRouter([
           { path: "/expenses", element: <Expenses /> },
           { path: "/add-ledger", element: <AddLedger /> },
           { path: "/transaction-entry/:id", element: <TransactionEntry /> },
+          { path: "/ledger/:ledgerId/transactions", element: <LedgerTransactions /> },
         ],
       },
     ],

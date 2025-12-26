@@ -39,11 +39,13 @@ const updateLedgerService = async (
 
   return result;
 };
-const getLedgersService = async (user: User) => {
+const getLedgersService = async (user: User,type: string) => {
   const { id } = user;
+  
   const ledgers = await prisma.ledger.findMany({
     where: {
       userId: id,
+      type: type=="expense" ? "EXPENSE" : type=="income" ? "INCOME" : undefined,
     },
     include: {
       transactions: {
@@ -59,7 +61,13 @@ const getLedgersService = async (user: User) => {
     amount: ledger.transactions.reduce((sum, tx) => sum + Number(tx.amount), 0),
   }));
 
-  return result;
+  // calculate total amount (all ledgers)
+  const totalAmount = result.reduce((sum, ledger) => sum + ledger.amount, 0);
+
+  return {
+    totalAmount,
+    ledgers: result,
+  };
 };
 const deleteLedgerService = async (ledgerId: number, user: User) => {
   const { id } = user;

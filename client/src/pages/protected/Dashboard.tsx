@@ -1,27 +1,18 @@
-
-import {
-  ChevronDown,
-  ChevronLeft,
-  Wallet,
-  Plus,
-} from "lucide-react";
+import { ChevronDown, ChevronLeft, Wallet, Plus } from "lucide-react";
 
 import { useState } from "react";
 import { Link } from "react-router";
 import LedgerCard from "../../components/LedgerCard";
 
-
 const periods = ["Monthly", "Weekly", "Yearly"];
 
 const Dashboard = () => {
-
   const [selectedPeriod, setSelectedPeriod] = useState("Monthly");
   const [expenseOpen, setExpenseOpen] = useState(true);
   const [incomeOpen, setIncomeOpen] = useState(true);
 
-  const totalExpense = 0
-  const totalIncome = 0
-
+  const totalExpense = 0;
+  const totalIncome = 0;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-1 gap-3 md:gap-4">
@@ -80,20 +71,12 @@ const Dashboard = () => {
               </span>
             </div>
             <ChevronDown
-              className={`w-5 h-5 md:w-6 md:h-6 text-gray-400 group-hover:text-white transition-all transform ${
+              className={`cursor-pointer w-5 h-5 md:w-6 md:h-6 text-gray-400 group-hover:text-white transition-all transform ${
                 expenseOpen ? "rotate-180" : ""
               }`}
             />
           </button>
-
-          <LedgerCard />
-          {/* {expenseOpen && (
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
-              {expenseCategories.map((category) => (
-                <CategoryCard key={category.name} category={category} />
-              ))}
-            </div>
-          )} */}
+          {expenseOpen && <LedgerCard type="expense" />}
         </div>
 
         <div className="bg-[#1a2332] rounded-lg p-4 md:p-6 border border-gray-800">
@@ -110,19 +93,12 @@ const Dashboard = () => {
               </span>
             </div>
             <ChevronDown
-              className={`w-5 h-5 md:w-6 md:h-6 text-gray-400 group-hover:text-white transition-all transform ${
+              className={`cursor-pointer w-5 h-5 md:w-6 md:h-6 text-gray-400 group-hover:text-white transition-all transform ${
                 incomeOpen ? "rotate-180" : ""
               }`}
             />
           </button>
-{/* 
-          {incomeOpen && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-              {incomeCategories.map((category) => (
-                <CategoryCard key={category.name} category={category} />
-              ))}
-            </div>
-          )} */}
+          {incomeOpen && <LedgerCard type="income" />}
         </div>
       </div>
       {/* <div>

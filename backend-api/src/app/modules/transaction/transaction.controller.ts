@@ -28,7 +28,8 @@ const createTransaction = catchAsync(async (req: Request, res: Response) => {
 
 const getAllTransactions = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;
-  const result = await TransactionService.getAllTransactionsService(user);
+  const { ledgerid } = req.query;
+  const result = await TransactionService.getAllTransactionsService(user, ledgerid);
   if (!result) {
     throw new ApiError(
       httpStatus.INTERNAL_SERVER_ERROR,

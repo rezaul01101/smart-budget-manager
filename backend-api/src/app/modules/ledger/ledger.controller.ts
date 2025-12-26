@@ -29,7 +29,6 @@ const updateLedger = catchAsync(async (req: Request, res: Response) => {
   const ledgerId = req.params.id as unknown as number;
   const { ...ledgerData } = req.body;
 
-
   const result = await LedgerService.updateLedgerService(
     ledgerId,
     ledgerData,
@@ -51,7 +50,8 @@ const updateLedger = catchAsync(async (req: Request, res: Response) => {
 });
 const getLedgers = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;
-  const result = await LedgerService.getLedgersService(user);
+  const { type } = req.query;
+  const result = await LedgerService.getLedgersService(user,type as string);
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, "Ledger not found");
   }
@@ -59,7 +59,7 @@ const getLedgers = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: "Ledger created successfully",
+    message: "Ledger retrieved successfully",
     data: result,
   });
 });
@@ -75,7 +75,7 @@ const deleteLedger = catchAsync(async (req: Request, res: Response) => {
     statusCode: 200,
     success: true,
     message: "Ledger deleted successfully",
-    data: '',
+    data: "",
   });
 });
 
@@ -83,5 +83,5 @@ export const LedgerController = {
   createLedger,
   getLedgers,
   updateLedger,
-  deleteLedger
+  deleteLedger,
 };
