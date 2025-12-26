@@ -8,14 +8,29 @@ import {
   transactionListColorClasses,
 } from "../constants/constants";
 
-const LedgerCard = ({ type }: { type: string }) => {
+const LedgerCard = ({
+  type,
+  setTotalIncomeAmountTransactions,
+  setTotalExpenseAmountTransactions,
+}: {
+  type: string;
+  setTotalIncomeAmountTransactions?: (amount: number) => void;
+  setTotalExpenseAmountTransactions?: (amount: number) => void;
+}) => {
   const { data: ledgers, isLoading, error } = useLedgerListQuery(type);
   if (isLoading) return <p className="text-center p-10">Loading ledgers...</p>;
   if (error)
     return <p className="text-center p-10 text-red-500">Error loading data.</p>;
 
+  if (type === "income" && setTotalIncomeAmountTransactions) {
+    setTotalIncomeAmountTransactions(ledgers?.data?.totalAmount || 0);
+  }
+  if (type === "expense" && setTotalExpenseAmountTransactions) {
+    setTotalExpenseAmountTransactions(ledgers?.data?.totalAmount || 0);
+  }
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
+    <div className="grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
       {ledgers?.data?.ledgers?.map((ledger: LedgerType, index: number) => {
         type IconName = keyof typeof LucideIcons;
 
@@ -31,7 +46,7 @@ const LedgerCard = ({ type }: { type: string }) => {
         return (
           <div
             key={index}
-            className={`rounded-xl p-4 md:p-6 border ${colorClass} transition-all hover:scale-105  cursor-pointer relative`}
+            className={`rounded-xl p-2 md:p-6 border ${colorClass} transition-all hover:scale-105  cursor-pointer relative`}
           >
             <Link
               to={`/transaction-entry/${ledger.id}?ledger=${
@@ -62,7 +77,7 @@ const LedgerCard = ({ type }: { type: string }) => {
               >
                 <IconComponent className="w-4 md:w-8 h-4 md:h-8 text-white" />
               </div>
-              <h3 className="text-white font-semibold text-sm md:text-base text-center">
+              <h3 className="text-white max-w-27.5 truncate font-semibold text-sm md:text-base text-center">
                 {ledger.name}
               </h3>
               <p className="text-white font-bold text-lg md:text-2xl">
@@ -71,13 +86,15 @@ const LedgerCard = ({ type }: { type: string }) => {
               </p>
             </Link>
             <div
-              className={`absolute top-2 right-2 w-7 h-7 text-white rounded-sm  flex items-center justify-center cursor-pointer ${ledgerListIconColorClass}`}
+              className={`absolute top-2 right-2 w-5 h-5 md:w-7 md:h-7 text-white rounded-sm  flex items-center justify-center cursor-pointer ${ledgerListIconColorClass}`}
             >
               <Link
-                to={`/ledger/${ledger.id}/transactions?ledger=${ledger.name}&type=${ledger.type.toLowerCase()}`}
+                to={`/ledger/${ledger.id}/transactions?ledger=${
+                  ledger.name
+                }&type=${ledger.type.toLowerCase()}`}
                 className=" transition-all"
               >
-                <LucideIcons.List className="w-5 h-5 " />
+                <LucideIcons.List className="w-3.5 h-3.5 md:w-5 md:h-5 " />
               </Link>
             </div>
           </div>

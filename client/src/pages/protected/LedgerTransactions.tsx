@@ -79,7 +79,7 @@ const LedgerTransactions = () => {
                               : "text-orange-500"
                           }`}
                         >
-                          {transaction?.ledger?.type =="INCOME" ? "+" : "-"}$
+                          {transaction?.ledger?.type =="INCOME" ? "+" : "-"}৳
                           {Math.abs(transaction.amount).toLocaleString()}
                         </p>
                         <p className="text-xs text-gray-500">

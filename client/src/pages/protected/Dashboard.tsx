@@ -10,9 +10,8 @@ const Dashboard = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("Monthly");
   const [expenseOpen, setExpenseOpen] = useState(true);
   const [incomeOpen, setIncomeOpen] = useState(true);
-
-  const totalExpense = 0;
-  const totalIncome = 0;
+  const [totalIncomeAmountTransactions, setTotalIncomeAmountTransactions] = useState(0);
+  const [totalExpenseAmountTransactions, setTotalExpenseAmountTransactions] = useState(0);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-1 gap-3 md:gap-4">
@@ -57,7 +56,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="bg-[#1a2332] rounded-lg p-4 md:p-6 border border-gray-800">
+        <div className="bg-[#1a2332] rounded-lg p-3 md:p-6 border border-gray-800">
           <button
             onClick={() => setExpenseOpen(!expenseOpen)}
             className="w-full flex items-center justify-between mb-6 group"
@@ -67,7 +66,7 @@ const Dashboard = () => {
                 Expense
               </h3>
               <span className="text-2xl md:text-3xl font-bold text-orange-500">
-                ${totalExpense.toLocaleString()}
+                ৳{totalExpenseAmountTransactions?.toLocaleString()}
               </span>
             </div>
             <ChevronDown
@@ -76,7 +75,7 @@ const Dashboard = () => {
               }`}
             />
           </button>
-          {expenseOpen && <LedgerCard type="expense" />}
+          {expenseOpen && <LedgerCard type="expense" setTotalExpenseAmountTransactions={setTotalExpenseAmountTransactions} />}
         </div>
 
         <div className="bg-[#1a2332] rounded-lg p-4 md:p-6 border border-gray-800">
@@ -89,7 +88,7 @@ const Dashboard = () => {
                 Income
               </h3>
               <span className="text-2xl md:text-3xl font-bold text-green-500">
-                ${totalIncome.toLocaleString()}
+                ৳{totalIncomeAmountTransactions?.toLocaleString()}
               </span>
             </div>
             <ChevronDown
@@ -98,7 +97,7 @@ const Dashboard = () => {
               }`}
             />
           </button>
-          {incomeOpen && <LedgerCard type="income" />}
+          {incomeOpen && <LedgerCard type="income" setTotalIncomeAmountTransactions={setTotalIncomeAmountTransactions} />}
         </div>
       </div>
       {/* <div>

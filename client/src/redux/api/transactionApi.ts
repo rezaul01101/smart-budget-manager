@@ -9,13 +9,14 @@ export const transactionApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["ledger"],
+      invalidatesTags: ["ledger",'transaction'],
     }),
     transactionList: build.query({
       query: (query: string) => ({
         url: `${BaseUrl}/list${query}`,
         method: "GET",
       }),
+      providesTags: ["transaction"],
     }),
   }),
 });
