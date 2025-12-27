@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft,
   UtensilsCrossed,
@@ -12,7 +12,12 @@ import {
   TrendingUp,
   Wallet,
 } from "lucide-react";
-import { useCreateLedgerMutation } from "../../redux/api/ledgerApi";
+import {
+  useCreateLedgerMutation,
+  useSingleLedgerQuery,
+  useUpdateLedgerMutation,
+} from "../../redux/api/ledgerApi";
+import type { LedgerFormData } from "../../interfaces/interface";
 
 const availableIcons = [
   { name: "Wallet", icon: Wallet },
@@ -39,24 +44,44 @@ const availableColors = [
 ];
 
 const LedgerEntry = () => {
-  const [createLedger, { isLoading, error }] = useCreateLedgerMutation();
+  const hasInitialized = useRef(false);
 
   const navigate = useNavigate();
+  const { ledgerId } = useParams();
+  const isEditMode = Boolean(ledgerId);
 
-  const [formData, setFormData] = useState({
+  //Api call
+  const [createLedger, { isLoading: isCreating, error }] =
+    useCreateLedgerMutation();
+
+  const [updateLedger, { isLoading: isUpdating }] = useUpdateLedgerMutation();
+
+  const [formData, setFormData] = useState<LedgerFormData>({
     name: "",
     type: "EXPENSE",
     icon: "Wallet",
     color: "yellow",
   });
 
+  const { data: ledger } = useSingleLedgerQuery(ledgerId!, {
+    skip: !isEditMode,
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      const res = await createLedger(formData).unwrap();
+      let res;
+      if (isEditMode) {
+        res = await updateLedger({
+          id: Number(ledgerId),
+          ...formData,
+        }).unwrap();
+      } else {
+        res = await createLedger(formData).unwrap();
+      }
       if (res) {
-        navigate(-1);
+        navigate(isEditMode ? -2 : -1);
       }
     } catch (err) {
       console.error("Ledger Create failed:", error, err);
@@ -70,6 +95,24 @@ const LedgerEntry = () => {
     });
   };
 
+  useEffect(() => {
+    // Only run if we have data, we are in edit mode, and we haven't filled the form yet
+    if (isEditMode && ledger && !hasInitialized.current) {
+      // Use a functional update or wrap in a microtask to move it out of the sync render flow
+      const timer = setTimeout(() => {
+        setFormData({
+          name: ledger?.data?.name || "",
+          type: ledger?.data?.type === "INCOME" ? "INCOME" : "EXPENSE",
+          icon: ledger?.data?.icon || "Wallet",
+          color: ledger?.data?.color || "yellow",
+        });
+        hasInitialized.current = true;
+      }, 0);
+
+      return () => clearTimeout(timer);
+    }
+  }, [ledger, isEditMode]);
+
   return (
     <>
       <div className="bg-[#1a2332] rounded-lg p-2 pb-3 md:p-4 border border-gray-800">
@@ -77,14 +120,14 @@ const LedgerEntry = () => {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-4">
               <button
-                onClick={() => navigate(-1)}
+                onClick={() => navigate(ledger?.data ? -2 : -1)}
                 className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors cursor-pointer"
               >
                 <ArrowLeft className="w-6 h-6" />
               </button>
               <div>
                 <h2 className="text-xl md:text-2xl font-bold text-white">
-                  Create New Ledger
+                  {isEditMode ? "Edit Ledger" : "Add New Ledger"}
                 </h2>
                 <p className="text-sm text-gray-400">
                   Set up a new ledger to track your money easily
@@ -201,7 +244,7 @@ const LedgerEntry = () => {
               <div className="flex gap-4 pt-4">
                 <button
                   type="button"
-                  onClick={() => navigate(-1)}
+                  onClick={() => navigate(isEditMode ? -2 : -1)}
                   className="cursor-pointer flex-1 px-6 py-3 rounded-lg border border-gray-700 text-gray-300 hover:bg-gray-800 transition-colors"
                 >
                   Cancel
@@ -210,7 +253,13 @@ const LedgerEntry = () => {
                   type="submit"
                   className=" cursor-pointer flex-1 px-6 py-3 rounded-lg bg-linear-to-r from-orange-500 to-orange-600 text-white font-semibold hover:from-orange-600 hover:to-orange-700 transition-all"
                 >
-                  {isLoading ? "Creating" : "Create"}
+                  {isEditMode
+                    ? isUpdating
+                      ? "Updating..."
+                      : "Update"
+                    : isCreating
+                    ? "Creating..."
+                    : "Create"}
                 </button>
               </div>
             </form>

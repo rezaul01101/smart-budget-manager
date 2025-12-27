@@ -11,6 +11,14 @@ export const transactionApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["ledger",'transaction'],
     }),
+    updateTransaction: build.mutation({
+      query: (data) => ({
+        url: `${BaseUrl}/update`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["ledger",'transaction'],
+    }),
     transactionList: build.query({
       query: (query?: string) => ({
         url: `${BaseUrl}/list${query}`,

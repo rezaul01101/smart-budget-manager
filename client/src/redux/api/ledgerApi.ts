@@ -11,6 +11,14 @@ export const ledgerApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["ledger"],
     }),
+    updateLedger: build.mutation({
+      query: (data) => ({
+        url: `${BaseUrl}/update/${data.id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["ledger"],
+    }),
     LedgerList: build.query({
       query: (type) => ({
         url: `${BaseUrl}/list?type=${type}`,
@@ -27,4 +35,4 @@ export const ledgerApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateLedgerMutation, useLedgerListQuery, useSingleLedgerQuery } = ledgerApi;
+export const { useCreateLedgerMutation, useLedgerListQuery, useSingleLedgerQuery,useUpdateLedgerMutation } = ledgerApi;

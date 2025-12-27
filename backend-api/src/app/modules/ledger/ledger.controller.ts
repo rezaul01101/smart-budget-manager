@@ -37,7 +37,7 @@ const updateLedger = catchAsync(async (req: Request, res: Response) => {
   if (!result) {
     throw new ApiError(
       httpStatus.INTERNAL_SERVER_ERROR,
-      "Ledger not created. Please try again"
+      "Ledger not updated. Please try again"
     );
   }
 

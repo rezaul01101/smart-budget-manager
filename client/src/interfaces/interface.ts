@@ -6,6 +6,12 @@ export type LedgerType = {
   type:"INCOME" | "EXPENSE"
   color:string,
 }
+export interface LedgerFormData {
+  name: string;
+  type: "EXPENSE" | "INCOME";
+  icon: string;
+  color: string;
+}
 export type TransactionType = {
   id: string | number
   amount: number

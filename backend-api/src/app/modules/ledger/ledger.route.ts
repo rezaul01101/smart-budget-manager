@@ -30,7 +30,7 @@ router.put(
   LedgerController.updateLedger
 );
 router.delete(
-  "/delete/:id",
+  "/:id",
   auth("user"),
   LedgerController.deleteLedger
 );

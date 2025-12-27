@@ -55,6 +55,9 @@ const getLedgersService = async (user: User, type: string) => {
         },
       },
     },
+    orderBy: {
+      id: "desc",
+    },
   });
   // calculate sum per ledger
   const result = ledgers.map((ledger) => ({
@@ -91,11 +94,11 @@ const getLedgerByIdService = async (user: User, ledgerId: number) => {
 
 const deleteLedgerService = async (ledgerId: number, user: User) => {
   const { id } = user;
-
+  console.log(ledgerId, id);
   const result = await prisma.ledger.delete({
     where: {
-      id: ledgerId,
-      userId: id,
+      id: Number(ledgerId),
+      userId: Number(id),
     },
   });
 

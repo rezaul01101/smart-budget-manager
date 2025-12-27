@@ -53,7 +53,7 @@ model Account {
   icon         String?
   color        String?
   userId       Int
-  user         User          @relation(fields: [userId], references: [id])
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   transactions Transaction[]
 }
 
@@ -65,7 +65,7 @@ model Ledger {
   icon         String?
   color        String?
   userId       Int
-  user         User          @relation(fields: [userId], references: [id])
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   transactions Transaction[]
   budgets      Budget[]
 }
@@ -82,9 +82,9 @@ model Transaction {
   account   Account? @relation(fields: [accountId], references: [id])
 
   ledgerId Int
-  ledger   Ledger @relation(fields: [ledgerId], references: [id])
+  ledger   Ledger @relation(fields: [ledgerId], references: [id], onDelete: Cascade)
   userId   Int
-  user     User    @relation(fields: [userId], references: [id])
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // Budget targets for specific ledgers per month
@@ -96,10 +96,10 @@ model Budget {
   icon     String?
   color    String?
   ledgerId Int
-  ledger   Ledger  @relation(fields: [ledgerId], references: [id])
+  ledger   Ledger  @relation(fields: [ledgerId], references: [id],onDelete: Cascade)
 
   userId Int
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
 
 enum AccountType {
