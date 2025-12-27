@@ -1,5 +1,5 @@
 import { prisma } from "../../../shared/prisma";
-import { User } from "../../../generated/prisma/client";
+import { LedgerType, User } from "../../../generated/prisma/client";
 import { TransactionType } from "./transaction.interface";
 
 const createTransactionService = async (
@@ -23,17 +23,33 @@ const createTransactionService = async (
   return result;
 };
 
-const getAllTransactionsService = async (user: User, ledgerid?: string) => {
+const getAllTransactionsService = async (
+  user: User,
+  ledgerid?: string,
+  type?: string
+) => {
+  const ledgerType =
+    type === "income"
+      ? LedgerType.INCOME
+      : type === "expense"
+      ? LedgerType.EXPENSE
+      : undefined;
+
   const result = await prisma.transaction.findMany({
     where: {
       userId: user.id,
       ledgerId: ledgerid ? Number(ledgerid) : undefined,
+      ...(ledgerType && {
+        ledger: {
+          type: ledgerType,
+        },
+      }),
     },
     include: {
       ledger: true,
     },
     orderBy: {
-      date: 'desc',
+      date: "desc",
     },
   });
 

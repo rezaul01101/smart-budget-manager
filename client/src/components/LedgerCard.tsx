@@ -7,6 +7,7 @@ import {
   ledgerColorClasses,
   transactionListColorClasses,
 } from "../constants/constants";
+import { useEffect } from "react";
 
 const LedgerCard = ({
   type,
@@ -18,16 +19,22 @@ const LedgerCard = ({
   setTotalExpenseAmountTransactions?: (amount: number) => void;
 }) => {
   const { data: ledgers, isLoading, error } = useLedgerListQuery(type);
+
+  useEffect(() => {
+    if (!ledgers?.data?.totalAmount) return;
+
+    if (type === "income" && setTotalIncomeAmountTransactions) {
+      setTotalIncomeAmountTransactions(Number(ledgers.data.totalAmount));
+    }
+
+    if (type === "expense" && setTotalExpenseAmountTransactions) {
+      setTotalExpenseAmountTransactions(Number(ledgers.data.totalAmount));
+    }
+  }, [type, ledgers?.data?.totalAmount, setTotalIncomeAmountTransactions, setTotalExpenseAmountTransactions]);
+
   if (isLoading) return <p className="text-center p-10">Loading ledgers...</p>;
   if (error)
     return <p className="text-center p-10 text-red-500">Error loading data.</p>;
-
-  if (type === "income" && setTotalIncomeAmountTransactions) {
-    setTotalIncomeAmountTransactions(ledgers?.data?.totalAmount || 0);
-  }
-  if (type === "expense" && setTotalExpenseAmountTransactions) {
-    setTotalExpenseAmountTransactions(ledgers?.data?.totalAmount || 0);
-  }
 
   return (
     <div className="grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
