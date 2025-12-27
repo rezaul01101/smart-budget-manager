@@ -51,7 +51,23 @@ const updateLedger = catchAsync(async (req: Request, res: Response) => {
 const getLedgers = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;
   const { type } = req.query;
-  const result = await LedgerService.getLedgersService(user,type as string);
+  const result = await LedgerService.getLedgersService(user, type as string);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Ledger not found");
+  }
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Ledger retrieved successfully",
+    data: result,
+  });
+});
+const getLedgerById = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user;
+  const ledgerId = req.params.id as unknown as number;
+  console.log(ledgerId);
+  const result = await LedgerService.getLedgerByIdService(user, Number(ledgerId));
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, "Ledger not found");
   }
@@ -82,6 +98,7 @@ const deleteLedger = catchAsync(async (req: Request, res: Response) => {
 export const LedgerController = {
   createLedger,
   getLedgers,
+  getLedgerById,
   updateLedger,
   deleteLedger,
 };

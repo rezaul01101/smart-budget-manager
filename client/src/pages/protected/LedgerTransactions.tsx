@@ -1,4 +1,4 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useTransactionListQuery } from "../../redux/api/transactionApi";
 import { ArrowLeft } from "lucide-react";
 import * as LucideIcons from "lucide-react";
@@ -32,6 +32,11 @@ const LedgerTransactions = () => {
               </h2>
               <p className="text-sm text-gray-400">Transaction History</p>
             </div>
+          </div>
+          <div>
+            <Link to={`/edit-ledger/${ledgerId}`} className="rounded-lg bg-orange-500 flex items-center justify-center w-8 h-8">
+              <LucideIcons.Pen className="w-4 h-4 text-white" />
+            </Link>
           </div>
         </div>
       </div>

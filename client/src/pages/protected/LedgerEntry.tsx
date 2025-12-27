@@ -38,7 +38,7 @@ const availableColors = [
   { name: "Green", value: "green" },
 ];
 
-const AddLedger = () => {
+const LedgerEntry = () => {
   const [createLedger, { isLoading, error }] = useCreateLedgerMutation();
 
   const navigate = useNavigate();
@@ -221,4 +221,4 @@ const AddLedger = () => {
   );
 };
 
-export default AddLedger;
+export default LedgerEntry;

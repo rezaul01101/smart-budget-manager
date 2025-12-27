@@ -18,6 +18,11 @@ router.get(
   auth("user"),
   LedgerController.getLedgers
 );
+router.get(
+  "/:id",
+  auth("user"),
+  LedgerController.getLedgerById
+);
 router.put(
   "/update/:id",
   auth("user"),

@@ -18,7 +18,13 @@ export const ledgerApi = baseApi.injectEndpoints({
       }),
       providesTags: ["ledger"],
     }),
+    SingleLedger: build.query({
+      query: (id) => ({
+        url: `${BaseUrl}/${Number(id)}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateLedgerMutation, useLedgerListQuery } = ledgerApi;
+export const { useCreateLedgerMutation, useLedgerListQuery, useSingleLedgerQuery } = ledgerApi;

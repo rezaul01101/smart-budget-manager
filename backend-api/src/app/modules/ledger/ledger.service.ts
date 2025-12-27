@@ -39,13 +39,14 @@ const updateLedgerService = async (
 
   return result;
 };
-const getLedgersService = async (user: User,type: string) => {
+const getLedgersService = async (user: User, type: string) => {
   const { id } = user;
-  
+
   const ledgers = await prisma.ledger.findMany({
     where: {
       userId: id,
-      type: type=="expense" ? "EXPENSE" : type=="income" ? "INCOME" : undefined,
+      type:
+        type == "expense" ? "EXPENSE" : type == "income" ? "INCOME" : undefined,
     },
     include: {
       transactions: {
@@ -69,6 +70,25 @@ const getLedgersService = async (user: User,type: string) => {
     ledgers: result,
   };
 };
+
+const getLedgerByIdService = async (user: User, ledgerId: number) => {
+  const ledger = await prisma.ledger.findFirst({
+    where: {
+      id: ledgerId,
+      userId: user.id,
+    },
+    include: {
+      transactions: true,
+    },
+  });
+
+  if (!ledger) {
+    throw new Error("Ledger not found");
+  }
+
+  return ledger;
+};
+
 const deleteLedgerService = async (ledgerId: number, user: User) => {
   const { id } = user;
 
@@ -85,6 +105,7 @@ const deleteLedgerService = async (ledgerId: number, user: User) => {
 export const LedgerService = {
   createLedgerService,
   getLedgersService,
+  getLedgerByIdService,
   updateLedgerService,
   deleteLedgerService,
 };
