@@ -13,7 +13,7 @@ import TransactionEntry from "./pages/protected/TransactionEntry";
 import LedgerTransactions from "./pages/protected/LedgerTransactions";
 import LedgerEntry from "./pages/protected/LedgerEntry";
 import { createBrowserRouter } from "react-router";
-
+import NotFoundPage from "./pages/404";
 
 export const router = createBrowserRouter([
   {
@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // 🔐 Protected area
+  //Protected area
   {
     element: <ProtectedLayout />,
     children: [
@@ -39,9 +39,16 @@ export const router = createBrowserRouter([
           { path: "/add-ledger", element: <LedgerEntry /> },
           { path: "/edit-ledger/:ledgerId", element: <LedgerEntry /> },
           { path: "/transaction-entry/:id", element: <TransactionEntry /> },
-          { path: "/ledger/:ledgerId/transactions", element: <LedgerTransactions /> },
+          {
+            path: "/ledger/:ledgerId/transactions",
+            element: <LedgerTransactions />,
+          },
         ],
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);

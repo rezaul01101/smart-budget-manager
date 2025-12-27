@@ -18,7 +18,7 @@ const LedgerCard = ({
   setTotalIncomeAmountTransactions?: (amount: number) => void;
   setTotalExpenseAmountTransactions?: (amount: number) => void;
 }) => {
-  const { data: ledgers, isLoading, error } = useLedgerListQuery(type);
+  const { data: ledgers, isLoading } = useLedgerListQuery(type);
 
   useEffect(() => {
     if (!ledgers?.data?.totalAmount) return;
@@ -33,8 +33,7 @@ const LedgerCard = ({
   }, [type, ledgers?.data?.totalAmount, setTotalIncomeAmountTransactions, setTotalExpenseAmountTransactions]);
 
   if (isLoading) return <p className="text-center p-10">Loading ledgers...</p>;
-  if (error)
-    return <p className="text-center p-10 text-red-500">Error loading data.</p>;
+  
 
   return (
     <div className="grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">

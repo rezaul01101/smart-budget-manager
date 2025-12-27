@@ -1,13 +1,13 @@
-import { ChevronDown, ChevronLeft, Wallet, Plus } from "lucide-react";
+import { ChevronDown, Wallet, Plus } from "lucide-react";
 
 import { useState } from "react";
 import { Link } from "react-router";
 import LedgerCard from "../../components/LedgerCard";
 
-const periods = ["Monthly", "Weekly", "Yearly"];
+// const periods = ["Monthly", "Weekly", "Yearly"];
 
 const Dashboard = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState("Monthly");
+  // const [selectedPeriod, setSelectedPeriod] = useState("Monthly");
   const [expenseOpen, setExpenseOpen] = useState(true);
   const [incomeOpen, setIncomeOpen] = useState(true);
   const [totalIncomeAmountTransactions, setTotalIncomeAmountTransactions] = useState(0);
@@ -18,7 +18,7 @@ const Dashboard = () => {
       <div className="space-y-6 col-span-2">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-2 md:gap-4">
-            <select
+            {/* <select
               value={selectedPeriod}
               onChange={(e) => setSelectedPeriod(e.target.value)}
               className="bg-[#1a2332] text-white text-sm md:text-base px-3 md:px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 cursor-pointer"
@@ -28,16 +28,16 @@ const Dashboard = () => {
                   {period}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
 
           <div className="flex items-center gap-2 md:gap-4">
-            <button className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">
+            {/* <button className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors">
               <ChevronLeft className="w-5 h-5" />
             </button>
             <h2 className="text-lg md:text-2xl font-bold text-white whitespace-nowrap">
               This Month
-            </h2>
+            </h2> */}
           </div>
 
           <div className="flex items-center gap-2">
