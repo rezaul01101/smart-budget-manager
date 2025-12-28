@@ -4,10 +4,12 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthState {
   accessToken: string | null;
+  isInitialized: boolean;
 }
 
 const initialState: AuthState = {
   accessToken: null,
+  isInitialized: false,
 };
 
 const authSlice = createSlice({
@@ -20,8 +22,11 @@ const authSlice = createSlice({
     clearAccessToken: (state) => {
       state.accessToken = null;
     },
+    setInitialized(state) {
+      state.isInitialized = true;
+    },
   },
 });
 
-export const { setAccessToken, clearAccessToken } = authSlice.actions;
+export const { setAccessToken, clearAccessToken, setInitialized } = authSlice.actions;
 export default authSlice.reducer;

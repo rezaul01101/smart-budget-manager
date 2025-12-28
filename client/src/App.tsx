@@ -3,18 +3,21 @@ import Footer from "./components/Footer";
 import { Outlet } from "react-router-dom";
 import { useRefreshTokenMutation } from "./redux/api/authApi";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setAccessToken } from "./redux/features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setAccessToken, setInitialized } from "./redux/features/authSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import { setUserInfo } from "./redux/features/user/userSlice";
 import { decodedToken } from "./utils/jwt";
+import type { RootState } from "./redux/store";
 
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
 
+
   const [refreshToken] = useRefreshTokenMutation();
+  const isInitialized = useSelector((state: RootState) => state.auth.isInitialized);
 
   useEffect(() => {
     refreshToken(undefined)
@@ -29,7 +32,7 @@ const App = () => {
         }
       })
       .catch(() => {
-        // stay on login
+        dispatch(setInitialized());
       });
   }, [dispatch, refreshToken, navigate, location.pathname]);
 

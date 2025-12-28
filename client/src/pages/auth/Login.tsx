@@ -14,6 +14,7 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState<string | null>(null);
@@ -31,7 +32,7 @@ export default function Login() {
       dispatch(setUserInfo(decodedToken(res.data.accessToken)));
       navigate("/dashboard");
     } catch (err) {
-      console.error("Login failed:", error, err);
+      setErrorMessage(err?.data?.message as string);
     }
   };
 
@@ -50,19 +51,28 @@ export default function Login() {
             <p className="text-gray-600 dark:text-gray-400">
               Sign in to your account to access your dashboard
             </p>
+            {
+              errorMessage && (
+                <div className="text-left bg-red-300 p-2 rounded-md">
+                  <p className="text-red-700 text-left mb-0">
+                    {errorMessage}
+                  </p>
+                </div>
+              )
+            }
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">
+
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
                 Email Address
               </label>
               <div
-                className={`relative flex items-center border-2 rounded-xl transition-all duration-300 ${
-                  isFocused === "email"
+                className={`relative flex items-center border-2 rounded-xl transition-all duration-300 ${isFocused === "email"
                     ? "border-orange-500 dark:border-orange-500 bg-white/80 dark:bg-gray-700/80"
                     : "border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-700/50"
-                }`}
+                  }`}
               >
                 <Mail className="absolute left-4 w-5 h-5 text-gray-400" />
                 <input
@@ -83,11 +93,10 @@ export default function Login() {
                 Password
               </label>
               <div
-                className={`relative flex items-center border-2 rounded-xl transition-all duration-300 ${
-                  isFocused === "password"
+                className={`relative flex items-center border-2 rounded-xl transition-all duration-300 ${isFocused === "password"
                     ? "border-orange-500 dark:border-orange-500 bg-white/80 dark:bg-gray-700/80"
                     : "border-gray-200 dark:border-gray-700 bg-white/50 dark:bg-gray-700/50"
-                }`}
+                  }`}
               >
                 <Lock className="absolute left-4 w-5 h-5 text-gray-400" />
                 <input
