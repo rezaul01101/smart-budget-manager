@@ -11,6 +11,7 @@ import {
 import { useUserRegisterMutation } from "../../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 import SuccessComponent from "./components/SuccessComponent";
+import type { ApiError } from "../../interfaces/interface";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ export default function Register() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isFocused, setIsFocused] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -45,8 +47,10 @@ export default function Register() {
       if (res) {
         setSuccess(true);
       }
-    } catch (err) {
-      console.error("Login failed:", error, err);
+    } catch (err: ApiError | unknown) {
+      setErrorMessage(
+        (err as ApiError)?.data?.message || "Something went wrong"
+      );
     }
     console.log("Registering user:", formData);
   };
@@ -70,6 +74,11 @@ export default function Register() {
               Join Smart Budget Manager and start managing your finances
             </p>
           </div>
+          {errorMessage && (
+            <div className="text-left bg-red-300 p-2 rounded-md">
+              <p className="text-dark text-center mb-0">{errorMessage}</p>
+            </div>
+          )}
 
           {success ? (
             <SuccessComponent />

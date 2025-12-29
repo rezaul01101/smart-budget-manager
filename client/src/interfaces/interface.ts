@@ -20,3 +20,18 @@ export type TransactionType = {
   ledgerId: string | number
   ledger?: LedgerType
 }
+export interface ApiError{
+  status:number,
+  data:ApiErrorResponse 
+}
+export interface ApiErrorResponse {
+  success: false;
+  message: string;
+  errorMessages: ApiErrorMessage[];
+  stack?: string; // optional (usually only in dev)
+}
+
+export interface ApiErrorMessage {
+  path: string;
+  message: string;
+}
