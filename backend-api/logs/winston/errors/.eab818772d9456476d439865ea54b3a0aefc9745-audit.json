@@ -259,6 +259,11 @@
             "date": 1767172367140,
             "name": "/app/logs/winston/errors/2025-31-12-09-error.log",
             "hash": "a5b9c7a6f46589f63470ba2b605e60f3045822d750e212e872b255917ab6d014"
+        },
+        {
+            "date": 1767175920061,
+            "name": "/app/logs/winston/errors/2025-31-12-10-error.log",
+            "hash": "70c198cee545bdb1f1ebcd8f4c44157607cc3f7d8a2f7e5b426bca445de0087a"
         }
     ],
     "hashType": "sha256"

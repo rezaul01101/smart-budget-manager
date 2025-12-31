@@ -72,7 +72,6 @@ const updatePassword = catchAsync(async (req: Request, res: Response) => {
 });
 const refreshToken = catchAsync(async (req: Request, res: Response) => {
   const refreshToken = req.cookies.refreshToken;
-
   if (!refreshToken) {
     throw new ApiError(401, "Refresh token missing");
   }
@@ -127,6 +126,7 @@ const logOut = catchAsync(async (req: Request, res: Response) => {
     httpOnly: true,
     sameSite: "lax",
     path: "/",
+    maxAge: 0,
   });
 
   sendResponse(res, {
