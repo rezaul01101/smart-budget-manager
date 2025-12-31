@@ -10,7 +10,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: loginData,
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: ["user","ledger","transaction"],
     }),
     userLogout: build.mutation({
       query: () => ({

@@ -11,6 +11,10 @@ import {
   Briefcase,
   TrendingUp,
   Wallet,
+  BriefcaseMedical,
+  House,
+  Clapperboard,
+  Handshake,
 } from "lucide-react";
 import {
   useCreateLedgerMutation,
@@ -29,6 +33,10 @@ const availableIcons = [
   { name: "Heart", icon: Heart },
   { name: "Briefcase", icon: Briefcase },
   { name: "TrendingUp", icon: TrendingUp },
+  { name: "BriefcaseMedical", icon: BriefcaseMedical },
+  { name: "House", icon: House},
+  { name: "Clapperboard", icon: Clapperboard},
+  { name: "Handshake", icon: Handshake},
 ];
 
 const availableColors = [
