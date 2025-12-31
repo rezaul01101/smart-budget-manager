@@ -122,11 +122,14 @@ const logOut = catchAsync(async (req: Request, res: Response) => {
     throw new ApiError(httpStatus.UNAUTHORIZED, "You are not authorized");
   }
   // clear cookie
-  res.clearCookie("refreshToken", {
+  res.cookie("refreshToken", "", {
     httpOnly: true,
     secure: true,
     sameSite: "strict",
+    path: "/",
+    expires: new Date(0),
   });
+
   sendResponse(res, {
     statusCode: 200,
     success: true,

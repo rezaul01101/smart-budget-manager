@@ -86,7 +86,7 @@ const LedgerCard = ({
               <h3 className="text-white max-w-22 md:max-w-27.5 truncate font-normal text-xs md:text-base text-center">
                 {ledger.name}
               </h3>
-              <p className="text-white font-bold text-lg md:text-2xl">
+              <p className="text-white font-semibold text-sm md:text-xl">
                 ৳{ledger?.amount.toLocaleString()}
                 {/* ${ledger?.amount.toLocaleString()} */}
               </p>

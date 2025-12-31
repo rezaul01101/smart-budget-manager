@@ -34,7 +34,7 @@ export default function MobileNav() {
             }
           >
             <item.icon className="w-4 h-4" />
-            <span className="text-[8px] mt-1 font-normal">{item.label}</span>
+            <span className="text-[10px] mt-1 font-normal">{item.label}</span>
           </NavLink>
         ))}
       </div>
