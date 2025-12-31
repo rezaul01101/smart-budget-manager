@@ -15,7 +15,7 @@ import type { ApiError } from "../../interfaces/interface";
 
 export default function Register() {
   const navigate = useNavigate();
-  const [register, { isLoading, error }] = useUserRegisterMutation();
+  const [register, { isLoading }] = useUserRegisterMutation();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",

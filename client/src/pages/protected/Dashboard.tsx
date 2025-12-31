@@ -1,7 +1,6 @@
-import { ChevronDown, Wallet, Plus } from "lucide-react";
+import { ChevronDown} from "lucide-react";
 
 import { useState } from "react";
-import { Link } from "react-router";
 import LedgerCard from "../../components/LedgerCard";
 
 // const periods = ["Monthly", "Weekly", "Yearly"];
