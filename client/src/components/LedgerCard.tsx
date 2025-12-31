@@ -36,7 +36,7 @@ const LedgerCard = ({
   
 
   return (
-    <div className="grid grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
+    <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4">
       {ledgers?.data?.ledgers?.map((ledger: LedgerType, index: number) => {
         type IconName = keyof typeof LucideIcons;
 
@@ -58,7 +58,7 @@ const LedgerCard = ({
               to={`/transaction-entry/${ledger.id}?ledger=${
                 ledger.name
               }&type=${ledger.type.toLowerCase()}`}
-              className="flex flex-col items-center justify-center gap-4"
+              className="flex flex-col items-center justify-center gap-2 md:gap-4"
             >
               <div
                 className={`w-8 md:w-16 h-8 md:h-16 rounded-full flex items-center justify-center ${
@@ -83,7 +83,7 @@ const LedgerCard = ({
               >
                 <IconComponent className="w-4 md:w-8 h-4 md:h-8 text-white" />
               </div>
-              <h3 className="text-white max-w-27.5 truncate font-semibold text-sm md:text-base text-center">
+              <h3 className="text-white max-w-22 md:max-w-27.5 truncate font-normal text-xs md:text-base text-center">
                 {ledger.name}
               </h3>
               <p className="text-white font-bold text-lg md:text-2xl">

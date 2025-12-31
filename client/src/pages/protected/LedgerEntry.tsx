@@ -144,7 +144,7 @@ const LedgerEntry = () => {
             </div>
           </div>
           <div className="w-full md:w-[80%]">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Ledger Name
@@ -162,7 +162,7 @@ const LedgerEntry = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+                <label className="block text-xs font-normal text-gray-300 mb-2">
                   Type
                 </label>
                 <div className="grid grid-cols-2 gap-4">
@@ -171,24 +171,24 @@ const LedgerEntry = () => {
                     onClick={() =>
                       setFormData({ ...formData, type: "EXPENSE" })
                     }
-                    className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
+                    className={`p-2 rounded-lg border-1 transition-all cursor-pointer ${
                       formData.type === "EXPENSE"
                         ? "border-orange-500 bg-orange-500/10"
                         : "border-gray-700 hover:border-gray-600"
                     }`}
                   >
-                    <p className="text-white font-semibold">Expense</p>
+                    <p className="text-white">Expense</p>
                   </button>
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, type: "INCOME" })}
-                    className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
+                    className={`p-2 rounded-lg border-1 transition-all cursor-pointer ${
                       formData.type === "INCOME"
                         ? "border-green-500 bg-green-500/10"
                         : "border-gray-700 hover:border-gray-600"
                     }`}
                   >
-                    <p className="text-white font-semibold">Income</p>
+                    <p className="text-white">Income</p>
                   </button>
                 </div>
               </div>
@@ -197,7 +197,7 @@ const LedgerEntry = () => {
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Icon
                 </label>
-                <div className="grid grid-cols-5 md:grid-cols-9 gap-3">
+                <div className="grid grid-cols-5 md:grid-cols-9 gap-3 max-h-[100px] md:max-h-full overflow-y-auto">
                   {availableIcons.map((iconOption) => {
                     const IconComponent = iconOption.icon;
                     return (
@@ -224,7 +224,7 @@ const LedgerEntry = () => {
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Color
                 </label>
-                <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
+                <div className="grid grid-cols-4 md:grid-cols-6 gap-3 max-h-[100px] md:max-h-full overflow-y-auto">
                   {availableColors.map((colorOption) => (
                     <button
                       key={colorOption.value}
@@ -232,14 +232,14 @@ const LedgerEntry = () => {
                       onClick={() =>
                         setFormData({ ...formData, color: colorOption.value })
                       }
-                      className={`cursor-pointer p-3 rounded-lg border-2 transition-all ${
+                      className={`cursor-pointer py-3 rounded-lg border-1 transition-all ${
                         formData.color === colorOption.value
                           ? "border-white"
                           : "border-transparent hover:border-gray-600"
                       } bg-${colorOption.value}-900/30`}
                     >
                       <div
-                        className={`w-8 h-8 rounded-full bg-${colorOption.value}-500 mx-auto`}
+                        className={`w-6 h-6 rounded-full bg-${colorOption.value}-500 mx-auto`}
                       />
                       <p className="text-white text-xs mt-2 text-center">
                         {colorOption.name}
@@ -253,13 +253,13 @@ const LedgerEntry = () => {
                 <button
                   type="button"
                   onClick={() => navigate(isEditMode ? -2 : -1)}
-                  className="cursor-pointer flex-1 px-6 py-3 rounded-lg border border-gray-700 text-gray-300 hover:bg-gray-800 transition-colors"
+                  className="cursor-pointer flex-1 px-4 py-2 rounded-lg border border-gray-700 text-gray-300 hover:bg-gray-800 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className=" cursor-pointer flex-1 px-6 py-3 rounded-lg bg-linear-to-r from-orange-500 to-orange-600 text-white font-semibold hover:from-orange-600 hover:to-orange-700 transition-all"
+                  className=" cursor-pointer flex-1 px-4 py-2 rounded-lg bg-linear-to-r from-orange-500 to-orange-600 text-white font-semibold hover:from-orange-600 hover:to-orange-700 transition-all"
                 >
                   {isEditMode
                     ? isUpdating

@@ -6,7 +6,8 @@ import {
   CreditCard,
   // PieChart,
   // Settings,
-  X
+  X,
+  PlusCircleIcon
 } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ const menuItems = [
   { icon: Wallet, label: 'Transactions', path: '/transactions' },
   { icon: TrendingUp, label: 'Income', path: '/income' },
   { icon: CreditCard, label: 'Expenses', path: '/expenses' },
+  { icon: PlusCircleIcon, label: 'Add Ledger', path: '/add-ledger' },
   // { icon: Target, label: 'Goals', path: '/goals' },
   // { icon: PieChart, label: 'Reports', path: '/reports' },
   // { icon: Settings, label: 'Settings', path: '/settings' },
