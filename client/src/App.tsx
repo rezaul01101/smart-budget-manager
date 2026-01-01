@@ -24,6 +24,9 @@ const App = () => {
         .then((res) => {
           dispatch(setAccessToken(res.data.accessToken));
           dispatch(setUserInfo(decodedToken(res.data.accessToken)));
+          if(res.data.accessToken){
+            localStorage.setItem("isLoggedOut", "false");
+          }
 
           // 🔥 Only redirect if user is on auth pages
           if (location.pathname === "/login") {

@@ -31,6 +31,9 @@ export default function Login() {
       const res = await userLogin(data).unwrap();
       dispatch(setAccessToken(res.data.accessToken));
       dispatch(setUserInfo(decodedToken(res.data.accessToken)));
+      if(res.data.accessToken){
+        localStorage.setItem("isLoggedOut", "false");
+      }
       navigate("/dashboard");
     } catch (err: ApiError | unknown) {
       setErrorMessage(
