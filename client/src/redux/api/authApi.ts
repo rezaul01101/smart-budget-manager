@@ -15,9 +15,10 @@ export const authApi = baseApi.injectEndpoints({
     userLogout: build.mutation({
       query: () => ({
         url: `${AUTH_URL}/logout`,
-        method: "POST", // best practice
-        credentials: "include", // IMPORTANT if refresh token is in cookie
+        method: "POST", 
+        credentials: "include", 
       }),
+      invalidatesTags: ["user"],
     }),
     userRegister: build.mutation({
       query: (registerData) => ({
@@ -25,6 +26,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: registerData,
       }),
+      invalidatesTags: ["user"],
     }),
     refreshToken: build.mutation({
       query: () => ({
@@ -36,6 +38,7 @@ export const authApi = baseApi.injectEndpoints({
         const { data } = await queryFulfilled;
         storeAccessToken(data.data.accessToken);
       },
+      invalidatesTags: ["user"],
     }),
   }),
 });

@@ -122,8 +122,8 @@ const logOut = catchAsync(async (req: Request, res: Response) => {
   }
   // clear cookie
   res.clearCookie("refreshToken", {
-    secure: false,
     httpOnly: true,
+    secure: false,
     sameSite: "lax",
     path: "/",
     maxAge: 0,

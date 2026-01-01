@@ -17,20 +17,23 @@ const App = () => {
   const [refreshToken] = useRefreshTokenMutation();
 
   useEffect(() => {
-    refreshToken(undefined)
-      .unwrap()
-      .then((res) => {
-        dispatch(setAccessToken(res.data.accessToken));
-        dispatch(setUserInfo(decodedToken(res.data.accessToken)));
+    const isLoggedOut = localStorage.getItem("isLoggedOut");
+    if (isLoggedOut !== "true") {
+      refreshToken(undefined)
+        .unwrap()
+        .then((res) => {
+          dispatch(setAccessToken(res.data.accessToken));
+          dispatch(setUserInfo(decodedToken(res.data.accessToken)));
 
-        // 🔥 Only redirect if user is on auth pages
-        if (location.pathname === "/login") {
-          navigate("/dashboard", { replace: true });
-        }
-      })
-      .catch(() => {
-        console.log("Failed to refresh token");
-      });
+          // 🔥 Only redirect if user is on auth pages
+          if (location.pathname === "/login") {
+            navigate("/dashboard", { replace: true });
+          }
+        })
+        .catch(() => {
+          console.log("Failed to refresh token");
+        });
+    }
   }, [dispatch, refreshToken, navigate, location.pathname]);
 
   return (

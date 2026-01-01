@@ -22,6 +22,7 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
 
   const handleLogout = async () => {
     try {
+      localStorage.setItem("isLoggedOut", "true");
       await logout({}).unwrap();
 
       // clear client-side auth
