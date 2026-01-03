@@ -1,57 +1,50 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  ArrowLeft,
-  UtensilsCrossed,
-  Bus,
-  Droplet,
-  Sparkles,
-  ShoppingBag,
-  Heart,
-  Briefcase,
-  TrendingUp,
-  Wallet,
-  BriefcaseMedical,
-  House,
-  Clapperboard,
-  Handshake,
-} from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import {
   useCreateLedgerMutation,
   useSingleLedgerQuery,
   useUpdateLedgerMutation,
 } from "../../redux/api/ledgerApi";
 import type { LedgerFormData } from "../../interfaces/interface";
+import IconColorModal from "../../components/modal/IconColorModal";
+import * as LucideIcons from "lucide-react";
+import type { LucideProps } from "lucide-react";
+import type { ElementType } from "react";
 
-const availableIcons = [
-  { name: "Wallet", icon: Wallet },
-  { name: "UtensilsCrossed", icon: UtensilsCrossed },
-  { name: "Bus", icon: Bus },
-  { name: "Droplet", icon: Droplet },
-  { name: "Sparkles", icon: Sparkles },
-  { name: "ShoppingBag", icon: ShoppingBag },
-  { name: "Heart", icon: Heart },
-  { name: "Briefcase", icon: Briefcase },
-  { name: "TrendingUp", icon: TrendingUp },
-  { name: "BriefcaseMedical", icon: BriefcaseMedical },
-  { name: "House", icon: House},
-  { name: "Clapperboard", icon: Clapperboard},
-  { name: "Handshake", icon: Handshake},
-];
 
-const availableColors = [
-  { name: "Yellow", value: "yellow" },
-  { name: "Blue", value: "blue" },
-  { name: "Orange", value: "orange" },
-  { name: "Purple", value: "purple" },
-  { name: "Pink", value: "pink" },
-  { name: "Emerald", value: "emerald" },
-  { name: "Teal", value: "teal" },
-  { name: "Cyan", value: "cyan" },
-  { name: "Green", value: "green" },
-];
+
+// const availableIcons = [
+//   { name: "Wallet", icon: Wallet },
+//   { name: "UtensilsCrossed", icon: UtensilsCrossed },
+//   { name: "Bus", icon: Bus },
+//   { name: "Droplet", icon: Droplet },
+//   { name: "Sparkles", icon: Sparkles },
+//   { name: "ShoppingBag", icon: ShoppingBag },
+//   { name: "Heart", icon: Heart },
+//   { name: "Briefcase", icon: Briefcase },
+//   { name: "TrendingUp", icon: TrendingUp },
+//   { name: "BriefcaseMedical", icon: BriefcaseMedical },
+//   { name: "House", icon: House},
+//   { name: "Clapperboard", icon: Clapperboard},
+//   { name: "Handshake", icon: Handshake},
+// ];
+
+// const availableColors = [
+//   { name: "Yellow", value: "yellow" },
+//   { name: "Blue", value: "blue" },
+//   { name: "Orange", value: "orange" },
+//   { name: "Purple", value: "purple" },
+//   { name: "Pink", value: "pink" },
+//   { name: "Emerald", value: "emerald" },
+//   { name: "Teal", value: "teal" },
+//   { name: "Cyan", value: "cyan" },
+//   { name: "Green", value: "green" },
+// ];
 
 const LedgerEntry = () => {
+  const [openIconColorModal, setOpenIconColorModal] = useState(false);
+  const [modalType, setModalType] = useState("icon");
   const hasInitialized = useRef(false);
 
   const navigate = useNavigate();
@@ -104,9 +97,7 @@ const LedgerEntry = () => {
   };
 
   useEffect(() => {
-    // Only run if we have data, we are in edit mode, and we haven't filled the form yet
     if (isEditMode && ledger && !hasInitialized.current) {
-      // Use a functional update or wrap in a microtask to move it out of the sync render flow
       const timer = setTimeout(() => {
         setFormData({
           name: ledger?.data?.name || "",
@@ -121,8 +112,30 @@ const LedgerEntry = () => {
     }
   }, [ledger, isEditMode]);
 
+  const handleIconClick = () => {
+    setOpenIconColorModal(true);
+    // () => setFormData({ ...formData, icon: "Wallet" })
+    setModalType("icon");
+  };
+
+  const handleColorClick = () => {
+    setOpenIconColorModal(true);
+    // () => setFormData({ ...formData, icon: "Wallet" })
+    setModalType("color");
+  };
+
+const IconComponent = LucideIcons[
+  formData.icon as keyof typeof LucideIcons
+] as ElementType<LucideProps>;
   return (
     <>
+      <IconColorModal
+        formData={formData}
+        setFormData={setFormData}
+        type={modalType}
+        isOpen={openIconColorModal}
+        onClose={() => setOpenIconColorModal(false)}
+      />
       <div className="bg-[#1a2332] rounded-lg p-2 pb-3 md:p-4 border border-gray-800">
         <div className="p-2">
           <div className="flex items-center justify-between mb-6">
@@ -193,11 +206,20 @@ const LedgerEntry = () => {
                 </div>
               </div>
 
-              <div>
+              <div className="flex items-center gap-4 justify-between">
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Icon
+                  Select Icon
                 </label>
-                <div className="grid grid-cols-5 md:grid-cols-9 gap-3 max-h-[100px] md:max-h-full overflow-y-auto">
+                <button
+                  type="button"
+                  onClick={handleIconClick}
+                  className={`p-2 rounded-lg border-1 transition-all cursor-pointer border-orange-500 bg-orange-500/10`}
+                >
+                  {IconComponent && (
+                    <IconComponent className="w-6 h-6 text-white mx-auto" />
+                  )}
+                </button>
+                {/* <div className="grid grid-cols-5 md:grid-cols-9 gap-3 max-h-[100px] md:max-h-full overflow-y-auto">
                   {availableIcons.map((iconOption) => {
                     const IconComponent = iconOption.icon;
                     return (
@@ -217,14 +239,25 @@ const LedgerEntry = () => {
                       </button>
                     );
                   })}
-                </div>
+                </div> */}
               </div>
 
-              <div>
+              <div className="flex items-center gap-4 justify-between">
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Color
+                  Select Color
                 </label>
-                <div className="grid grid-cols-4 md:grid-cols-6 gap-3 max-h-[100px] md:max-h-full overflow-y-auto">
+                <div onClick={() => {}}>
+                  <button
+                    type="button"
+                    onClick={handleColorClick}
+                    className={`cursor-pointer py-3 px-2 rounded-lg border-1 transition-all border-orange-500 bg-orange-500/10`}
+                  >
+                    <div
+                      className={`w-6 h-6 rounded-full bg-${formData.color}-500 mx-auto`}
+                    />
+                  </button>
+                </div>
+                {/* <div className="grid grid-cols-4 md:grid-cols-6 gap-3 max-h-[100px] md:max-h-full overflow-y-auto">
                   {availableColors.map((colorOption) => (
                     <button
                       key={colorOption.value}
@@ -246,7 +279,7 @@ const LedgerEntry = () => {
                       </p>
                     </button>
                   ))}
-                </div>
+                </div> */}
               </div>
 
               <div className="flex gap-4 pt-4">

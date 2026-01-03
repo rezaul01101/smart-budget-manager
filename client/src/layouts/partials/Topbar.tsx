@@ -36,13 +36,13 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
   };
 
   return (
-    <header className="bg-[#1a2332] border-b border-gray-800 px-4 md:px-6 py-4 sticky top-0 z-20">
+    <header className="bg-[#1a2332] border-b border-gray-800 px-4 md:px-6 md:py-4 py-0 sticky top-0 z-20">
       <div className="flex items-center justify-between gap-4">
         <button
           onClick={onMenuClick}
           className="md:hidden p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors shrink-0"
         >
-          <Menu className="w-5 h-5" />
+          <Menu className="md:w-5 md:h-5 w-4 h-4" />
         </button>
 
         <div className="flex-1 hidden sm:block max-w-xl">
@@ -58,7 +58,7 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
 
         <div className="flex items-center gap-2 md:gap-4">
           <button className="relative p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors shrink-0">
-            <Bell className="w-5 h-5" />
+            <Bell className="md:w-5 md:h-5 w-4 h-4" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-orange-500 rounded-full"></span>
           </button>
 
@@ -67,8 +67,8 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
               onClick={() => setShowUserMenu(!showUserMenu)}
               className="flex items-center gap-2 md:gap-3 p-2 rounded-lg hover:bg-gray-800 transition-colors shrink-0 cursor-pointer"
             >
-              <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center">
-                <User className="w-5 h-5 text-white" />
+              <div className="md:w-8 md:h-8 w-5 h-5 rounded-full bg-orange-500 flex items-center justify-center">
+                <User className="md:w-5 md:h-5 w-4 h-4 text-white" />
               </div>
               <div className="text-left hidden md:block">
                 <p className="text-sm font-medium text-white">{userInfo?.name}</p>
