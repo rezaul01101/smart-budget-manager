@@ -3,7 +3,7 @@ import { User } from "../../../generated/prisma/client";
 import { LedgerType } from "./ledger.interface";
 
 const createLedgerService = async (ledgerData: LedgerType, user: User) => {
-  const { name, type, icon, color } = ledgerData;
+  const { name, type, icon, color,subLedger } = ledgerData;
 
   const result = await prisma.ledger.create({
     data: {
@@ -14,6 +14,15 @@ const createLedgerService = async (ledgerData: LedgerType, user: User) => {
       color: color,
     },
   });
+  if(result && subLedger){
+    const subLedgerResult = await prisma.subLedger.createMany({
+      data: subLedger.map((subLedger) => ({
+        ledgerId: result.id,
+        userId: user.id,
+        name: subLedger
+      })),
+    });
+  }
 
   return result;
 };
@@ -82,6 +91,7 @@ const getLedgerByIdService = async (user: User, ledgerId: number) => {
     },
     include: {
       transactions: true,
+      subLedgers: true,
     },
   });
 

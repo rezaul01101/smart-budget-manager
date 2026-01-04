@@ -8,7 +8,6 @@ import { LedgerService } from "./ledger.service";
 const createLedger = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;
   const { ...ledgerData } = req.body;
-  console.log(ledgerData);
   const result = await LedgerService.createLedgerService(ledgerData, user);
   if (!result) {
     throw new ApiError(

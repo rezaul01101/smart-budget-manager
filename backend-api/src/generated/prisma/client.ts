@@ -58,6 +58,11 @@ export type Account = Prisma.AccountModel
  */
 export type Ledger = Prisma.LedgerModel
 /**
+ * Model SubLedger
+ * 
+ */
+export type SubLedger = Prisma.SubLedgerModel
+/**
  * Model Transaction
  * 
  */

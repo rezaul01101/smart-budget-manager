@@ -25,6 +25,7 @@ model User {
   passwordResetOtps PasswordResetOtp[]
   accounts          Account[]
   ledgers           Ledger[]
+  subLedgers        SubLedger[]
   budgets           Budget[]
   transactions     Transaction[]
 }
@@ -68,6 +69,18 @@ model Ledger {
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   transactions Transaction[]
   budgets      Budget[]
+  subLedgers   SubLedger[]
+}
+
+model SubLedger {
+  id           Int           @id @default(autoincrement())
+  name         String
+  icon         String?
+  color        String?
+  ledgerId     Int
+  ledger       Ledger        @relation(fields: [ledgerId], references: [id], onDelete: Cascade)
+  userId       Int
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // Transactions record the movement of money

@@ -388,6 +388,7 @@ export const ModelName = {
   PasswordResetOtp: 'PasswordResetOtp',
   Account: 'Account',
   Ledger: 'Ledger',
+  SubLedger: 'SubLedger',
   Transaction: 'Transaction',
   Budget: 'Budget'
 } as const
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "passwordResetOtp" | "account" | "ledger" | "transaction" | "budget"
+    modelProps: "user" | "passwordResetOtp" | "account" | "ledger" | "subLedger" | "transaction" | "budget"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -705,6 +706,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    SubLedger: {
+      payload: Prisma.$SubLedgerPayload<ExtArgs>
+      fields: Prisma.SubLedgerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SubLedgerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SubLedgerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload>
+        }
+        findFirst: {
+          args: Prisma.SubLedgerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SubLedgerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload>
+        }
+        findMany: {
+          args: Prisma.SubLedgerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload>[]
+        }
+        create: {
+          args: Prisma.SubLedgerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload>
+        }
+        createMany: {
+          args: Prisma.SubLedgerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SubLedgerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload>[]
+        }
+        delete: {
+          args: Prisma.SubLedgerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload>
+        }
+        update: {
+          args: Prisma.SubLedgerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload>
+        }
+        deleteMany: {
+          args: Prisma.SubLedgerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SubLedgerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SubLedgerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload>[]
+        }
+        upsert: {
+          args: Prisma.SubLedgerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubLedgerPayload>
+        }
+        aggregate: {
+          args: Prisma.SubLedgerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSubLedger>
+        }
+        groupBy: {
+          args: Prisma.SubLedgerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubLedgerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SubLedgerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubLedgerCountAggregateOutputType> | number
+        }
+      }
+    }
     Transaction: {
       payload: Prisma.$TransactionPayload<ExtArgs>
       fields: Prisma.TransactionFieldRefs
@@ -942,6 +1017,18 @@ export const LedgerScalarFieldEnum = {
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
+
+
+export const SubLedgerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon',
+  color: 'color',
+  ledgerId: 'ledgerId',
+  userId: 'userId'
+} as const
+
+export type SubLedgerScalarFieldEnum = (typeof SubLedgerScalarFieldEnum)[keyof typeof SubLedgerScalarFieldEnum]
 
 
 export const TransactionScalarFieldEnum = {
@@ -1197,6 +1284,7 @@ export type GlobalOmitConfig = {
   passwordResetOtp?: Prisma.PasswordResetOtpOmit
   account?: Prisma.AccountOmit
   ledger?: Prisma.LedgerOmit
+  subLedger?: Prisma.SubLedgerOmit
   transaction?: Prisma.TransactionOmit
   budget?: Prisma.BudgetOmit
 }

@@ -4,5 +4,6 @@ export type LedgerType = {
   type: "INCOME" | "EXPENSE";
   icon: string;
   color: string;
+  subLedger?: string[];
 };
 

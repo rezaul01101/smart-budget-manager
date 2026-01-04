@@ -243,6 +243,7 @@ export type UserWhereInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
+  subLedgers?: Prisma.SubLedgerListRelationFilter
   budgets?: Prisma.BudgetListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
 }
@@ -259,6 +260,7 @@ export type UserOrderByWithRelationInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
   ledgers?: Prisma.LedgerOrderByRelationAggregateInput
+  subLedgers?: Prisma.SubLedgerOrderByRelationAggregateInput
   budgets?: Prisma.BudgetOrderByRelationAggregateInput
   transactions?: Prisma.TransactionOrderByRelationAggregateInput
 }
@@ -278,6 +280,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   passwordResetOtps?: Prisma.PasswordResetOtpListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
   ledgers?: Prisma.LedgerListRelationFilter
+  subLedgers?: Prisma.SubLedgerListRelationFilter
   budgets?: Prisma.BudgetListRelationFilter
   transactions?: Prisma.TransactionListRelationFilter
 }, "id" | "email">
@@ -323,6 +326,7 @@ export type UserCreateInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
 }
@@ -339,6 +343,7 @@ export type UserUncheckedCreateInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -354,6 +359,7 @@ export type UserUpdateInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
 }
@@ -370,6 +376,7 @@ export type UserUncheckedUpdateInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -518,6 +525,20 @@ export type UserUpdateOneRequiredWithoutLedgersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLedgersInput, Prisma.UserUpdateWithoutLedgersInput>, Prisma.UserUncheckedUpdateWithoutLedgersInput>
 }
 
+export type UserCreateNestedOneWithoutSubLedgersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubLedgersInput, Prisma.UserUncheckedCreateWithoutSubLedgersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubLedgersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSubLedgersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubLedgersInput, Prisma.UserUncheckedCreateWithoutSubLedgersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubLedgersInput
+  upsert?: Prisma.UserUpsertWithoutSubLedgersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubLedgersInput, Prisma.UserUpdateWithoutSubLedgersInput>, Prisma.UserUncheckedUpdateWithoutSubLedgersInput>
+}
+
 export type UserCreateNestedOneWithoutTransactionsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutTransactionsInput, Prisma.UserUncheckedCreateWithoutTransactionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutTransactionsInput
@@ -556,6 +577,7 @@ export type UserCreateWithoutPasswordResetOtpsInput = {
   updatedAt?: Date | string | null
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
 }
@@ -571,6 +593,7 @@ export type UserUncheckedCreateWithoutPasswordResetOtpsInput = {
   updatedAt?: Date | string | null
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -601,6 +624,7 @@ export type UserUpdateWithoutPasswordResetOtpsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
 }
@@ -616,6 +640,7 @@ export type UserUncheckedUpdateWithoutPasswordResetOtpsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -630,6 +655,7 @@ export type UserCreateWithoutAccountsInput = {
   updatedAt?: Date | string | null
   passwordResetOtps?: Prisma.PasswordResetOtpCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
 }
@@ -645,6 +671,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   updatedAt?: Date | string | null
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -675,6 +702,7 @@ export type UserUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordResetOtps?: Prisma.PasswordResetOtpUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
 }
@@ -690,6 +718,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -704,6 +733,7 @@ export type UserCreateWithoutLedgersInput = {
   updatedAt?: Date | string | null
   passwordResetOtps?: Prisma.PasswordResetOtpCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
 }
@@ -719,6 +749,7 @@ export type UserUncheckedCreateWithoutLedgersInput = {
   updatedAt?: Date | string | null
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
 }
@@ -749,6 +780,7 @@ export type UserUpdateWithoutLedgersInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordResetOtps?: Prisma.PasswordResetOtpUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
 }
@@ -764,6 +796,85 @@ export type UserUncheckedUpdateWithoutLedgersInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUncheckedUpdateManyWithoutUserNestedInput
+  budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
+  transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSubLedgersInput = {
+  name: string
+  email: string
+  image?: string | null
+  password: string
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  passwordResetOtps?: Prisma.PasswordResetOtpCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutUserInput
+  budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
+  transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSubLedgersInput = {
+  id?: number
+  name: string
+  email: string
+  image?: string | null
+  password: string
+  deletedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string | null
+  passwordResetOtps?: Prisma.PasswordResetOtpUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutUserInput
+  budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
+  transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSubLedgersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubLedgersInput, Prisma.UserUncheckedCreateWithoutSubLedgersInput>
+}
+
+export type UserUpsertWithoutSubLedgersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSubLedgersInput, Prisma.UserUncheckedUpdateWithoutSubLedgersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubLedgersInput, Prisma.UserUncheckedCreateWithoutSubLedgersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSubLedgersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSubLedgersInput, Prisma.UserUncheckedUpdateWithoutSubLedgersInput>
+}
+
+export type UserUpdateWithoutSubLedgersInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetOtps?: Prisma.PasswordResetOtpUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutUserNestedInput
+  budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
+  transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSubLedgersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  passwordResetOtps?: Prisma.PasswordResetOtpUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -779,6 +890,7 @@ export type UserCreateWithoutTransactionsInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetCreateNestedManyWithoutUserInput
 }
 
@@ -794,6 +906,7 @@ export type UserUncheckedCreateWithoutTransactionsInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerUncheckedCreateNestedManyWithoutUserInput
   budgets?: Prisma.BudgetUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -824,6 +937,7 @@ export type UserUpdateWithoutTransactionsInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUpdateManyWithoutUserNestedInput
 }
 
@@ -839,6 +953,7 @@ export type UserUncheckedUpdateWithoutTransactionsInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUncheckedUpdateManyWithoutUserNestedInput
   budgets?: Prisma.BudgetUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -853,6 +968,7 @@ export type UserCreateWithoutBudgetsInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionCreateNestedManyWithoutUserInput
 }
 
@@ -868,6 +984,7 @@ export type UserUncheckedCreateWithoutBudgetsInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutUserInput
+  subLedgers?: Prisma.SubLedgerUncheckedCreateNestedManyWithoutUserInput
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -898,6 +1015,7 @@ export type UserUpdateWithoutBudgetsInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUpdateManyWithoutUserNestedInput
 }
 
@@ -913,6 +1031,7 @@ export type UserUncheckedUpdateWithoutBudgetsInput = {
   passwordResetOtps?: Prisma.PasswordResetOtpUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutUserNestedInput
+  subLedgers?: Prisma.SubLedgerUncheckedUpdateManyWithoutUserNestedInput
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -925,6 +1044,7 @@ export type UserCountOutputType = {
   passwordResetOtps: number
   accounts: number
   ledgers: number
+  subLedgers: number
   budgets: number
   transactions: number
 }
@@ -933,6 +1053,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   passwordResetOtps?: boolean | UserCountOutputTypeCountPasswordResetOtpsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
   ledgers?: boolean | UserCountOutputTypeCountLedgersArgs
+  subLedgers?: boolean | UserCountOutputTypeCountSubLedgersArgs
   budgets?: boolean | UserCountOutputTypeCountBudgetsArgs
   transactions?: boolean | UserCountOutputTypeCountTransactionsArgs
 }
@@ -971,6 +1092,13 @@ export type UserCountOutputTypeCountLedgersArgs<ExtArgs extends runtime.Types.Ex
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountSubLedgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubLedgerWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountBudgetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.BudgetWhereInput
 }
@@ -995,6 +1123,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   passwordResetOtps?: boolean | Prisma.User$passwordResetOtpsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   ledgers?: boolean | Prisma.User$ledgersArgs<ExtArgs>
+  subLedgers?: boolean | Prisma.User$subLedgersArgs<ExtArgs>
   budgets?: boolean | Prisma.User$budgetsArgs<ExtArgs>
   transactions?: boolean | Prisma.User$transactionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1038,6 +1167,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   passwordResetOtps?: boolean | Prisma.User$passwordResetOtpsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
   ledgers?: boolean | Prisma.User$ledgersArgs<ExtArgs>
+  subLedgers?: boolean | Prisma.User$subLedgersArgs<ExtArgs>
   budgets?: boolean | Prisma.User$budgetsArgs<ExtArgs>
   transactions?: boolean | Prisma.User$transactionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1051,6 +1181,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     passwordResetOtps: Prisma.$PasswordResetOtpPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
     ledgers: Prisma.$LedgerPayload<ExtArgs>[]
+    subLedgers: Prisma.$SubLedgerPayload<ExtArgs>[]
     budgets: Prisma.$BudgetPayload<ExtArgs>[]
     transactions: Prisma.$TransactionPayload<ExtArgs>[]
   }
@@ -1460,6 +1591,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   passwordResetOtps<T extends Prisma.User$passwordResetOtpsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$passwordResetOtpsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetOtpPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ledgers<T extends Prisma.User$ledgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ledgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subLedgers<T extends Prisma.User$subLedgersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subLedgersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubLedgerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   budgets<T extends Prisma.User$budgetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$budgetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BudgetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   transactions<T extends Prisma.User$transactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
@@ -1956,6 +2088,30 @@ export type User$ledgersArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.LedgerScalarFieldEnum | Prisma.LedgerScalarFieldEnum[]
+}
+
+/**
+ * User.subLedgers
+ */
+export type User$subLedgersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubLedger
+   */
+  select?: Prisma.SubLedgerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubLedger
+   */
+  omit?: Prisma.SubLedgerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubLedgerInclude<ExtArgs> | null
+  where?: Prisma.SubLedgerWhereInput
+  orderBy?: Prisma.SubLedgerOrderByWithRelationInput | Prisma.SubLedgerOrderByWithRelationInput[]
+  cursor?: Prisma.SubLedgerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SubLedgerScalarFieldEnum | Prisma.SubLedgerScalarFieldEnum[]
 }
 
 /**

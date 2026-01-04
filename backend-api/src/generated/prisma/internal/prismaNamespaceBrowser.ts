@@ -55,6 +55,7 @@ export const ModelName = {
   PasswordResetOtp: 'PasswordResetOtp',
   Account: 'Account',
   Ledger: 'Ledger',
+  SubLedger: 'SubLedger',
   Transaction: 'Transaction',
   Budget: 'Budget'
 } as const
@@ -125,6 +126,18 @@ export const LedgerScalarFieldEnum = {
 } as const
 
 export type LedgerScalarFieldEnum = (typeof LedgerScalarFieldEnum)[keyof typeof LedgerScalarFieldEnum]
+
+
+export const SubLedgerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  icon: 'icon',
+  color: 'color',
+  ledgerId: 'ledgerId',
+  userId: 'userId'
+} as const
+
+export type SubLedgerScalarFieldEnum = (typeof SubLedgerScalarFieldEnum)[keyof typeof SubLedgerScalarFieldEnum]
 
 
 export const TransactionScalarFieldEnum = {
