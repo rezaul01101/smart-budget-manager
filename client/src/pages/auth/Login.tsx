@@ -34,7 +34,8 @@ export default function Login() {
       if(res.data.accessToken){
         localStorage.setItem("isLoggedOut", "false");
       }
-      navigate("/dashboard");
+
+      window.location.reload();
     } catch (err: ApiError | unknown) {
       setErrorMessage(
         (err as ApiError)?.data?.message || "Something went wrong"

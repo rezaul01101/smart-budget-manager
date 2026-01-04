@@ -11,6 +11,7 @@ export interface LedgerFormData {
   type: "EXPENSE" | "INCOME";
   icon: string;
   color: string;
+  subLedger?:string[]
 }
 export type TransactionType = {
   id: string | number

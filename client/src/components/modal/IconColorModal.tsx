@@ -2,6 +2,7 @@ import {
   Briefcase,
   BriefcaseMedical,
   Bus,
+  Check,
   Clapperboard,
   Droplet,
   Handshake,
@@ -82,6 +83,12 @@ const IconColorModal = ({
                 </p>
               </div>
             </div>
+              <button
+                onClick={onClose}
+                className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+              >
+                <Check className="w-6 h-6" />
+              </button>
           </div>
         </div>
 

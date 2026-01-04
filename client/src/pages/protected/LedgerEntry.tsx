@@ -11,8 +11,7 @@ import IconColorModal from "../../components/modal/IconColorModal";
 import * as LucideIcons from "lucide-react";
 import type { LucideProps } from "lucide-react";
 import type { ElementType } from "react";
-
-
+import SubLedgerModal from "../../components/modal/SubLedgerEntry";
 
 // const availableIcons = [
 //   { name: "Wallet", icon: Wallet },
@@ -44,6 +43,7 @@ import type { ElementType } from "react";
 
 const LedgerEntry = () => {
   const [openIconColorModal, setOpenIconColorModal] = useState(false);
+  const [openSubLedgerModal, setOpenSubLedgerModal] = useState(false);
   const [modalType, setModalType] = useState("icon");
   const hasInitialized = useRef(false);
 
@@ -62,6 +62,7 @@ const LedgerEntry = () => {
     type: "EXPENSE",
     icon: "Wallet",
     color: "yellow",
+    subLedger: [],
   });
 
   const { data: ledger } = useSingleLedgerQuery(ledgerId!, {
@@ -70,7 +71,7 @@ const LedgerEntry = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    console.log(formData);
     try {
       let res;
       if (isEditMode) {
@@ -93,6 +94,7 @@ const LedgerEntry = () => {
       type: "EXPENSE",
       icon: "Wallet",
       color: "yellow",
+      subLedger: [],
     });
   };
 
@@ -114,19 +116,21 @@ const LedgerEntry = () => {
 
   const handleIconClick = () => {
     setOpenIconColorModal(true);
-    // () => setFormData({ ...formData, icon: "Wallet" })
     setModalType("icon");
   };
 
   const handleColorClick = () => {
     setOpenIconColorModal(true);
-    // () => setFormData({ ...formData, icon: "Wallet" })
     setModalType("color");
   };
 
-const IconComponent = LucideIcons[
-  formData.icon as keyof typeof LucideIcons
-] as ElementType<LucideProps>;
+  const handleSubLedgerClick = () => {
+    setOpenSubLedgerModal(true);
+  };
+
+  const IconComponent = LucideIcons[
+    formData.icon as keyof typeof LucideIcons
+  ] as ElementType<LucideProps>;
   return (
     <>
       <IconColorModal
@@ -135,6 +139,11 @@ const IconComponent = LucideIcons[
         type={modalType}
         isOpen={openIconColorModal}
         onClose={() => setOpenIconColorModal(false)}
+      />
+      <SubLedgerModal
+        setFormData={setFormData}
+        isOpen={openSubLedgerModal}
+        onClose={() => setOpenSubLedgerModal(false)}
       />
       <div className="bg-[#1a2332] rounded-lg p-2 pb-3 md:p-4 border border-gray-800">
         <div className="p-2">
@@ -219,27 +228,6 @@ const IconComponent = LucideIcons[
                     <IconComponent className="w-6 h-6 text-white mx-auto" />
                   )}
                 </button>
-                {/* <div className="grid grid-cols-5 md:grid-cols-9 gap-3 max-h-[100px] md:max-h-full overflow-y-auto">
-                  {availableIcons.map((iconOption) => {
-                    const IconComponent = iconOption.icon;
-                    return (
-                      <button
-                        key={iconOption.name}
-                        type="button"
-                        onClick={() =>
-                          setFormData({ ...formData, icon: iconOption.name })
-                        }
-                        className={`p-3 rounded-lg border-2 transition-all cursor-pointer ${
-                          formData.icon === iconOption.name
-                            ? "border-orange-500 bg-orange-500/10"
-                            : "border-gray-700 hover:border-gray-600"
-                        }`}
-                      >
-                        <IconComponent className="w-6 h-6 text-white mx-auto" />
-                      </button>
-                    );
-                  })}
-                </div> */}
               </div>
 
               <div className="flex items-center gap-4 justify-between">
@@ -257,29 +245,31 @@ const IconComponent = LucideIcons[
                     />
                   </button>
                 </div>
-                {/* <div className="grid grid-cols-4 md:grid-cols-6 gap-3 max-h-[100px] md:max-h-full overflow-y-auto">
-                  {availableColors.map((colorOption) => (
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Sub Ledger
+                </label>
+                <div className="grid grid-cols-4 md:grid-cols-6 gap-1 md:max-h-full overflow-y-auto">
+                  {formData?.subLedger?.map((subLedger, index) => (
                     <button
-                      key={colorOption.value}
+                      key={index}
                       type="button"
-                      onClick={() =>
-                        setFormData({ ...formData, color: colorOption.value })
-                      }
-                      className={`cursor-pointer py-3 rounded-lg border-1 transition-all ${
-                        formData.color === colorOption.value
-                          ? "border-white"
-                          : "border-transparent hover:border-gray-600"
-                      } bg-${colorOption.value}-900/30`}
+                      className={`cursor-pointer py-2 rounded-lg border-1 transition-all bg-orange-500/10`}
                     >
-                      <div
-                        className={`w-6 h-6 rounded-full bg-${colorOption.value}-500 mx-auto`}
-                      />
-                      <p className="text-white text-xs mt-2 text-center">
-                        {colorOption.name}
+                      <p className="text-white text-xs text-center">
+                        {subLedger}
                       </p>
                     </button>
                   ))}
-                </div> */}
+                  <button
+                    type="button"
+                    onClick={handleSubLedgerClick}
+                    className={`cursor-pointer py-2 rounded-lg border-1 transition-all bg-orange-500/10 flex items-center justify-center`}
+                  >
+                    <LucideIcons.Plus className="w-5 h-5 text-white text-xs" />
+                  </button>
+                </div>
               </div>
 
               <div className="flex gap-4 pt-4">
