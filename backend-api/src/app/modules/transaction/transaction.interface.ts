@@ -4,4 +4,5 @@ export type TransactionType = {
   ledgerId: number;
   description?: string;
   userId:number;
+  subLedgerId?:number;
 };

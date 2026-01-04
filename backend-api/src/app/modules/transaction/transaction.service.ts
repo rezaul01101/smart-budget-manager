@@ -6,7 +6,7 @@ const createTransactionService = async (
   transactionData: TransactionType,
   user: User
 ) => {
-  const { amount, description, date, ledgerId } = transactionData;
+  const { amount, description, date, ledgerId, subLedgerId } = transactionData;
 
   const result = await prisma.transaction.create({
     data: {
@@ -17,6 +17,7 @@ const createTransactionService = async (
         ? new Date(date)
         : new Date(new Date(date).setHours(0, 0, 0, 0)),
       ledgerId: ledgerId,
+      subLedgerId: subLedgerId,
     },
   });
 
@@ -47,6 +48,7 @@ const getAllTransactionsService = async (
     },
     include: {
       ledger: true,
+      subLedger: true,
     },
     orderBy: {
       date: "desc",

@@ -81,6 +81,7 @@ model SubLedger {
   ledger       Ledger        @relation(fields: [ledgerId], references: [id], onDelete: Cascade)
   userId       Int
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
 }
 
 // Transactions record the movement of money
@@ -96,6 +97,10 @@ model Transaction {
 
   ledgerId Int
   ledger   Ledger @relation(fields: [ledgerId], references: [id], onDelete: Cascade)
+
+  subLedgerId Int?
+  subLedger   SubLedger? @relation(fields: [subLedgerId], references: [id])
+
   userId   Int
   user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

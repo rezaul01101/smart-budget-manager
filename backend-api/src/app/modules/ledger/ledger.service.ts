@@ -3,7 +3,7 @@ import { User } from "../../../generated/prisma/client";
 import { LedgerType } from "./ledger.interface";
 
 const createLedgerService = async (ledgerData: LedgerType, user: User) => {
-  const { name, type, icon, color,subLedger } = ledgerData;
+  const { name, type, icon, color, subLedger } = ledgerData;
 
   const result = await prisma.ledger.create({
     data: {
@@ -14,12 +14,12 @@ const createLedgerService = async (ledgerData: LedgerType, user: User) => {
       color: color,
     },
   });
-  if(result && subLedger){
+  if (result && subLedger) {
     const subLedgerResult = await prisma.subLedger.createMany({
       data: subLedger.map((subLedger) => ({
         ledgerId: result.id,
         userId: user.id,
-        name: subLedger
+        name: subLedger,
       })),
     });
   }
@@ -31,7 +31,7 @@ const updateLedgerService = async (
   ledgerData: LedgerType,
   user: User
 ) => {
-  const { name, type, icon, color } = ledgerData;
+  const { name, type, icon, color, subLedger } = ledgerData;
 
   const result = await prisma.ledger.update({
     where: {
@@ -44,6 +44,38 @@ const updateLedgerService = async (
       icon: icon,
       color: color,
     },
+  });
+  if (!subLedger || subLedger.length === 0) {
+    return result; // nothing to add
+  }
+
+  // Get existing sub-ledgers
+  const existing = await prisma.subLedger.findMany({
+    where: {
+      ledgerId: Number(ledgerId),
+      userId: Number(user.id),
+    },
+    select: { name: true },
+  });
+
+  const existingNames = new Set(existing.map((s) => s.name.toLowerCase()));
+
+  // Filter only NEW sub-ledgers
+  const newSubLedgers = subLedger.filter(
+    (name) => !existingNames.has(name.toLowerCase())
+  );
+
+  if (newSubLedgers.length === 0) {
+    return result;
+  }
+
+  await prisma.subLedger.createMany({
+    data: newSubLedgers.map((name) => ({
+      name,
+      ledgerId: Number(ledgerId),
+      userId: Number(user.id),
+    })),
+    skipDuplicates: true,
   });
 
   return result;
@@ -61,6 +93,12 @@ const getLedgersService = async (user: User, type: string) => {
       transactions: {
         select: {
           amount: true,
+        },
+      },
+      subLedgers: {
+        select: {
+          name: true,
+          id: true,
         },
       },
     },
@@ -91,7 +129,12 @@ const getLedgerByIdService = async (user: User, ledgerId: number) => {
     },
     include: {
       transactions: true,
-      subLedgers: true,
+      subLedgers: {
+        select: {
+          name: true,
+          id: true,
+        },
+      },
     },
   });
 

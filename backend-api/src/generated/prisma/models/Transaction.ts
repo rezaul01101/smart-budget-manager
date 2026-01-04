@@ -31,6 +31,7 @@ export type TransactionAvgAggregateOutputType = {
   amount: runtime.Decimal | null
   accountId: number | null
   ledgerId: number | null
+  subLedgerId: number | null
   userId: number | null
 }
 
@@ -39,6 +40,7 @@ export type TransactionSumAggregateOutputType = {
   amount: runtime.Decimal | null
   accountId: number | null
   ledgerId: number | null
+  subLedgerId: number | null
   userId: number | null
 }
 
@@ -49,6 +51,7 @@ export type TransactionMinAggregateOutputType = {
   description: string | null
   accountId: number | null
   ledgerId: number | null
+  subLedgerId: number | null
   userId: number | null
 }
 
@@ -59,6 +62,7 @@ export type TransactionMaxAggregateOutputType = {
   description: string | null
   accountId: number | null
   ledgerId: number | null
+  subLedgerId: number | null
   userId: number | null
 }
 
@@ -69,6 +73,7 @@ export type TransactionCountAggregateOutputType = {
   description: number
   accountId: number
   ledgerId: number
+  subLedgerId: number
   userId: number
   _all: number
 }
@@ -79,6 +84,7 @@ export type TransactionAvgAggregateInputType = {
   amount?: true
   accountId?: true
   ledgerId?: true
+  subLedgerId?: true
   userId?: true
 }
 
@@ -87,6 +93,7 @@ export type TransactionSumAggregateInputType = {
   amount?: true
   accountId?: true
   ledgerId?: true
+  subLedgerId?: true
   userId?: true
 }
 
@@ -97,6 +104,7 @@ export type TransactionMinAggregateInputType = {
   description?: true
   accountId?: true
   ledgerId?: true
+  subLedgerId?: true
   userId?: true
 }
 
@@ -107,6 +115,7 @@ export type TransactionMaxAggregateInputType = {
   description?: true
   accountId?: true
   ledgerId?: true
+  subLedgerId?: true
   userId?: true
 }
 
@@ -117,6 +126,7 @@ export type TransactionCountAggregateInputType = {
   description?: true
   accountId?: true
   ledgerId?: true
+  subLedgerId?: true
   userId?: true
   _all?: true
 }
@@ -214,6 +224,7 @@ export type TransactionGroupByOutputType = {
   description: string | null
   accountId: number | null
   ledgerId: number
+  subLedgerId: number | null
   userId: number
   _count: TransactionCountAggregateOutputType | null
   _avg: TransactionAvgAggregateOutputType | null
@@ -247,9 +258,11 @@ export type TransactionWhereInput = {
   description?: Prisma.StringNullableFilter<"Transaction"> | string | null
   accountId?: Prisma.IntNullableFilter<"Transaction"> | number | null
   ledgerId?: Prisma.IntFilter<"Transaction"> | number
+  subLedgerId?: Prisma.IntNullableFilter<"Transaction"> | number | null
   userId?: Prisma.IntFilter<"Transaction"> | number
   account?: Prisma.XOR<Prisma.AccountNullableScalarRelationFilter, Prisma.AccountWhereInput> | null
   ledger?: Prisma.XOR<Prisma.LedgerScalarRelationFilter, Prisma.LedgerWhereInput>
+  subLedger?: Prisma.XOR<Prisma.SubLedgerNullableScalarRelationFilter, Prisma.SubLedgerWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -260,9 +273,11 @@ export type TransactionOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   accountId?: Prisma.SortOrderInput | Prisma.SortOrder
   ledgerId?: Prisma.SortOrder
+  subLedgerId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   account?: Prisma.AccountOrderByWithRelationInput
   ledger?: Prisma.LedgerOrderByWithRelationInput
+  subLedger?: Prisma.SubLedgerOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -276,9 +291,11 @@ export type TransactionWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Transaction"> | string | null
   accountId?: Prisma.IntNullableFilter<"Transaction"> | number | null
   ledgerId?: Prisma.IntFilter<"Transaction"> | number
+  subLedgerId?: Prisma.IntNullableFilter<"Transaction"> | number | null
   userId?: Prisma.IntFilter<"Transaction"> | number
   account?: Prisma.XOR<Prisma.AccountNullableScalarRelationFilter, Prisma.AccountWhereInput> | null
   ledger?: Prisma.XOR<Prisma.LedgerScalarRelationFilter, Prisma.LedgerWhereInput>
+  subLedger?: Prisma.XOR<Prisma.SubLedgerNullableScalarRelationFilter, Prisma.SubLedgerWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
@@ -289,6 +306,7 @@ export type TransactionOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   accountId?: Prisma.SortOrderInput | Prisma.SortOrder
   ledgerId?: Prisma.SortOrder
+  subLedgerId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   _count?: Prisma.TransactionCountOrderByAggregateInput
   _avg?: Prisma.TransactionAvgOrderByAggregateInput
@@ -307,6 +325,7 @@ export type TransactionScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Transaction"> | string | null
   accountId?: Prisma.IntNullableWithAggregatesFilter<"Transaction"> | number | null
   ledgerId?: Prisma.IntWithAggregatesFilter<"Transaction"> | number
+  subLedgerId?: Prisma.IntNullableWithAggregatesFilter<"Transaction"> | number | null
   userId?: Prisma.IntWithAggregatesFilter<"Transaction"> | number
 }
 
@@ -316,6 +335,7 @@ export type TransactionCreateInput = {
   description?: string | null
   account?: Prisma.AccountCreateNestedOneWithoutTransactionsInput
   ledger: Prisma.LedgerCreateNestedOneWithoutTransactionsInput
+  subLedger?: Prisma.SubLedgerCreateNestedOneWithoutTransactionsInput
   user: Prisma.UserCreateNestedOneWithoutTransactionsInput
 }
 
@@ -326,6 +346,7 @@ export type TransactionUncheckedCreateInput = {
   description?: string | null
   accountId?: number | null
   ledgerId: number
+  subLedgerId?: number | null
   userId: number
 }
 
@@ -335,6 +356,7 @@ export type TransactionUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   account?: Prisma.AccountUpdateOneWithoutTransactionsNestedInput
   ledger?: Prisma.LedgerUpdateOneRequiredWithoutTransactionsNestedInput
+  subLedger?: Prisma.SubLedgerUpdateOneWithoutTransactionsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutTransactionsNestedInput
 }
 
@@ -345,6 +367,7 @@ export type TransactionUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ledgerId?: Prisma.IntFieldUpdateOperationsInput | number
+  subLedgerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -355,6 +378,7 @@ export type TransactionCreateManyInput = {
   description?: string | null
   accountId?: number | null
   ledgerId: number
+  subLedgerId?: number | null
   userId: number
 }
 
@@ -371,6 +395,7 @@ export type TransactionUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ledgerId?: Prisma.IntFieldUpdateOperationsInput | number
+  subLedgerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -391,6 +416,7 @@ export type TransactionCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
   ledgerId?: Prisma.SortOrder
+  subLedgerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -399,6 +425,7 @@ export type TransactionAvgOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
   ledgerId?: Prisma.SortOrder
+  subLedgerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -409,6 +436,7 @@ export type TransactionMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
   ledgerId?: Prisma.SortOrder
+  subLedgerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -419,6 +447,7 @@ export type TransactionMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
   ledgerId?: Prisma.SortOrder
+  subLedgerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -427,6 +456,7 @@ export type TransactionSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   accountId?: Prisma.SortOrder
   ledgerId?: Prisma.SortOrder
+  subLedgerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -556,6 +586,48 @@ export type TransactionUncheckedUpdateManyWithoutLedgerNestedInput = {
   deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
 }
 
+export type TransactionCreateNestedManyWithoutSubLedgerInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutSubLedgerInput, Prisma.TransactionUncheckedCreateWithoutSubLedgerInput> | Prisma.TransactionCreateWithoutSubLedgerInput[] | Prisma.TransactionUncheckedCreateWithoutSubLedgerInput[]
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutSubLedgerInput | Prisma.TransactionCreateOrConnectWithoutSubLedgerInput[]
+  createMany?: Prisma.TransactionCreateManySubLedgerInputEnvelope
+  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+}
+
+export type TransactionUncheckedCreateNestedManyWithoutSubLedgerInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutSubLedgerInput, Prisma.TransactionUncheckedCreateWithoutSubLedgerInput> | Prisma.TransactionCreateWithoutSubLedgerInput[] | Prisma.TransactionUncheckedCreateWithoutSubLedgerInput[]
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutSubLedgerInput | Prisma.TransactionCreateOrConnectWithoutSubLedgerInput[]
+  createMany?: Prisma.TransactionCreateManySubLedgerInputEnvelope
+  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+}
+
+export type TransactionUpdateManyWithoutSubLedgerNestedInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutSubLedgerInput, Prisma.TransactionUncheckedCreateWithoutSubLedgerInput> | Prisma.TransactionCreateWithoutSubLedgerInput[] | Prisma.TransactionUncheckedCreateWithoutSubLedgerInput[]
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutSubLedgerInput | Prisma.TransactionCreateOrConnectWithoutSubLedgerInput[]
+  upsert?: Prisma.TransactionUpsertWithWhereUniqueWithoutSubLedgerInput | Prisma.TransactionUpsertWithWhereUniqueWithoutSubLedgerInput[]
+  createMany?: Prisma.TransactionCreateManySubLedgerInputEnvelope
+  set?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  disconnect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  delete?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  update?: Prisma.TransactionUpdateWithWhereUniqueWithoutSubLedgerInput | Prisma.TransactionUpdateWithWhereUniqueWithoutSubLedgerInput[]
+  updateMany?: Prisma.TransactionUpdateManyWithWhereWithoutSubLedgerInput | Prisma.TransactionUpdateManyWithWhereWithoutSubLedgerInput[]
+  deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
+}
+
+export type TransactionUncheckedUpdateManyWithoutSubLedgerNestedInput = {
+  create?: Prisma.XOR<Prisma.TransactionCreateWithoutSubLedgerInput, Prisma.TransactionUncheckedCreateWithoutSubLedgerInput> | Prisma.TransactionCreateWithoutSubLedgerInput[] | Prisma.TransactionUncheckedCreateWithoutSubLedgerInput[]
+  connectOrCreate?: Prisma.TransactionCreateOrConnectWithoutSubLedgerInput | Prisma.TransactionCreateOrConnectWithoutSubLedgerInput[]
+  upsert?: Prisma.TransactionUpsertWithWhereUniqueWithoutSubLedgerInput | Prisma.TransactionUpsertWithWhereUniqueWithoutSubLedgerInput[]
+  createMany?: Prisma.TransactionCreateManySubLedgerInputEnvelope
+  set?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  disconnect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  delete?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  connect?: Prisma.TransactionWhereUniqueInput | Prisma.TransactionWhereUniqueInput[]
+  update?: Prisma.TransactionUpdateWithWhereUniqueWithoutSubLedgerInput | Prisma.TransactionUpdateWithWhereUniqueWithoutSubLedgerInput[]
+  updateMany?: Prisma.TransactionUpdateManyWithWhereWithoutSubLedgerInput | Prisma.TransactionUpdateManyWithWhereWithoutSubLedgerInput[]
+  deleteMany?: Prisma.TransactionScalarWhereInput | Prisma.TransactionScalarWhereInput[]
+}
+
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -570,6 +642,7 @@ export type TransactionCreateWithoutUserInput = {
   description?: string | null
   account?: Prisma.AccountCreateNestedOneWithoutTransactionsInput
   ledger: Prisma.LedgerCreateNestedOneWithoutTransactionsInput
+  subLedger?: Prisma.SubLedgerCreateNestedOneWithoutTransactionsInput
 }
 
 export type TransactionUncheckedCreateWithoutUserInput = {
@@ -579,6 +652,7 @@ export type TransactionUncheckedCreateWithoutUserInput = {
   description?: string | null
   accountId?: number | null
   ledgerId: number
+  subLedgerId?: number | null
 }
 
 export type TransactionCreateOrConnectWithoutUserInput = {
@@ -617,6 +691,7 @@ export type TransactionScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Transaction"> | string | null
   accountId?: Prisma.IntNullableFilter<"Transaction"> | number | null
   ledgerId?: Prisma.IntFilter<"Transaction"> | number
+  subLedgerId?: Prisma.IntNullableFilter<"Transaction"> | number | null
   userId?: Prisma.IntFilter<"Transaction"> | number
 }
 
@@ -625,6 +700,7 @@ export type TransactionCreateWithoutAccountInput = {
   date?: Date | string
   description?: string | null
   ledger: Prisma.LedgerCreateNestedOneWithoutTransactionsInput
+  subLedger?: Prisma.SubLedgerCreateNestedOneWithoutTransactionsInput
   user: Prisma.UserCreateNestedOneWithoutTransactionsInput
 }
 
@@ -634,6 +710,7 @@ export type TransactionUncheckedCreateWithoutAccountInput = {
   date?: Date | string
   description?: string | null
   ledgerId: number
+  subLedgerId?: number | null
   userId: number
 }
 
@@ -668,6 +745,7 @@ export type TransactionCreateWithoutLedgerInput = {
   date?: Date | string
   description?: string | null
   account?: Prisma.AccountCreateNestedOneWithoutTransactionsInput
+  subLedger?: Prisma.SubLedgerCreateNestedOneWithoutTransactionsInput
   user: Prisma.UserCreateNestedOneWithoutTransactionsInput
 }
 
@@ -677,6 +755,7 @@ export type TransactionUncheckedCreateWithoutLedgerInput = {
   date?: Date | string
   description?: string | null
   accountId?: number | null
+  subLedgerId?: number | null
   userId: number
 }
 
@@ -706,6 +785,51 @@ export type TransactionUpdateManyWithWhereWithoutLedgerInput = {
   data: Prisma.XOR<Prisma.TransactionUpdateManyMutationInput, Prisma.TransactionUncheckedUpdateManyWithoutLedgerInput>
 }
 
+export type TransactionCreateWithoutSubLedgerInput = {
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  date?: Date | string
+  description?: string | null
+  account?: Prisma.AccountCreateNestedOneWithoutTransactionsInput
+  ledger: Prisma.LedgerCreateNestedOneWithoutTransactionsInput
+  user: Prisma.UserCreateNestedOneWithoutTransactionsInput
+}
+
+export type TransactionUncheckedCreateWithoutSubLedgerInput = {
+  id?: number
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  date?: Date | string
+  description?: string | null
+  accountId?: number | null
+  ledgerId: number
+  userId: number
+}
+
+export type TransactionCreateOrConnectWithoutSubLedgerInput = {
+  where: Prisma.TransactionWhereUniqueInput
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutSubLedgerInput, Prisma.TransactionUncheckedCreateWithoutSubLedgerInput>
+}
+
+export type TransactionCreateManySubLedgerInputEnvelope = {
+  data: Prisma.TransactionCreateManySubLedgerInput | Prisma.TransactionCreateManySubLedgerInput[]
+  skipDuplicates?: boolean
+}
+
+export type TransactionUpsertWithWhereUniqueWithoutSubLedgerInput = {
+  where: Prisma.TransactionWhereUniqueInput
+  update: Prisma.XOR<Prisma.TransactionUpdateWithoutSubLedgerInput, Prisma.TransactionUncheckedUpdateWithoutSubLedgerInput>
+  create: Prisma.XOR<Prisma.TransactionCreateWithoutSubLedgerInput, Prisma.TransactionUncheckedCreateWithoutSubLedgerInput>
+}
+
+export type TransactionUpdateWithWhereUniqueWithoutSubLedgerInput = {
+  where: Prisma.TransactionWhereUniqueInput
+  data: Prisma.XOR<Prisma.TransactionUpdateWithoutSubLedgerInput, Prisma.TransactionUncheckedUpdateWithoutSubLedgerInput>
+}
+
+export type TransactionUpdateManyWithWhereWithoutSubLedgerInput = {
+  where: Prisma.TransactionScalarWhereInput
+  data: Prisma.XOR<Prisma.TransactionUpdateManyMutationInput, Prisma.TransactionUncheckedUpdateManyWithoutSubLedgerInput>
+}
+
 export type TransactionCreateManyUserInput = {
   id?: number
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -713,6 +837,7 @@ export type TransactionCreateManyUserInput = {
   description?: string | null
   accountId?: number | null
   ledgerId: number
+  subLedgerId?: number | null
 }
 
 export type TransactionUpdateWithoutUserInput = {
@@ -721,6 +846,7 @@ export type TransactionUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   account?: Prisma.AccountUpdateOneWithoutTransactionsNestedInput
   ledger?: Prisma.LedgerUpdateOneRequiredWithoutTransactionsNestedInput
+  subLedger?: Prisma.SubLedgerUpdateOneWithoutTransactionsNestedInput
 }
 
 export type TransactionUncheckedUpdateWithoutUserInput = {
@@ -730,6 +856,7 @@ export type TransactionUncheckedUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ledgerId?: Prisma.IntFieldUpdateOperationsInput | number
+  subLedgerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TransactionUncheckedUpdateManyWithoutUserInput = {
@@ -739,6 +866,7 @@ export type TransactionUncheckedUpdateManyWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   ledgerId?: Prisma.IntFieldUpdateOperationsInput | number
+  subLedgerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type TransactionCreateManyAccountInput = {
@@ -747,6 +875,7 @@ export type TransactionCreateManyAccountInput = {
   date?: Date | string
   description?: string | null
   ledgerId: number
+  subLedgerId?: number | null
   userId: number
 }
 
@@ -755,6 +884,7 @@ export type TransactionUpdateWithoutAccountInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ledger?: Prisma.LedgerUpdateOneRequiredWithoutTransactionsNestedInput
+  subLedger?: Prisma.SubLedgerUpdateOneWithoutTransactionsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutTransactionsNestedInput
 }
 
@@ -764,6 +894,7 @@ export type TransactionUncheckedUpdateWithoutAccountInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ledgerId?: Prisma.IntFieldUpdateOperationsInput | number
+  subLedgerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -773,6 +904,7 @@ export type TransactionUncheckedUpdateManyWithoutAccountInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ledgerId?: Prisma.IntFieldUpdateOperationsInput | number
+  subLedgerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -782,6 +914,7 @@ export type TransactionCreateManyLedgerInput = {
   date?: Date | string
   description?: string | null
   accountId?: number | null
+  subLedgerId?: number | null
   userId: number
 }
 
@@ -790,6 +923,7 @@ export type TransactionUpdateWithoutLedgerInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   account?: Prisma.AccountUpdateOneWithoutTransactionsNestedInput
+  subLedger?: Prisma.SubLedgerUpdateOneWithoutTransactionsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutTransactionsNestedInput
 }
 
@@ -799,6 +933,7 @@ export type TransactionUncheckedUpdateWithoutLedgerInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subLedgerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -808,6 +943,46 @@ export type TransactionUncheckedUpdateManyWithoutLedgerInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accountId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  subLedgerId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type TransactionCreateManySubLedgerInput = {
+  id?: number
+  amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  date?: Date | string
+  description?: string | null
+  accountId?: number | null
+  ledgerId: number
+  userId: number
+}
+
+export type TransactionUpdateWithoutSubLedgerInput = {
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  account?: Prisma.AccountUpdateOneWithoutTransactionsNestedInput
+  ledger?: Prisma.LedgerUpdateOneRequiredWithoutTransactionsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutTransactionsNestedInput
+}
+
+export type TransactionUncheckedUpdateWithoutSubLedgerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ledgerId?: Prisma.IntFieldUpdateOperationsInput | number
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type TransactionUncheckedUpdateManyWithoutSubLedgerInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accountId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  ledgerId?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -820,9 +995,11 @@ export type TransactionSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   description?: boolean
   accountId?: boolean
   ledgerId?: boolean
+  subLedgerId?: boolean
   userId?: boolean
   account?: boolean | Prisma.Transaction$accountArgs<ExtArgs>
   ledger?: boolean | Prisma.LedgerDefaultArgs<ExtArgs>
+  subLedger?: boolean | Prisma.Transaction$subLedgerArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
@@ -833,9 +1010,11 @@ export type TransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   description?: boolean
   accountId?: boolean
   ledgerId?: boolean
+  subLedgerId?: boolean
   userId?: boolean
   account?: boolean | Prisma.Transaction$accountArgs<ExtArgs>
   ledger?: boolean | Prisma.LedgerDefaultArgs<ExtArgs>
+  subLedger?: boolean | Prisma.Transaction$subLedgerArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
@@ -846,9 +1025,11 @@ export type TransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   description?: boolean
   accountId?: boolean
   ledgerId?: boolean
+  subLedgerId?: boolean
   userId?: boolean
   account?: boolean | Prisma.Transaction$accountArgs<ExtArgs>
   ledger?: boolean | Prisma.LedgerDefaultArgs<ExtArgs>
+  subLedger?: boolean | Prisma.Transaction$subLedgerArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["transaction"]>
 
@@ -859,23 +1040,27 @@ export type TransactionSelectScalar = {
   description?: boolean
   accountId?: boolean
   ledgerId?: boolean
+  subLedgerId?: boolean
   userId?: boolean
 }
 
-export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "date" | "description" | "accountId" | "ledgerId" | "userId", ExtArgs["result"]["transaction"]>
+export type TransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "date" | "description" | "accountId" | "ledgerId" | "subLedgerId" | "userId", ExtArgs["result"]["transaction"]>
 export type TransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.Transaction$accountArgs<ExtArgs>
   ledger?: boolean | Prisma.LedgerDefaultArgs<ExtArgs>
+  subLedger?: boolean | Prisma.Transaction$subLedgerArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type TransactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.Transaction$accountArgs<ExtArgs>
   ledger?: boolean | Prisma.LedgerDefaultArgs<ExtArgs>
+  subLedger?: boolean | Prisma.Transaction$subLedgerArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type TransactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.Transaction$accountArgs<ExtArgs>
   ledger?: boolean | Prisma.LedgerDefaultArgs<ExtArgs>
+  subLedger?: boolean | Prisma.Transaction$subLedgerArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
@@ -884,6 +1069,7 @@ export type $TransactionPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     account: Prisma.$AccountPayload<ExtArgs> | null
     ledger: Prisma.$LedgerPayload<ExtArgs>
+    subLedger: Prisma.$SubLedgerPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -893,6 +1079,7 @@ export type $TransactionPayload<ExtArgs extends runtime.Types.Extensions.Interna
     description: string | null
     accountId: number | null
     ledgerId: number
+    subLedgerId: number | null
     userId: number
   }, ExtArgs["result"]["transaction"]>
   composites: {}
@@ -1290,6 +1477,7 @@ export interface Prisma__TransactionClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   account<T extends Prisma.Transaction$accountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$accountArgs<ExtArgs>>): Prisma.Prisma__AccountClient<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   ledger<T extends Prisma.LedgerDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LedgerDefaultArgs<ExtArgs>>): Prisma.Prisma__LedgerClient<runtime.Types.Result.GetResult<Prisma.$LedgerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  subLedger<T extends Prisma.Transaction$subLedgerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Transaction$subLedgerArgs<ExtArgs>>): Prisma.Prisma__SubLedgerClient<runtime.Types.Result.GetResult<Prisma.$SubLedgerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1326,6 +1514,7 @@ export interface TransactionFieldRefs {
   readonly description: Prisma.FieldRef<"Transaction", 'String'>
   readonly accountId: Prisma.FieldRef<"Transaction", 'Int'>
   readonly ledgerId: Prisma.FieldRef<"Transaction", 'Int'>
+  readonly subLedgerId: Prisma.FieldRef<"Transaction", 'Int'>
   readonly userId: Prisma.FieldRef<"Transaction", 'Int'>
 }
     
@@ -1739,6 +1928,25 @@ export type Transaction$accountArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   include?: Prisma.AccountInclude<ExtArgs> | null
   where?: Prisma.AccountWhereInput
+}
+
+/**
+ * Transaction.subLedger
+ */
+export type Transaction$subLedgerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubLedger
+   */
+  select?: Prisma.SubLedgerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SubLedger
+   */
+  omit?: Prisma.SubLedgerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubLedgerInclude<ExtArgs> | null
+  where?: Prisma.SubLedgerWhereInput
 }
 
 /**

@@ -147,6 +147,7 @@ export const TransactionScalarFieldEnum = {
   description: 'description',
   accountId: 'accountId',
   ledgerId: 'ledgerId',
+  subLedgerId: 'subLedgerId',
   userId: 'userId'
 } as const
 

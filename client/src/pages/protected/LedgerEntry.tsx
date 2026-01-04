@@ -106,6 +106,7 @@ const LedgerEntry = () => {
           type: ledger?.data?.type === "INCOME" ? "INCOME" : "EXPENSE",
           icon: ledger?.data?.icon || "Wallet",
           color: ledger?.data?.color || "yellow",
+          subLedger: ledger?.data?.subLedgers?.map((subLedger:{name:string}) => subLedger.name) || [],
         });
         hasInitialized.current = true;
       }, 0);

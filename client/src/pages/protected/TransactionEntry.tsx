@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Save } from "lucide-react";
 import { useCreateTransactionMutation } from "../../redux/api/transactionApi";
+import { useSingleLedgerQuery } from "../../redux/api/ledgerApi";
 
 const TransactionEntry = () => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ const TransactionEntry = () => {
   const [searchParams] = useSearchParams();
   const [createTransaction, { isLoading, error }] =
     useCreateTransactionMutation();
+  const { data: ledger } = useSingleLedgerQuery(Number(id));
 
   const categoryName = searchParams.get("ledger") || "";
   const categoryType = searchParams.get("type") || "expense";
@@ -17,6 +19,7 @@ const TransactionEntry = () => {
     amount: "",
     description: "",
     date: new Date().toISOString().split("T")[0],
+    subLedgerId: Number(undefined),
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,6 +31,7 @@ const TransactionEntry = () => {
         date: formData?.date,
         description: formData?.description,
         ledgerId: Number(id),
+        subLedgerId: formData?.subLedgerId,
       };
       const res = await createTransaction(data).unwrap();
       if (res) {
@@ -52,7 +56,8 @@ const TransactionEntry = () => {
               </button>
               <div>
                 <h2 className="text-xl md:text-2xl font-bold text-white">
-                  Add {categoryName} {categoryType === "income" ? "Income" : "Expense"}
+                  Add {categoryName}{" "}
+                  {categoryType === "income" ? "Income" : "Expense"}
                 </h2>
                 <p className="text-sm text-gray-400">
                   Add a transaction to your records
@@ -98,7 +103,48 @@ const TransactionEntry = () => {
                   className="w-full bg-gray-800/50 text-white px-4 py-3 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
               </div>
-
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-2">
+                  Sub Ledger
+                </label>
+                <div className="grid grid-cols-4 md:grid-cols-6 gap-1 md:max-h-full overflow-y-auto">
+                  {ledger?.data?.subLedgers?.map(
+                    (
+                      subLedger: { name: string; id: number },
+                      index: number
+                    ) => (
+                      <button
+                        key={index}
+                        onClick={() => {
+                          setFormData({
+                            ...formData,
+                            subLedgerId: Number(subLedger.id),
+                          });
+                        }}
+                        type="button"
+                        className={`cursor-pointer py-2 rounded-lg border-1 transition-all bg-orange-500/10 
+                         ${
+                           formData.subLedgerId === Number(subLedger.id)
+                             ? "border-orange-500 bg-orange-500/10"
+                             : "border-gray-700 hover:border-gray-600"
+                         }
+                        `}
+                      >
+                        <p className="text-white text-xs text-center">
+                          {subLedger.name}
+                        </p>
+                      </button>
+                    )
+                  )}
+                  {/* <button
+                    type="button"
+                    onClick={handleSubLedgerClick}
+                    className={`cursor-pointer py-2 rounded-lg border-1 transition-all bg-orange-500/10 flex items-center justify-center`}
+                  >
+                    <Plus className="w-5 h-5 text-white text-xs" />
+                  </button> */}
+                </div>
+              </div>
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Description (Optional)
@@ -138,4 +184,3 @@ const TransactionEntry = () => {
 };
 
 export default TransactionEntry;
-

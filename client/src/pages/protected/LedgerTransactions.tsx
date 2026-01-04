@@ -107,7 +107,7 @@ const LedgerTransactions = () => {
                           </div>
                           <div className="flex-1">
                             <h4 className="text-white font-semibold">
-                              {transaction?.ledger?.name}
+                              {transaction?.ledger?.name}- ( {transaction?.subLedger?.name} )
                             </h4>
                             <p className="text-sm text-gray-400">
                               {transaction.description}
