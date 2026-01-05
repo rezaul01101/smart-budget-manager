@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router";
 import { useUserLoginMutation } from "../../redux/api/authApi";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "../../redux/features/authSlice";
 import { setUserInfo } from "../../redux/features/user/userSlice";
@@ -11,7 +11,7 @@ import type { ApiError } from "../../interfaces/interface";
 
 export default function Login() {
   const [userLogin, { isLoading }] = useUserLoginMutation();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");

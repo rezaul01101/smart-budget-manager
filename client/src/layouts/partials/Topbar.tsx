@@ -1,4 +1,4 @@
-import { Bell, Search, User, LogOut, Menu } from "lucide-react";
+import {Search, User, LogOut, Menu } from "lucide-react";
 import { useState } from "react";
 import { useUserLogoutMutation } from "../../redux/api/authApi";
 import { useNavigate } from "react-router";

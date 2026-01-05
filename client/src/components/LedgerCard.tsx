@@ -30,10 +30,14 @@ const LedgerCard = ({
     if (type === "expense" && setTotalExpenseAmountTransactions) {
       setTotalExpenseAmountTransactions(Number(ledgers.data.totalAmount));
     }
-  }, [type, ledgers?.data?.totalAmount, setTotalIncomeAmountTransactions, setTotalExpenseAmountTransactions]);
+  }, [
+    type,
+    ledgers?.data?.totalAmount,
+    setTotalIncomeAmountTransactions,
+    setTotalExpenseAmountTransactions,
+  ]);
 
   if (isLoading) return <p className="text-center p-10">Loading ledgers...</p>;
-  
 
   return (
     <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4">
@@ -91,17 +95,19 @@ const LedgerCard = ({
                 {/* ${ledger?.amount.toLocaleString()} */}
               </p>
             </Link>
-            <div
-              className={`absolute top-2 right-2 w-5 h-5 md:w-7 md:h-7 text-white rounded-sm  flex items-center justify-center cursor-pointer ${ledgerListIconColorClass}`}
-            >
-              <Link
-                to={`/ledger/${ledger.id}/transactions?ledger=${
-                  ledger.name
-                }&type=${ledger.type.toLowerCase()}`}
-                className=" transition-all"
+            <div className="absolute top-2 right-2 w-8 h-8 flex justify-end items-start">
+              <div
+                className={` w-5 h-5 md:w-7 md:h-7 text-white rounded-sm  flex items-center justify-center cursor-pointer ${ledgerListIconColorClass}`}
               >
-                <LucideIcons.List className="w-3.5 h-3.5 md:w-5 md:h-5 " />
-              </Link>
+                <Link
+                  to={`/ledger/${ledger.id}/transactions?ledger=${
+                    ledger.name
+                  }&type=${ledger.type.toLowerCase()}`}
+                  className=" transition-all"
+                >
+                  <LucideIcons.List className="w-3.5 h-3.5 md:w-5 md:h-5 " />
+                </Link>
+              </div>
             </div>
           </div>
         );
