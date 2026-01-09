@@ -999,6 +999,7 @@ export const AccountScalarFieldEnum = {
   name: 'name',
   type: 'type',
   balance: 'balance',
+  description: 'description',
   icon: 'icon',
   color: 'color',
   userId: 'userId'
@@ -1011,6 +1012,7 @@ export const LedgerScalarFieldEnum = {
   id: 'id',
   name: 'name',
   type: 'type',
+  description: 'description',
   icon: 'icon',
   color: 'color',
   userId: 'userId'

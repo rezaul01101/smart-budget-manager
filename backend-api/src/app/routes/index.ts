@@ -2,6 +2,7 @@ import express from "express";
 import { AuthRoutes } from "../modules/auth/auth.route";
 import { LedgerRoute } from "../modules/ledger/ledger.route";
 import { TransactionRoute } from '../modules/transaction/transaction.route';
+import { AccountRoute } from "../modules/account/account.route";
 
 const router = express.Router();
 const moduleRoutes = [
@@ -16,6 +17,10 @@ const moduleRoutes = [
   {
     path: "/transaction",
     route: TransactionRoute,
+  },
+  {
+    path: "/account",
+    route: AccountRoute,
   },
 ];
 

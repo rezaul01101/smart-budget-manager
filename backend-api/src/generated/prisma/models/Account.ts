@@ -43,6 +43,7 @@ export type AccountMinAggregateOutputType = {
   name: string | null
   type: $Enums.AccountType | null
   balance: runtime.Decimal | null
+  description: string | null
   icon: string | null
   color: string | null
   userId: number | null
@@ -53,6 +54,7 @@ export type AccountMaxAggregateOutputType = {
   name: string | null
   type: $Enums.AccountType | null
   balance: runtime.Decimal | null
+  description: string | null
   icon: string | null
   color: string | null
   userId: number | null
@@ -63,6 +65,7 @@ export type AccountCountAggregateOutputType = {
   name: number
   type: number
   balance: number
+  description: number
   icon: number
   color: number
   userId: number
@@ -87,6 +90,7 @@ export type AccountMinAggregateInputType = {
   name?: true
   type?: true
   balance?: true
+  description?: true
   icon?: true
   color?: true
   userId?: true
@@ -97,6 +101,7 @@ export type AccountMaxAggregateInputType = {
   name?: true
   type?: true
   balance?: true
+  description?: true
   icon?: true
   color?: true
   userId?: true
@@ -107,6 +112,7 @@ export type AccountCountAggregateInputType = {
   name?: true
   type?: true
   balance?: true
+  description?: true
   icon?: true
   color?: true
   userId?: true
@@ -204,6 +210,7 @@ export type AccountGroupByOutputType = {
   name: string
   type: $Enums.AccountType
   balance: runtime.Decimal
+  description: string | null
   icon: string | null
   color: string | null
   userId: number
@@ -237,6 +244,7 @@ export type AccountWhereInput = {
   name?: Prisma.StringFilter<"Account"> | string
   type?: Prisma.EnumAccountTypeFilter<"Account"> | $Enums.AccountType
   balance?: Prisma.DecimalFilter<"Account"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringNullableFilter<"Account"> | string | null
   icon?: Prisma.StringNullableFilter<"Account"> | string | null
   color?: Prisma.StringNullableFilter<"Account"> | string | null
   userId?: Prisma.IntFilter<"Account"> | number
@@ -249,6 +257,7 @@ export type AccountOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   balance?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -264,6 +273,7 @@ export type AccountWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Account"> | string
   type?: Prisma.EnumAccountTypeFilter<"Account"> | $Enums.AccountType
   balance?: Prisma.DecimalFilter<"Account"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringNullableFilter<"Account"> | string | null
   icon?: Prisma.StringNullableFilter<"Account"> | string | null
   color?: Prisma.StringNullableFilter<"Account"> | string | null
   userId?: Prisma.IntFilter<"Account"> | number
@@ -276,6 +286,7 @@ export type AccountOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   balance?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -294,6 +305,7 @@ export type AccountScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Account"> | string
   type?: Prisma.EnumAccountTypeWithAggregatesFilter<"Account"> | $Enums.AccountType
   balance?: Prisma.DecimalWithAggregatesFilter<"Account"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringNullableWithAggregatesFilter<"Account"> | string | null
   icon?: Prisma.StringNullableWithAggregatesFilter<"Account"> | string | null
   color?: Prisma.StringNullableWithAggregatesFilter<"Account"> | string | null
   userId?: Prisma.IntWithAggregatesFilter<"Account"> | number
@@ -303,6 +315,7 @@ export type AccountCreateInput = {
   name: string
   type: $Enums.AccountType
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
   icon?: string | null
   color?: string | null
   user: Prisma.UserCreateNestedOneWithoutAccountsInput
@@ -314,6 +327,7 @@ export type AccountUncheckedCreateInput = {
   name: string
   type: $Enums.AccountType
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
   icon?: string | null
   color?: string | null
   userId: number
@@ -324,6 +338,7 @@ export type AccountUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutAccountsNestedInput
@@ -335,6 +350,7 @@ export type AccountUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -346,6 +362,7 @@ export type AccountCreateManyInput = {
   name: string
   type: $Enums.AccountType
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
   icon?: string | null
   color?: string | null
   userId: number
@@ -355,6 +372,7 @@ export type AccountUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -364,6 +382,7 @@ export type AccountUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -384,6 +403,7 @@ export type AccountCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   balance?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   color?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -400,6 +420,7 @@ export type AccountMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   balance?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   color?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -410,6 +431,7 @@ export type AccountMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
   balance?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   color?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -500,6 +522,7 @@ export type AccountCreateWithoutUserInput = {
   name: string
   type: $Enums.AccountType
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
   icon?: string | null
   color?: string | null
   transactions?: Prisma.TransactionCreateNestedManyWithoutAccountInput
@@ -510,6 +533,7 @@ export type AccountUncheckedCreateWithoutUserInput = {
   name: string
   type: $Enums.AccountType
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
   icon?: string | null
   color?: string | null
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutAccountInput
@@ -549,6 +573,7 @@ export type AccountScalarWhereInput = {
   name?: Prisma.StringFilter<"Account"> | string
   type?: Prisma.EnumAccountTypeFilter<"Account"> | $Enums.AccountType
   balance?: Prisma.DecimalFilter<"Account"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.StringNullableFilter<"Account"> | string | null
   icon?: Prisma.StringNullableFilter<"Account"> | string | null
   color?: Prisma.StringNullableFilter<"Account"> | string | null
   userId?: Prisma.IntFilter<"Account"> | number
@@ -558,6 +583,7 @@ export type AccountCreateWithoutTransactionsInput = {
   name: string
   type: $Enums.AccountType
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
   icon?: string | null
   color?: string | null
   user: Prisma.UserCreateNestedOneWithoutAccountsInput
@@ -568,6 +594,7 @@ export type AccountUncheckedCreateWithoutTransactionsInput = {
   name: string
   type: $Enums.AccountType
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
   icon?: string | null
   color?: string | null
   userId: number
@@ -593,6 +620,7 @@ export type AccountUpdateWithoutTransactionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutAccountsNestedInput
@@ -603,6 +631,7 @@ export type AccountUncheckedUpdateWithoutTransactionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -613,6 +642,7 @@ export type AccountCreateManyUserInput = {
   name: string
   type: $Enums.AccountType
   balance?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: string | null
   icon?: string | null
   color?: string | null
 }
@@ -621,6 +651,7 @@ export type AccountUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactions?: Prisma.TransactionUpdateManyWithoutAccountNestedInput
@@ -631,6 +662,7 @@ export type AccountUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutAccountNestedInput
@@ -641,6 +673,7 @@ export type AccountUncheckedUpdateManyWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumAccountTypeFieldUpdateOperationsInput | $Enums.AccountType
   balance?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -681,6 +714,7 @@ export type AccountSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name?: boolean
   type?: boolean
   balance?: boolean
+  description?: boolean
   icon?: boolean
   color?: boolean
   userId?: boolean
@@ -694,6 +728,7 @@ export type AccountSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   type?: boolean
   balance?: boolean
+  description?: boolean
   icon?: boolean
   color?: boolean
   userId?: boolean
@@ -705,6 +740,7 @@ export type AccountSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   type?: boolean
   balance?: boolean
+  description?: boolean
   icon?: boolean
   color?: boolean
   userId?: boolean
@@ -716,12 +752,13 @@ export type AccountSelectScalar = {
   name?: boolean
   type?: boolean
   balance?: boolean
+  description?: boolean
   icon?: boolean
   color?: boolean
   userId?: boolean
 }
 
-export type AccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "type" | "balance" | "icon" | "color" | "userId", ExtArgs["result"]["account"]>
+export type AccountOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "type" | "balance" | "description" | "icon" | "color" | "userId", ExtArgs["result"]["account"]>
 export type AccountInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   transactions?: boolean | Prisma.Account$transactionsArgs<ExtArgs>
@@ -745,6 +782,7 @@ export type $AccountPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     name: string
     type: $Enums.AccountType
     balance: runtime.Decimal
+    description: string | null
     icon: string | null
     color: string | null
     userId: number
@@ -1177,6 +1215,7 @@ export interface AccountFieldRefs {
   readonly name: Prisma.FieldRef<"Account", 'String'>
   readonly type: Prisma.FieldRef<"Account", 'AccountType'>
   readonly balance: Prisma.FieldRef<"Account", 'Decimal'>
+  readonly description: Prisma.FieldRef<"Account", 'String'>
   readonly icon: Prisma.FieldRef<"Account", 'String'>
   readonly color: Prisma.FieldRef<"Account", 'String'>
   readonly userId: Prisma.FieldRef<"Account", 'Int'>

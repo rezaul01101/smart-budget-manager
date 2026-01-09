@@ -18,7 +18,7 @@ app.use(
     origin: [
       "http://localhost:3001",
       "http://localhost:3002",
-      "http://budgetmanager.buildbeam.xyz",
+      "https://budgetmanager.buildbeam.xyz",
     ],
     credentials: true,
   })

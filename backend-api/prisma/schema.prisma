@@ -27,7 +27,7 @@ model User {
   ledgers           Ledger[]
   subLedgers        SubLedger[]
   budgets           Budget[]
-  transactions     Transaction[]
+  transactions      Transaction[]
 }
 
 model PasswordResetOtp {
@@ -51,6 +51,7 @@ model Account {
   name         String // e.g., "Chase Bank", "Physical Wallet"
   type         AccountType // Enum: BANK, CASH, SAVINGS
   balance      Decimal       @default(0)
+  description  String?       @db.Text
   icon         String?
   color        String?
   userId       Int
@@ -63,6 +64,7 @@ model Ledger {
   id           Int           @id @default(autoincrement())
   name         String
   type         LedgerType // Enum: INCOME, EXPENSE
+  description  String?
   icon         String?
   color        String?
   userId       Int
@@ -101,8 +103,8 @@ model Transaction {
   subLedgerId Int?
   subLedger   SubLedger? @relation(fields: [subLedgerId], references: [id])
 
-  userId   Int
-  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // Budget targets for specific ledgers per month
@@ -114,10 +116,10 @@ model Budget {
   icon     String?
   color    String?
   ledgerId Int
-  ledger   Ledger  @relation(fields: [ledgerId], references: [id],onDelete: Cascade)
+  ledger   Ledger  @relation(fields: [ledgerId], references: [id], onDelete: Cascade)
 
   userId Int
-  user   User @relation(fields: [userId], references: [id],onDelete: Cascade)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum AccountType {

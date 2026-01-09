@@ -40,6 +40,7 @@ export type LedgerMinAggregateOutputType = {
   id: number | null
   name: string | null
   type: $Enums.LedgerType | null
+  description: string | null
   icon: string | null
   color: string | null
   userId: number | null
@@ -49,6 +50,7 @@ export type LedgerMaxAggregateOutputType = {
   id: number | null
   name: string | null
   type: $Enums.LedgerType | null
+  description: string | null
   icon: string | null
   color: string | null
   userId: number | null
@@ -58,6 +60,7 @@ export type LedgerCountAggregateOutputType = {
   id: number
   name: number
   type: number
+  description: number
   icon: number
   color: number
   userId: number
@@ -79,6 +82,7 @@ export type LedgerMinAggregateInputType = {
   id?: true
   name?: true
   type?: true
+  description?: true
   icon?: true
   color?: true
   userId?: true
@@ -88,6 +92,7 @@ export type LedgerMaxAggregateInputType = {
   id?: true
   name?: true
   type?: true
+  description?: true
   icon?: true
   color?: true
   userId?: true
@@ -97,6 +102,7 @@ export type LedgerCountAggregateInputType = {
   id?: true
   name?: true
   type?: true
+  description?: true
   icon?: true
   color?: true
   userId?: true
@@ -193,6 +199,7 @@ export type LedgerGroupByOutputType = {
   id: number
   name: string
   type: $Enums.LedgerType
+  description: string | null
   icon: string | null
   color: string | null
   userId: number
@@ -225,6 +232,7 @@ export type LedgerWhereInput = {
   id?: Prisma.IntFilter<"Ledger"> | number
   name?: Prisma.StringFilter<"Ledger"> | string
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
+  description?: Prisma.StringNullableFilter<"Ledger"> | string | null
   icon?: Prisma.StringNullableFilter<"Ledger"> | string | null
   color?: Prisma.StringNullableFilter<"Ledger"> | string | null
   userId?: Prisma.IntFilter<"Ledger"> | number
@@ -238,6 +246,7 @@ export type LedgerOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -254,6 +263,7 @@ export type LedgerWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LedgerWhereInput | Prisma.LedgerWhereInput[]
   name?: Prisma.StringFilter<"Ledger"> | string
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
+  description?: Prisma.StringNullableFilter<"Ledger"> | string | null
   icon?: Prisma.StringNullableFilter<"Ledger"> | string | null
   color?: Prisma.StringNullableFilter<"Ledger"> | string | null
   userId?: Prisma.IntFilter<"Ledger"> | number
@@ -267,6 +277,7 @@ export type LedgerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
   color?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -284,6 +295,7 @@ export type LedgerScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Ledger"> | number
   name?: Prisma.StringWithAggregatesFilter<"Ledger"> | string
   type?: Prisma.EnumLedgerTypeWithAggregatesFilter<"Ledger"> | $Enums.LedgerType
+  description?: Prisma.StringNullableWithAggregatesFilter<"Ledger"> | string | null
   icon?: Prisma.StringNullableWithAggregatesFilter<"Ledger"> | string | null
   color?: Prisma.StringNullableWithAggregatesFilter<"Ledger"> | string | null
   userId?: Prisma.IntWithAggregatesFilter<"Ledger"> | number
@@ -292,6 +304,7 @@ export type LedgerScalarWhereWithAggregatesInput = {
 export type LedgerCreateInput = {
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   user: Prisma.UserCreateNestedOneWithoutLedgersInput
@@ -304,6 +317,7 @@ export type LedgerUncheckedCreateInput = {
   id?: number
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   userId: number
@@ -315,6 +329,7 @@ export type LedgerUncheckedCreateInput = {
 export type LedgerUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutLedgersNestedInput
@@ -327,6 +342,7 @@ export type LedgerUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -339,6 +355,7 @@ export type LedgerCreateManyInput = {
   id?: number
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   userId: number
@@ -347,6 +364,7 @@ export type LedgerCreateManyInput = {
 export type LedgerUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -355,6 +373,7 @@ export type LedgerUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -374,6 +393,7 @@ export type LedgerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   color?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -388,6 +408,7 @@ export type LedgerMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   color?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -397,6 +418,7 @@ export type LedgerMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  description?: Prisma.SortOrder
   icon?: Prisma.SortOrder
   color?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -503,6 +525,7 @@ export type LedgerUpdateOneRequiredWithoutBudgetsNestedInput = {
 export type LedgerCreateWithoutUserInput = {
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   transactions?: Prisma.TransactionCreateNestedManyWithoutLedgerInput
@@ -514,6 +537,7 @@ export type LedgerUncheckedCreateWithoutUserInput = {
   id?: number
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   transactions?: Prisma.TransactionUncheckedCreateNestedManyWithoutLedgerInput
@@ -554,6 +578,7 @@ export type LedgerScalarWhereInput = {
   id?: Prisma.IntFilter<"Ledger"> | number
   name?: Prisma.StringFilter<"Ledger"> | string
   type?: Prisma.EnumLedgerTypeFilter<"Ledger"> | $Enums.LedgerType
+  description?: Prisma.StringNullableFilter<"Ledger"> | string | null
   icon?: Prisma.StringNullableFilter<"Ledger"> | string | null
   color?: Prisma.StringNullableFilter<"Ledger"> | string | null
   userId?: Prisma.IntFilter<"Ledger"> | number
@@ -562,6 +587,7 @@ export type LedgerScalarWhereInput = {
 export type LedgerCreateWithoutSubLedgersInput = {
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   user: Prisma.UserCreateNestedOneWithoutLedgersInput
@@ -573,6 +599,7 @@ export type LedgerUncheckedCreateWithoutSubLedgersInput = {
   id?: number
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   userId: number
@@ -599,6 +626,7 @@ export type LedgerUpdateToOneWithWhereWithoutSubLedgersInput = {
 export type LedgerUpdateWithoutSubLedgersInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutLedgersNestedInput
@@ -610,6 +638,7 @@ export type LedgerUncheckedUpdateWithoutSubLedgersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -620,6 +649,7 @@ export type LedgerUncheckedUpdateWithoutSubLedgersInput = {
 export type LedgerCreateWithoutTransactionsInput = {
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   user: Prisma.UserCreateNestedOneWithoutLedgersInput
@@ -631,6 +661,7 @@ export type LedgerUncheckedCreateWithoutTransactionsInput = {
   id?: number
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   userId: number
@@ -657,6 +688,7 @@ export type LedgerUpdateToOneWithWhereWithoutTransactionsInput = {
 export type LedgerUpdateWithoutTransactionsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutLedgersNestedInput
@@ -668,6 +700,7 @@ export type LedgerUncheckedUpdateWithoutTransactionsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -678,6 +711,7 @@ export type LedgerUncheckedUpdateWithoutTransactionsInput = {
 export type LedgerCreateWithoutBudgetsInput = {
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   user: Prisma.UserCreateNestedOneWithoutLedgersInput
@@ -689,6 +723,7 @@ export type LedgerUncheckedCreateWithoutBudgetsInput = {
   id?: number
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
   userId: number
@@ -715,6 +750,7 @@ export type LedgerUpdateToOneWithWhereWithoutBudgetsInput = {
 export type LedgerUpdateWithoutBudgetsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutLedgersNestedInput
@@ -726,6 +762,7 @@ export type LedgerUncheckedUpdateWithoutBudgetsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.IntFieldUpdateOperationsInput | number
@@ -737,6 +774,7 @@ export type LedgerCreateManyUserInput = {
   id?: number
   name: string
   type: $Enums.LedgerType
+  description?: string | null
   icon?: string | null
   color?: string | null
 }
@@ -744,6 +782,7 @@ export type LedgerCreateManyUserInput = {
 export type LedgerUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactions?: Prisma.TransactionUpdateManyWithoutLedgerNestedInput
@@ -755,6 +794,7 @@ export type LedgerUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   transactions?: Prisma.TransactionUncheckedUpdateManyWithoutLedgerNestedInput
@@ -766,6 +806,7 @@ export type LedgerUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumLedgerTypeFieldUpdateOperationsInput | $Enums.LedgerType
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -823,6 +864,7 @@ export type LedgerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   id?: boolean
   name?: boolean
   type?: boolean
+  description?: boolean
   icon?: boolean
   color?: boolean
   userId?: boolean
@@ -837,6 +879,7 @@ export type LedgerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   name?: boolean
   type?: boolean
+  description?: boolean
   icon?: boolean
   color?: boolean
   userId?: boolean
@@ -847,6 +890,7 @@ export type LedgerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   name?: boolean
   type?: boolean
+  description?: boolean
   icon?: boolean
   color?: boolean
   userId?: boolean
@@ -857,12 +901,13 @@ export type LedgerSelectScalar = {
   id?: boolean
   name?: boolean
   type?: boolean
+  description?: boolean
   icon?: boolean
   color?: boolean
   userId?: boolean
 }
 
-export type LedgerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "type" | "icon" | "color" | "userId", ExtArgs["result"]["ledger"]>
+export type LedgerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "type" | "description" | "icon" | "color" | "userId", ExtArgs["result"]["ledger"]>
 export type LedgerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   transactions?: boolean | Prisma.Ledger$transactionsArgs<ExtArgs>
@@ -889,6 +934,7 @@ export type $LedgerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     id: number
     name: string
     type: $Enums.LedgerType
+    description: string | null
     icon: string | null
     color: string | null
     userId: number
@@ -1322,6 +1368,7 @@ export interface LedgerFieldRefs {
   readonly id: Prisma.FieldRef<"Ledger", 'Int'>
   readonly name: Prisma.FieldRef<"Ledger", 'String'>
   readonly type: Prisma.FieldRef<"Ledger", 'LedgerType'>
+  readonly description: Prisma.FieldRef<"Ledger", 'String'>
   readonly icon: Prisma.FieldRef<"Ledger", 'String'>
   readonly color: Prisma.FieldRef<"Ledger", 'String'>
   readonly userId: Prisma.FieldRef<"Ledger", 'Int'>
