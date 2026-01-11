@@ -2,12 +2,11 @@ import {
   LayoutDashboard,
   Wallet,
   TrendingUp,
-  // Target,
   CreditCard,
-  // PieChart,
-  // Settings,
   X,
-  PlusCircleIcon
+  PlusCircleIcon,
+  Landmark,
+  List
 } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
 
@@ -17,7 +16,8 @@ const menuItems = [
   { icon: TrendingUp, label: 'Income', path: '/income' },
   { icon: CreditCard, label: 'Expenses', path: '/expenses' },
   { icon: PlusCircleIcon, label: 'Add Ledger', path: '/add-ledger' },
-  // { icon: Target, label: 'Goals', path: '/goals' },
+  { icon: Landmark, label: 'Add Account', path: '/add-account' },
+  { icon: List, label: 'Account List', path: '/account-list' },
   // { icon: PieChart, label: 'Reports', path: '/reports' },
   // { icon: Settings, label: 'Settings', path: '/settings' },
 ];

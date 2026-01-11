@@ -56,7 +56,7 @@ const LedgerCard = ({
         return (
           <div
             key={index}
-            className={`rounded-xl p-2 md:p-6 border ${colorClass} transition-all hover:scale-105  cursor-pointer relative`}
+            className={`rounded-xl py-2 px-3 md:p-6 border ${colorClass} transition-all hover:scale-105  cursor-pointer relative`}
           >
             <Link
               to={`/transaction-entry/${ledger.id}?ledger=${
@@ -95,20 +95,20 @@ const LedgerCard = ({
                 {/* ${ledger?.amount.toLocaleString()} */}
               </p>
             </Link>
-            <div className="absolute top-2 right-2 w-8 h-8 flex justify-end items-start">
+            <Link
+              to={`/ledger/${ledger.id}/transactions?ledger=${
+                ledger.name
+              }&type=${ledger.type.toLowerCase()}`}
+              className="absolute top-2 right-2 w-10 h-10 flex justify-end items-start"
+            >
               <div
                 className={` w-5 h-5 md:w-7 md:h-7 text-white rounded-sm  flex items-center justify-center cursor-pointer ${ledgerListIconColorClass}`}
               >
-                <Link
-                  to={`/ledger/${ledger.id}/transactions?ledger=${
-                    ledger.name
-                  }&type=${ledger.type.toLowerCase()}`}
-                  className=" transition-all"
-                >
+                <div className=" transition-all">
                   <LucideIcons.List className="w-3.5 h-3.5 md:w-5 md:h-5 " />
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         );
       })}

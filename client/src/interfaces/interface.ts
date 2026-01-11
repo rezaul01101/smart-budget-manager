@@ -25,6 +25,14 @@ export type TransactionType = {
     id: number;
   };
 };
+export interface AccountFormData {
+  name: string;
+  type: "BANK" | "CASH" | "SAVINGS" | "CREDIT_CARD";
+  icon: string;
+  color: string;
+  balance: number;
+  description: string;
+}
 export interface ApiError {
   status: number;
   data: ApiErrorResponse;

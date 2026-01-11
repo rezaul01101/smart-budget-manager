@@ -15,17 +15,26 @@ import {
   Wallet,
   X,
 } from "lucide-react";
-import type { LedgerFormData } from "../../interfaces/interface";
+import type { AccountFormData, LedgerFormData } from "../../interfaces/interface";
 
-interface IconColorModalProps {
+interface IconColorModalProps<T extends LedgerFormData | AccountFormData> {
   isOpen: boolean;
   type: string;
-  formData: LedgerFormData;
-  setFormData: React.Dispatch<React.SetStateAction<LedgerFormData>>;
+  formData: T;
+  setFormData: React.Dispatch<React.SetStateAction<T>>;
   onClose: () => void;
 }
 
-const availableIcons = [
+const IconColorModal = <T extends LedgerFormData | AccountFormData>({
+  formData,
+  setFormData,
+  isOpen,
+  type,
+  onClose,
+}: IconColorModalProps<T>) => {
+  if (!isOpen) return null;
+
+  const availableIcons = [
   { name: "Wallet", icon: Wallet },
   { name: "UtensilsCrossed", icon: UtensilsCrossed },
   { name: "Bus", icon: Bus },
@@ -39,28 +48,19 @@ const availableIcons = [
   { name: "House", icon: House },
   { name: "Clapperboard", icon: Clapperboard },
   { name: "Handshake", icon: Handshake },
-];
+  ];
 
-const availableColors = [
-  { name: "Yellow", value: "yellow" },
-  { name: "Blue", value: "blue" },
-  { name: "Orange", value: "orange" },
-  { name: "Purple", value: "purple" },
-  { name: "Pink", value: "pink" },
-  { name: "Emerald", value: "emerald" },
-  { name: "Teal", value: "teal" },
-  { name: "Cyan", value: "cyan" },
-  { name: "Green", value: "green" },
-];
-
-const IconColorModal = ({
-  formData,
-  setFormData,
-  isOpen,
-  type,
-  onClose,
-}: IconColorModalProps) => {
-  if (!isOpen) return null;
+  const availableColors = [
+    { name: "Yellow", value: "yellow" },
+    { name: "Blue", value: "blue" },
+    { name: "Orange", value: "orange" },
+    { name: "Purple", value: "purple" },
+    { name: "Pink", value: "pink" },
+    { name: "Emerald", value: "emerald" },
+    { name: "Teal", value: "teal" },
+    { name: "Cyan", value: "cyan" },
+    { name: "Green", value: "green" },
+  ];
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center">
