@@ -145,6 +145,7 @@ const AddAccount = () => {
                   placeholder="e.g., Bank Account, Cash, Saving Account etc."
                 />
               </div>
+              
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Initial Balance

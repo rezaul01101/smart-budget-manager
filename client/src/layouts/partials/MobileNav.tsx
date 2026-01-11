@@ -1,9 +1,9 @@
 import {
   LayoutDashboard,
   Wallet,
-  TrendingUp,
   CreditCard,
   PlusCircleIcon,
+  Landmark,
   // BarChart3
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
@@ -12,8 +12,9 @@ const mobileMenuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
   { icon: Wallet, label: 'Transactions', path: '/transactions' },
   { icon: PlusCircleIcon, label: 'Ledger', path: '/add-ledger', styles: 'text-orange-500' },
-  { icon: TrendingUp, label: 'Income', path: '/income' },
+  // { icon: TrendingUp, label: 'Income', path: '/income' },
   { icon: CreditCard, label: 'Expenses', path: '/expenses' },
+  { icon: Landmark, label: 'Accounts', path: '/account-list'},
   // { icon: BarChart3, label: 'Reports', path: '/reports' },
 ];
 

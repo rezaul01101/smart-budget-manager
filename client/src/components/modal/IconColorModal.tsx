@@ -1,4 +1,5 @@
 import {
+  Banknote,
   Briefcase,
   BriefcaseMedical,
   Bus,
@@ -8,6 +9,7 @@ import {
   Handshake,
   Heart,
   House,
+  Landmark,
   ShoppingBag,
   Sparkles,
   TrendingUp,
@@ -48,6 +50,8 @@ const IconColorModal = <T extends LedgerFormData | AccountFormData>({
   { name: "House", icon: House },
   { name: "Clapperboard", icon: Clapperboard },
   { name: "Handshake", icon: Handshake },
+  { name: "Banknote", icon: Banknote },
+  { name: "Landmark", icon: Landmark },
   ];
 
   const availableColors = [

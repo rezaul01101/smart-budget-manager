@@ -3,10 +3,13 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ArrowLeft, Save } from "lucide-react";
 import { useCreateTransactionMutation } from "../../redux/api/transactionApi";
 import { useSingleLedgerQuery } from "../../redux/api/ledgerApi";
+import AccountModal from "../../components/modal/AccountModal";
+import type { AccountType } from "../../interfaces/interface";
 
 const TransactionEntry = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [openAccountModal, setOpenAccountModal] = useState(false);
   const [searchParams] = useSearchParams();
   const [createTransaction, { isLoading, error }] =
     useCreateTransactionMutation();
@@ -20,7 +23,10 @@ const TransactionEntry = () => {
     description: "",
     date: new Date().toISOString().split("T")[0],
     subLedgerId: Number(undefined),
+    accountId: Number(undefined),
+    account: {} as AccountType,
   });
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,8 +48,20 @@ const TransactionEntry = () => {
     }
   };
 
+  const handleAccountClick = () => {
+    setOpenAccountModal(true);
+  };
+
+  const balance = categoryType === "income" ? formData?.account?.balance + Number(formData?.amount) : formData?.account?.balance - Number(formData?.amount)
+
   return (
     <>
+      <AccountModal
+        formData={formData}
+        setFormData={setFormData}
+        isOpen={openAccountModal}
+        onClose={() => setOpenAccountModal(false)}
+      />
       <div className="bg-[#1a2332] rounded-lg p-2 pb-3 md:p-4 border border-gray-800">
         <div className="p-2">
           <div className="flex items-center justify-between mb-6">
@@ -87,6 +105,24 @@ const TransactionEntry = () => {
                     placeholder="0.00"
                   />
                 </div>
+              </div>
+              <div className=" gap-4">
+                <div className="flex items-center gap-2 justify-between text-white">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Pay From
+                  </label>
+                  <span className="text-orange-500">৳ {balance ? balance?.toFixed(2) : "0.00"}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleAccountClick}
+                  className={`p-2 rounded-lg border transition-all cursor-pointer border-orange-500 bg-orange-500/10 text-white min-w-[200px]`}
+                >
+                  {formData?.account?.name || "Select Account"}
+                  {/* {IconComponent && (
+                    <IconComponent className="w-6 h-6 text-white mx-auto" />
+                  )} */}
+                </button>
               </div>
 
               <div>

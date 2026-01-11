@@ -48,3 +48,14 @@ export interface ApiErrorMessage {
   path: string;
   message: string;
 }
+
+export interface AccountType {
+  id: string | number;
+  name: string;
+  type: "BANK" | "CASH" | "SAVINGS" | "CREDIT_CARD";
+  icon: string;
+  color: string;
+  balance: number;
+  description: string;
+}
+
