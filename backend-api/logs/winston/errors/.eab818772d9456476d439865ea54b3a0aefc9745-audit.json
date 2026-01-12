@@ -6,11 +6,6 @@
     "auditLog": "/app/logs/winston/errors/.eab818772d9456476d439865ea54b3a0aefc9745-audit.json",
     "files": [
         {
-            "date": 1766937795444,
-            "name": "/app/logs/winston/errors/2025-28-12-16-error.log",
-            "hash": "42c0171c5fc2c8a7a34b11b2d0b07718b32d2321124bdd9641fb926dd75b7b58"
-        },
-        {
             "date": 1767018055977,
             "name": "/app/logs/winston/errors/2025-29-12-14-error.log",
             "hash": "569a8bd461548575dc0aefff2cf608698dccfde7fdbfed06823cc00402d5b2a7"
@@ -144,6 +139,11 @@
             "date": 1768133502822,
             "name": "/app/logs/winston/errors/2026-11-01-12-error.log",
             "hash": "93daec596646dc85c4620380136db86a3e51b2a8ab56561c9027c889f08c6760"
+        },
+        {
+            "date": 1768185123673,
+            "name": "/app/logs/winston/errors/2026-12-01-02-error.log",
+            "hash": "1293365a8e9f081327feed2f632683bfc75330b89459be48b95e0c529eb2cbed"
         }
     ],
     "hashType": "sha256"

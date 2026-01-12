@@ -27,7 +27,6 @@ const TransactionEntry = () => {
     account: {} as AccountType,
   });
 
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -37,7 +36,8 @@ const TransactionEntry = () => {
         date: formData?.date,
         description: formData?.description,
         ledgerId: Number(id),
-        subLedgerId: formData?.subLedgerId,
+        subLedgerId: Number(formData?.subLedgerId),
+        accountId: Number(formData?.accountId),
       };
       const res = await createTransaction(data).unwrap();
       if (res) {
@@ -52,7 +52,10 @@ const TransactionEntry = () => {
     setOpenAccountModal(true);
   };
 
-  const balance = categoryType === "income" ? formData?.account?.balance + Number(formData?.amount) : formData?.account?.balance - Number(formData?.amount)
+  const balance =
+    categoryType === "income"
+      ? Number(formData?.account?.balance) + Number(formData?.amount)
+      : Number(formData?.account?.balance) - Number(formData?.amount);
 
   return (
     <>
@@ -109,9 +112,16 @@ const TransactionEntry = () => {
               <div className=" gap-4">
                 <div className="flex items-center gap-2 justify-between text-white">
                   <label className="block text-sm font-medium text-gray-300 mb-2">
-                    Pay From
+                    {categoryType === "income" ? "Pay To" : "Pay From"}
                   </label>
-                  <span className="text-orange-500">৳ {balance ? balance?.toFixed(2) : "0.00"}</span>
+                  <span className="text-orange-500">
+                    ৳{" "}
+                    {`${formData?.account?.balance || "0.00"} ${
+                      categoryType === "income" ? "+" : "-"
+                    } ${formData?.amount || "0.00"} = ${
+                      balance ? balance : "0.00"
+                    }`}
+                  </span>
                 </div>
                 <button
                   type="button"

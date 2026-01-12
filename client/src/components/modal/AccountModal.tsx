@@ -26,6 +26,8 @@ const AccountModal = ({ setFormData, isOpen, onClose }: AccountModalProps) => {
     onClose();
   };
 
+  if (isLoading) return <p className="text-white">Loading...</p>;
+
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center">
       <div className="bg-[#0f1419] w-full md:max-w-2xl md:rounded-lg rounded-t-3xl max-h-[90vh] overflow-y-auto">
