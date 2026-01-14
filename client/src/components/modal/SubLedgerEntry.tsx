@@ -13,9 +13,8 @@ const SubLedgerModal = ({
   isOpen,
   onClose,
 }: SubLedgerModalProps) => {
-  if (!isOpen) return null;
-
   const [subLedgerName, setSubLedgerName] = useState("");
+  if (!isOpen) return null;
 
   const handleAddSubLedger = () => {
     if (!subLedgerName.trim()) return;

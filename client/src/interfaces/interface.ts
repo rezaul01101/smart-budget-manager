@@ -50,7 +50,7 @@ export interface ApiErrorMessage {
 }
 
 export interface AccountType {
-  id: string | number;
+  id: number;
   name: string;
   type: "BANK" | "CASH" | "SAVINGS" | "CREDIT_CARD";
   icon: string;
@@ -59,3 +59,11 @@ export interface AccountType {
   description: string;
 }
 
+export interface AccountModalTypes {
+  amount: string;
+  accountId: number | null;
+  account: null | AccountType;
+  description: string;
+  date: string;
+  subLedgerId: number | null;
+}

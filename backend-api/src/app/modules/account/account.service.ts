@@ -2,10 +2,7 @@ import { prisma } from "../../../shared/prisma";
 import { User } from "../../../generated/prisma/client";
 import { AccountType, UpdateAccountType } from "./account.interface";
 
-const createAccountService = async (
-  accountData: AccountType,
-  user: User
-) => {
+const createAccountService = async (accountData: AccountType, user: User) => {
   const { name, type, balance, icon, color } = accountData;
 
   const result = await prisma.account.create({
@@ -30,9 +27,37 @@ const getAllAccountsService = async (user: User) => {
     orderBy: {
       id: "desc",
     },
+    include: {
+      transactions: {
+        include: {
+          ledger: true, // needed for INCOME / EXPENSE
+        },
+      },
+    },
   });
 
-  return result;
+  const accountsWithTransactionAmount = result.map((account) => {
+    const transaction_amount = account.transactions.reduce((sum, txn) => {
+      const amount = Number(txn.amount);
+
+      if (txn.ledger.type === "INCOME") {
+        return sum + amount; // add income
+      }
+
+      if (txn.ledger.type === "EXPENSE") {
+        return sum - amount; // subtract expense
+      }
+
+      return sum;
+    }, 0);
+
+    return {
+      ...account,
+      balance: Number(account.balance) + transaction_amount, // 👈 separate calculated field
+    };
+  });
+
+  return accountsWithTransactionAmount;
 };
 
 const getSingleAccountService = async (id: number, user: User) => {

@@ -4,7 +4,7 @@ import { ArrowLeft, Save } from "lucide-react";
 import { useCreateTransactionMutation } from "../../redux/api/transactionApi";
 import { useSingleLedgerQuery } from "../../redux/api/ledgerApi";
 import AccountModal from "../../components/modal/AccountModal";
-import type { AccountType } from "../../interfaces/interface";
+import type { AccountModalTypes, AccountType } from "../../interfaces/interface";
 
 const TransactionEntry = () => {
   const navigate = useNavigate();
@@ -18,14 +18,15 @@ const TransactionEntry = () => {
   const categoryName = searchParams.get("ledger") || "";
   const categoryType = searchParams.get("type") || "expense";
 
-  const [formData, setFormData] = useState({
-    amount: "",
-    description: "",
-    date: new Date().toISOString().split("T")[0],
-    subLedgerId: Number(undefined),
-    accountId: Number(undefined),
-    account: {} as AccountType,
-  });
+  const [formData, setFormData] = useState<AccountModalTypes>({
+  amount: "",
+  description: "",
+  date: new Date().toISOString().split("T")[0],
+  subLedgerId: null,
+  accountId: null,
+  account: null,
+});
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,9 +37,10 @@ const TransactionEntry = () => {
         date: formData?.date,
         description: formData?.description,
         ledgerId: Number(id),
-        subLedgerId: Number(formData?.subLedgerId),
+        subLedgerId: formData?.subLedgerId? Number(formData?.subLedgerId):null,
         accountId: Number(formData?.accountId),
       };
+      console.log(data,formData);
       const res = await createTransaction(data).unwrap();
       if (res) {
         navigate(-1);
@@ -60,11 +62,11 @@ const TransactionEntry = () => {
   return (
     <>
       <AccountModal
-        formData={formData}
         setFormData={setFormData}
         isOpen={openAccountModal}
         onClose={() => setOpenAccountModal(false)}
       />
+
       <div className="bg-[#1a2332] rounded-lg p-2 pb-3 md:p-4 border border-gray-800">
         <div className="p-2">
           <div className="flex items-center justify-between mb-6">

@@ -2,25 +2,32 @@ import { Check, X } from "lucide-react";
 import { useAccountListQuery } from "../../redux/api/accountApi";
 import * as LucideIcons from "lucide-react";
 import { ledgerColorClasses } from "../../constants/constants";
+import type {
+  AccountModalTypes,
+  AccountType,
+} from "../../interfaces/interface";
 
 interface AccountModalProps {
   isOpen: boolean;
-  formData: any;
-  setFormData: React.Dispatch<React.SetStateAction<any>>;
+  setFormData: React.Dispatch<React.SetStateAction<AccountModalTypes>>;
   onClose: () => void;
 }
 
 const AccountModal = ({ setFormData, isOpen, onClose }: AccountModalProps) => {
-  if (!isOpen) return null;
-
   const { data: accounts, isLoading } = useAccountListQuery({});
 
-  const handleAddAccount = (item: any) => {
+  if (!isOpen) return null;
+
+  const handleClose = () => {
+    onClose();
+  };
+
+  const handleAddAccount = (item: AccountType) => {
     if (!item?.id) return;
 
-    setFormData((prev: any) => ({
+    setFormData((prev: AccountModalTypes) => ({
       ...prev,
-      accountId: item?.id,
+      accountId: Number(item.id),
       account: item,
     }));
     onClose();
@@ -48,7 +55,7 @@ const AccountModal = ({ setFormData, isOpen, onClose }: AccountModalProps) => {
               </div>
             </div>
             <button
-              onClick={handleAddAccount}
+              onClick={handleClose}
               className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
             >
               <Check className="w-6 h-6" />
@@ -57,8 +64,8 @@ const AccountModal = ({ setFormData, isOpen, onClose }: AccountModalProps) => {
         </div>
 
         <div className="p-4 md:p-6 space-y-6">
-          <div className="grid grid-cols-3 md:grid-cols-5 gap-2 md:gap-4 ">
-            {accounts?.data?.map((item: any) => {
+          <div className="grid grid-cols-3 md:grid-cols-4 gap-2 md:gap-4 ">
+            {accounts?.data?.map((item: AccountType) => {
               type IconName = keyof typeof LucideIcons;
               const iconName = item?.icon as IconName;
               const IconComponent = (LucideIcons[iconName] ||
@@ -68,7 +75,11 @@ const AccountModal = ({ setFormData, isOpen, onClose }: AccountModalProps) => {
               const colorClass =
                 ledgerColorClasses[item?.color] || ledgerColorClasses.green;
               return (
-                <div onClick={()=>handleAddAccount(item)}
+                <div
+                  key={item?.id}
+                  onClick={() => {
+                    handleAddAccount(item);
+                  }}
                   className={`rounded-xl py-2 px-3 md:p-6 border ${colorClass} transition-all hover:scale-105  cursor-pointer relative`}
                 >
                   <div className="flex flex-col items-center justify-center gap-2 md:gap-4">
