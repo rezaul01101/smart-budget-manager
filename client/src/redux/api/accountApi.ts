@@ -9,7 +9,7 @@ export const accountApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      
+      invalidatesTags: ['account']
     }),
     updateAccount: build.mutation({
       query: (data) => ({
@@ -17,6 +17,7 @@ export const accountApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ['account']
     }),
     singleAccount: build.query({
       query: (id) => ({

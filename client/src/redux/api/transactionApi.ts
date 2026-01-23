@@ -9,7 +9,7 @@ export const transactionApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["ledger",'transaction'],
+      invalidatesTags: ["ledger",'transaction','account'],
     }),
     updateTransaction: build.mutation({
       query: (data) => ({
@@ -17,7 +17,7 @@ export const transactionApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags: ["ledger",'transaction'],
+      invalidatesTags: ["ledger",'transaction','account'],
     }),
     transactionList: build.query({
       query: (query?: string) => ({

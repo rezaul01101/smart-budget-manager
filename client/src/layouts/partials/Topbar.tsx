@@ -1,16 +1,18 @@
-import {Search, User, LogOut, Menu } from "lucide-react";
+import { Search, User, LogOut, Menu } from "lucide-react";
 import { useState } from "react";
 import { useUserLogoutMutation } from "../../redux/api/authApi";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { clearAccessToken } from "../../redux/features/authSlice";
 import type { RootState } from "../../redux/store";
+import { useAccountListQuery } from "../../redux/api/accountApi";
 
 interface TopbarProps {
   onMenuClick: () => void;
 }
 
 export default function Topbar({ onMenuClick }: TopbarProps) {
+  const { data: accounts, isLoading: accountsLoading } = useAccountListQuery({});
   const [logout, { isLoading }] = useUserLogoutMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -53,6 +55,9 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
               className="w-full bg-gray-800 text-white pl-10 pr-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
             />
           </div>
+        </div>
+        <div>
+          <div className="text-white font-semibold">৳{accountsLoading ? "Loading..." : accounts?.data?.reduce((acc: number, account: any) => acc + account.balance, 0)?.toLocaleString()} </div>
         </div>
 
         <div className="flex items-center gap-2 md:gap-4">

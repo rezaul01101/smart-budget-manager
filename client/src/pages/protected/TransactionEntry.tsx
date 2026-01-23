@@ -4,7 +4,7 @@ import { ArrowLeft, Save } from "lucide-react";
 import { useCreateTransactionMutation } from "../../redux/api/transactionApi";
 import { useSingleLedgerQuery } from "../../redux/api/ledgerApi";
 import AccountModal from "../../components/modal/AccountModal";
-import type { AccountModalTypes, AccountType } from "../../interfaces/interface";
+import type { AccountModalTypes } from "../../interfaces/interface";
 
 const TransactionEntry = () => {
   const navigate = useNavigate();
