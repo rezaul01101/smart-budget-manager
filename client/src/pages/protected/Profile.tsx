@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
 import { usePasswordResetMutation } from "../../redux/api/userApi";
+import toast from "react-hot-toast";
 
 interface EditField {
   name: boolean;
@@ -72,7 +73,9 @@ function Profile() {
         console.log(sendingData);
 
         const passwordResetResponse = await resetPassword(sendingData);
-        console.log(passwordResetResponse);
+        if (passwordResetResponse) {
+          toast.success("Password reset successfully");
+        }
       } catch (error) {
         console.log(error);
       }
