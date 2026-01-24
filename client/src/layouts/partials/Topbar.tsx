@@ -36,6 +36,11 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
     }
   };
 
+  const handleProfile = () => {
+    navigate("/profile");
+    setShowUserMenu(false);
+  };
+
   return (
     <header className="bg-[#1a2332] border-b border-gray-800 px-4 md:px-6 md:py-4 py-1 sticky top-0 z-20">
       <div className="flex items-center justify-between gap-4">
@@ -84,7 +89,7 @@ export default function Topbar({ onMenuClick }: TopbarProps) {
 
             {showUserMenu && (
               <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg py-2 z-50">
-                <button className="cursor-pointer w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 flex items-center gap-2 text-sm">
+                <button onClick={handleProfile} className="cursor-pointer w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-700 flex items-center gap-2 text-sm">
                   <User className="w-4 h-4" />
                   Profile
                 </button>

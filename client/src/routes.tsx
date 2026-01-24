@@ -16,6 +16,7 @@ import { createBrowserRouter } from "react-router";
 import NotFoundPage from "./pages/404";
 import AddAccount from "./pages/protected/AddAccount";
 import AccountList from "./pages/protected/AccountList";
+import Profile from "./pages/protected/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -41,18 +42,10 @@ export const router = createBrowserRouter([
           { path: "/add-ledger", element: <LedgerEntry /> },
           { path: "/edit-ledger/:ledgerId", element: <LedgerEntry /> },
           { path: "/transaction-entry/:id", element: <TransactionEntry /> },
-          {
-            path: "/ledger/:ledgerId/transactions",
-            element: <LedgerTransactions />,
-          },
-          {
-            path: "/add-account",
-            element: <AddAccount />,
-          },
-          {
-            path: "/account-list",
-            element: <AccountList />,
-          }
+          { path: "/ledger/:ledgerId/transactions", element: <LedgerTransactions /> },
+          { path: "/add-account", element: <AddAccount /> },
+          { path: "/account-list", element: <AccountList /> },
+          { path: "/profile", element: <Profile /> },
         ],
       },
     ],
