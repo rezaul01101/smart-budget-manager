@@ -10,7 +10,7 @@ const router = express.Router();
 router.post(
   "/reset-password",
   auth("user"),
-  validateRequest(UserValidation.resetPasswordZodSchema),
+  // validateRequest(UserValidation.resetPasswordZodSchema),
   UserController.resetPassword
 );
 export const UserRoute = router;

@@ -14,14 +14,14 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
   if (!result) {
     throw new ApiError(
       httpStatus.INTERNAL_SERVER_ERROR,
-      "Account not created. Please try again"
+      "Something went wrong, please try again"
     );
   }
 
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: "Account created successfully",
+    message: "Password reset successfully",
     data: result,
   });
 });
