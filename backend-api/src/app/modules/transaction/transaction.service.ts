@@ -50,6 +50,7 @@ const getAllTransactionsService = async (
     include: {
       ledger: true,
       subLedger: true,
+      account: true,
     },
     orderBy: {
       date: "desc",

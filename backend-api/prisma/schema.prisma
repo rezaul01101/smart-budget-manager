@@ -88,10 +88,12 @@ model SubLedger {
 
 // Transactions record the movement of money
 model Transaction {
-  id          Int      @id @default(autoincrement())
-  amount      Decimal
-  date        DateTime @default(now())
-  description String?
+  id           Int      @id @default(autoincrement())
+  beforeAmount Decimal @default(0)
+  amount       Decimal
+  afterAmount  Decimal @default(0)
+  date         DateTime @default(now())
+  description  String?
 
   // Relations
   accountId Int?

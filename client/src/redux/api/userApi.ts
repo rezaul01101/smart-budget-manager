@@ -8,9 +8,18 @@ export const userApi = baseApi.injectEndpoints({
         url: `${BaseUrl}/reset-password`,
         method: "POST",
         body: data,
-      })
+      }),
+      invalidatesTags: ["user"],
+    }),
+    updateProfile: build.mutation({
+      query: (data) => ({
+        url: `${BaseUrl}/update-profile`,
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["user"],
     }),
   }),
 });
 
-export const { usePasswordResetMutation } = userApi;
+export const { usePasswordResetMutation, useUpdateProfileMutation } = userApi;

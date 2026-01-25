@@ -13,4 +13,11 @@ router.post(
   // validateRequest(UserValidation.resetPasswordZodSchema),
   UserController.resetPassword
 );
+
+router.patch(
+  "/update-profile",
+  auth("user"),
+  // validateRequest(UserValidation.resetPasswordZodSchema),
+  UserController.updateProfile
+);
 export const UserRoute = router;

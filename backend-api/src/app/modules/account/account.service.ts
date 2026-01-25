@@ -10,7 +10,7 @@ const createAccountService = async (accountData: AccountType, user: User) => {
       userId: user.id,
       name: name,
       type: type,
-      balance: balance || 0,
+      balance: Number(balance) || 0,
       icon: icon,
       color: color,
     },
@@ -53,7 +53,7 @@ const getAllAccountsService = async (user: User) => {
 
     return {
       ...account,
-      balance: Number(account.balance) + transaction_amount, // 👈 separate calculated field
+      balance: Number(account.balance) + Number(transaction_amount), // 👈 separate calculated field
     };
   });
 

@@ -1035,7 +1035,9 @@ export type SubLedgerScalarFieldEnum = (typeof SubLedgerScalarFieldEnum)[keyof t
 
 export const TransactionScalarFieldEnum = {
   id: 'id',
+  beforeAmount: 'beforeAmount',
   amount: 'amount',
+  afterAmount: 'afterAmount',
   date: 'date',
   description: 'description',
   accountId: 'accountId',

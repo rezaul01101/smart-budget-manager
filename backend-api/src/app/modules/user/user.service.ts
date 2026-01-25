@@ -39,6 +39,23 @@ const resetPasswordService = async (data: ResetPasswordType, user: User) => {
   return result;
 };
 
+const updateProfileService = async (data: any, user: User) => {
+  const { name, email } = data;
+
+  const result = await prisma.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      name: name? name : user.name,
+      email: email? email : user.email,
+    },
+  });
+
+  return result;
+};
+
 export const UserService = {
   resetPasswordService,
+  updateProfileService
 };

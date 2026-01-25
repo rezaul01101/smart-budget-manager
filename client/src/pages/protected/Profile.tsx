@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
-import { usePasswordResetMutation } from "../../redux/api/userApi";
+import {
+  usePasswordResetMutation,
+  useUpdateProfileMutation,
+} from "../../redux/api/userApi";
 import toast from "react-hot-toast";
 
 interface EditField {
@@ -10,7 +13,10 @@ interface EditField {
 }
 
 function Profile() {
-  const [resetPassword,{isLoading:isResetPasswordLoading}] =  usePasswordResetMutation();
+  const [updateProfile, { isLoading: isUpdateProfileLoading }] =
+    useUpdateProfileMutation();
+  const [resetPassword, { isLoading: isResetPasswordLoading }] =
+    usePasswordResetMutation();
   const userInfo = useSelector((state: RootState) => state.user.userInfo);
   const [editField, setEditField] = useState<EditField>({
     name: false,
@@ -41,7 +47,15 @@ function Profile() {
     setEditedValues((prev) => ({ ...prev, [field]: userInfo?.[field] || "" }));
   };
 
-  const handleSave = (field: keyof EditField) => {
+  const handleSave = async (field: keyof EditField) => {
+    const data = {
+      name: editedValues.name,
+      email: editedValues.email,
+    };
+    const passwordResetResponse = await updateProfile(data);
+    if (passwordResetResponse) {
+      toast.success(`${field.charAt(0).toUpperCase() + field.slice(1)} updated successfully`);
+    }
     console.log(`Profile update - ${field}:`, editedValues[field]);
     setEditField((prev) => ({ ...prev, [field]: false }));
     if (field === "name") {
@@ -69,9 +83,6 @@ function Profile() {
           newPassword: passwordData.newPassword.toString(),
           confirmPassword: passwordData.confirmPassword.toString(),
         };
-
-        console.log(sendingData);
-
         const passwordResetResponse = await resetPassword(sendingData);
         if (passwordResetResponse) {
           toast.success("Password reset successfully");

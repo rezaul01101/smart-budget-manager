@@ -93,6 +93,12 @@ const getLedgersService = async (user: User, type: string) => {
       transactions: {
         select: {
           amount: true,
+          accountId: true,
+          account: {
+            select: {
+              name: true,
+            },
+          },
         },
       },
       subLedgers: {

@@ -32,6 +32,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         credentials: "include",
       }),
+      invalidatesTags: ["user"],
       async onQueryStarted(_, { queryFulfilled }) {
         const { data } = await queryFulfilled;
         storeAccessToken(data.data.accessToken);

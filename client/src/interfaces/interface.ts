@@ -20,6 +20,7 @@ export type TransactionType = {
   date: string;
   ledgerId: string | number;
   ledger?: LedgerType;
+  account: AccountType;
   subLedger?: {
     name: string;
     id: number;

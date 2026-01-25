@@ -1,5 +1,7 @@
 export type TransactionType = {
   amount: number;
+  beforeAmount: number;
+  afterAmount: number;
   date: string;
   ledgerId: number;
   description?: string;
