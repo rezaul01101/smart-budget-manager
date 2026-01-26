@@ -19,6 +19,12 @@ router.get(
   TransactionController.getAllTransactions
 );
 
+router.delete(
+  "/delete/:id",
+  auth("user"),
+  TransactionController.deleteTransaction
+);
+
 
 
 export const TransactionRoute = router;

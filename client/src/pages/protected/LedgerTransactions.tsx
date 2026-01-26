@@ -4,17 +4,25 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { useTransactionListQuery } from "../../redux/api/transactionApi";
+import {
+  useDeleteTransactionMutation,
+  useTransactionListQuery,
+} from "../../redux/api/transactionApi";
 import { ArrowLeft } from "lucide-react";
 import * as LucideIcons from "lucide-react";
 import type { TransactionType } from "../../interfaces/interface";
 import { useState } from "react";
 import DeleteModal from "../../components/DeleteModal";
 import { useDeleteLedgerMutation } from "../../redux/api/ledgerApi";
-
 import { motion } from "framer-motion";
+import GlobalDeleteModal from "../../components/modal/GlobalDeleteModal";
+import toast from "react-hot-toast";
 
 const LedgerTransactions = () => {
+  const [transactionDeletableId, setTransactionDeletableId] = useState<
+    string | number | null
+  >(null);
+  const [globalDeleteModalOpen, setGlobalDeleteModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -23,6 +31,7 @@ const LedgerTransactions = () => {
   //   const categoryType = searchParams.get("type") || "expense";
   const { ledgerId } = useParams<{ ledgerId: string }>();
   const [deleteLedger] = useDeleteLedgerMutation();
+  const [deleteTransaction] = useDeleteTransactionMutation();
 
   const {
     data: transactions,
@@ -38,6 +47,19 @@ const LedgerTransactions = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleGlobalDelete = async () => {
+    setGlobalDeleteModalOpen(false);
+    try {
+      toast.promise(deleteTransaction(Number(transactionDeletableId)), {
+        loading: "Deleting...",
+        success: <b>Transaction deleted!</b>,
+        error: <b>Could not delete.</b>,
+      });
+    } catch (error) {
+      toast.error("Failed to delete transaction");
     }
   };
 
@@ -97,7 +119,10 @@ const LedgerTransactions = () => {
                 className: string;
               }>;
               return (
-                <div className="relative overflow-hidden rounded-xl">
+                <div
+                  className="relative overflow-hidden rounded-xl"
+                  key={transaction.id}
+                >
                   {/* ACTION BUTTONS (Behind card) */}
                   <div className="absolute right-0 top-0 h-full flex z-0">
                     <button
@@ -107,7 +132,10 @@ const LedgerTransactions = () => {
                       Edit
                     </button>
                     <button
-                      onClick={() => console.log("Delete", transaction.id)}
+                      onClick={() => {
+                        setGlobalDeleteModalOpen(true);
+                        setTransactionDeletableId(transaction.id);
+                      }}
                       className="w-20 bg-red-500 text-white text-sm"
                     >
                       Delete
@@ -178,6 +206,12 @@ const LedgerTransactions = () => {
         <DeleteModal
           handleDelete={handleDelete}
           onClose={() => setDeleteModalOpen(false)}
+        />
+      )}
+      {globalDeleteModalOpen && (
+        <GlobalDeleteModal
+          handleGlobalDelete={handleGlobalDelete}
+          onClose={() => setGlobalDeleteModalOpen(false)}
         />
       )}
     </>

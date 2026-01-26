@@ -45,7 +45,27 @@ const getAllTransactions = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const deleteTransaction = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user;
+  const { id } = req.params;
+  const result = await TransactionService.deleteTransactionService(user, id);
+  if (!result) {
+    throw new ApiError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      "Transaction not deleted. Please try again"
+    );
+  }
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Transaction deleted successfully",
+    data: result,
+  });
+});
+
 export const TransactionController = {
   createTransaction,
-  getAllTransactions
+  getAllTransactions,
+  deleteTransaction
 };

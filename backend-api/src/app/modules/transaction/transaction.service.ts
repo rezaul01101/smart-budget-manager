@@ -60,7 +60,22 @@ const getAllTransactionsService = async (
   return result;
 };
 
+const deleteTransactionService = async (
+  user: User,
+  id: string
+) => {
+  const result = await prisma.transaction.delete({
+    where: {
+      id: Number(id),
+      userId: user.id,
+    },
+  });
+
+  return result;
+};
+
 export const TransactionService = {
   createTransactionService,
   getAllTransactionsService,
+  deleteTransactionService
 };

@@ -26,7 +26,14 @@ export const transactionApi = baseApi.injectEndpoints({
       }),
       providesTags: ["transaction"],
     }),
+    deleteTransaction: build.mutation({
+      query: (id: number) => ({
+        url: `${BaseUrl}/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["ledger", "transaction", "account"],
+    }),
   }),
 });
 
-export const { useCreateTransactionMutation, useTransactionListQuery } = transactionApi;
+export const { useCreateTransactionMutation, useTransactionListQuery,useDeleteTransactionMutation } = transactionApi;
