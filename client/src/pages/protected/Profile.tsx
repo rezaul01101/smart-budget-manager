@@ -14,7 +14,8 @@ interface EditField {
 
 function Profile() {
   const [updateProfile] = useUpdateProfileMutation();
-  const [resetPassword] = usePasswordResetMutation();
+  const [resetPassword, { isLoading: isResetPasswordLoading }] =
+    usePasswordResetMutation();
   const userInfo = useSelector((state: RootState) => state.user.userInfo);
   const [editField, setEditField] = useState<EditField>({
     name: false,
@@ -52,7 +53,9 @@ function Profile() {
     };
     const passwordResetResponse = await updateProfile(data);
     if (passwordResetResponse) {
-      toast.success(`${field.charAt(0).toUpperCase() + field.slice(1)} updated successfully`);
+      toast.success(
+        `${field.charAt(0).toUpperCase() + field.slice(1)} updated successfully`,
+      );
     }
     console.log(`Profile update - ${field}:`, editedValues[field]);
     setEditField((prev) => ({ ...prev, [field]: false }));

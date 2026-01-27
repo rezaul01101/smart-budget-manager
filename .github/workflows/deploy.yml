@@ -1,0 +1,40 @@
+name: Deploy node js application to vps
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+
+            echo "🚀 Deploy started..."
+
+            cd /root/www/smart-budget-manager
+            git pull origin main
+
+            echo "📦 Deploying backend-api..."
+            cd backend-api
+            docker compose down
+            docker compose up -d --build
+
+            echo "📦 Deploying client..."
+            cd ../client
+            docker compose down
+            docker compose up -d --build
+
+            echo "✅ Deployment completed successfully!"
