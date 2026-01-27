@@ -13,10 +13,8 @@ interface EditField {
 }
 
 function Profile() {
-  const [updateProfile, { isLoading: isUpdateProfileLoading }] =
-    useUpdateProfileMutation();
-  const [resetPassword, { isLoading: isResetPasswordLoading }] =
-    usePasswordResetMutation();
+  const [updateProfile] = useUpdateProfileMutation();
+  const [resetPassword] = usePasswordResetMutation();
   const userInfo = useSelector((state: RootState) => state.user.userInfo);
   const [editField, setEditField] = useState<EditField>({
     name: false,
