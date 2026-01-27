@@ -142,7 +142,7 @@ export default function Contact() {
               href="mailto:hello@Smart Budget Manager.com"
               className="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
             >
-              hello@Smart Budget Manager.com
+              rezaul01101@gmail.com
             </a>
           </div>
 
@@ -155,7 +155,7 @@ export default function Contact() {
               href="tel:+1234567890"
               className="text-gray-600 dark:text-gray-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
             >
-              +1 (234) 567-890
+              +8801789812914
             </a>
           </div>
 
