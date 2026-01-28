@@ -76,7 +76,7 @@ const LedgerTransactions = () => {
                 <ArrowLeft className="w-6 h-6" />
               </button>
               <div>
-                <h2 className="text-xl md:text-2xl font-bold text-white">
+                <h2 className="text-sm md:text-2xl font-semibold text-white">
                   {ledgerName}
                 </h2>
                 <p className="text-sm text-gray-400">Transaction History</p>
@@ -161,7 +161,7 @@ const LedgerTransactions = () => {
                             {transaction?.date.split("T")[0]}
                           </p>
 
-                          <h4 className="text-white font-semibold text-lg">
+                          <h4 className="text-white font-semibold text-sm">
                             {transaction?.ledger?.name}
                             {transaction?.subLedger
                               ? `-(${transaction?.subLedger?.name})`
@@ -177,14 +177,14 @@ const LedgerTransactions = () => {
                       {/* RIGHT SIDE */}
                       <div className="flex flex-col items-end justify-between h-full text-right">
                         <div className="text-xs text-gray-400">
-                          <div className="text-white text-sm font-medium">
+                          <div className="text-white text-sm font-semibold capitalize">
                             {transaction?.account?.name}
                           </div>
                         </div>
 
                         <div className="my-1">
                           <p
-                            className={`font-bold text-xl ${
+                            className={`font-semibold text-sm ${
                               transaction?.ledger?.type === "INCOME"
                                 ? "text-green-500"
                                 : "text-orange-500"
