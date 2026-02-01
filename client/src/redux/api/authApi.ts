@@ -19,6 +19,31 @@ export const authApi = baseApi.injectEndpoints({
         credentials: "include", 
       }),
     }),
+    forgotPassword: build.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/forgot-password`,
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    verifyOtp: build.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/otp-verify`,
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+    }),
+    updatePassword: build.mutation({
+      query: (data) => ({
+        url: `${AUTH_URL}/update-password`,
+        method: "POST",
+        body: data,
+        credentials: "include",
+      }),
+      invalidatesTags: ["user"],
+    }),
     userRegister: build.mutation({
       query: (registerData) => ({
         url: `${AUTH_URL}/register`,
@@ -45,5 +70,8 @@ export const {
   useUserLoginMutation,
   useRefreshTokenMutation,
   useUserLogoutMutation,
-  useUserRegisterMutation
+  useUserRegisterMutation,
+  useForgotPasswordMutation,
+  useVerifyOtpMutation,
+  useUpdatePasswordMutation
 } = authApi;
