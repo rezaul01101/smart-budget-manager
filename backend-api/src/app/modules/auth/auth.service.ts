@@ -12,6 +12,7 @@ import { createToken } from "./auth.utils";
 import { prisma } from "../../../shared/prisma";
 import { LedgerType, User } from "../../../generated/prisma/client";
 import { email } from "zod";
+import { Resend } from "resend";
 
 const loginUser = async (payload: ILoginUser) => {
   const { email, password } = payload;
@@ -38,13 +39,13 @@ const loginUser = async (payload: ILoginUser) => {
   const accessToken = createToken(
     { email: email, id: isUserExist.id, name: isUserExist?.name },
     config.jwt.secret as string,
-    config.jwt.expires_in as string
+    config.jwt.expires_in as string,
   );
 
   const refreshToken = createToken(
     { email: email, id: isUserExist?.id, name: isUserExist?.name },
     config.jwt.refresh_secret as string,
-    config.jwt.refresh_expires_in as string
+    config.jwt.refresh_expires_in as string,
   );
 
   return {
@@ -65,7 +66,7 @@ const insertIntoDB = async (data: User): Promise<User> => {
     if (existUser) {
       throw new ApiError(
         httpStatus.BAD_REQUEST,
-        "Already exists this user. Please try again other email"
+        "Already exists this user. Please try again other email",
       );
     }
   }
@@ -73,7 +74,7 @@ const insertIntoDB = async (data: User): Promise<User> => {
   //generate plan password to encrypt password
   const encodedPassword = await bcrypt.hash(
     password,
-    Number(config.bycrypt_salt_rounds)
+    Number(config.bycrypt_salt_rounds),
   );
 
   //user create
@@ -101,7 +102,7 @@ const insertIntoDB = async (data: User): Promise<User> => {
       },
       {
         name: "Transport",
-        type:LedgerType.EXPENSE,
+        type: LedgerType.EXPENSE,
         userId: Number(result.id),
         icon: "Bus",
         color: "blue",
@@ -172,11 +173,20 @@ const forgotPassword = async (email: string) => {
   if (!otpcreate) {
     throw new ApiError(
       httpStatus.INTERNAL_SERVER_ERROR,
-      "Something went wrong, please try again"
+      "Something went wrong, please try again",
     );
   }
 
   // send otp email or sms
+
+  const resend = new Resend(config?.email?.resend_api_key);
+
+  await resend.emails.send({
+    from: `Budget Manager <${config?.email?.from}>`,
+    to: [email],
+    subject: "Budget Manager - OTP Verification",
+    html: `<p>Your OTP is: ${otp}</p>`,
+  });
 
   if (otpcreate) {
     return true;
@@ -247,13 +257,13 @@ const updatePassword = async (data: UpdatePassword) => {
   if (!otpRecord) {
     throw new ApiError(
       httpStatus.BAD_REQUEST,
-      "Please provide valid email or otp"
+      "Please provide valid email or otp",
     );
   }
   //generate password to encrypt password
   const encodedPassword = await bcrypt.hash(
     password,
-    Number(config.bycrypt_salt_rounds)
+    Number(config.bycrypt_salt_rounds),
   );
 
   //password update
