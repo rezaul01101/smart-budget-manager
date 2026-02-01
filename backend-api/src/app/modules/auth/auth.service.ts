@@ -152,7 +152,7 @@ const forgotPassword = async (email: string) => {
     },
   });
   if (!existEmail) {
-    throw new ApiError(httpStatus.BAD_REQUEST, "Please provide valid email");
+    throw new ApiError(httpStatus.NOT_FOUND, "Please provide valid email");
   }
 
   // delete old OTPs
@@ -179,14 +179,14 @@ const forgotPassword = async (email: string) => {
 
   // send otp email or sms
 
-  const resend = new Resend(config?.email?.resend_api_key);
+  // const resend = new Resend(config?.email?.resend_api_key);
 
-  await resend.emails.send({
-    from: `Budget Manager <${config?.email?.from}>`,
-    to: [email],
-    subject: "Budget Manager - OTP Verification",
-    html: `<p>Your OTP is: ${otp}</p>`,
-  });
+  // await resend.emails.send({
+  //   from: `Budget Manager <${config?.email?.from}>`,
+  //   to: [email],
+  //   subject: "Budget Manager - OTP Verification",
+  //   html: `<p>Your OTP is: ${otp}</p>`,
+  // });
 
   if (otpcreate) {
     return true;
