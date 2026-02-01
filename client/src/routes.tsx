@@ -17,6 +17,7 @@ import NotFoundPage from "./pages/404";
 import AddAccount from "./pages/protected/AddAccount";
 import AccountList from "./pages/protected/AccountList";
 import Profile from "./pages/protected/Profile";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
+      { path: "/forgot-password", element: <ForgotPassword /> },
     ],
   },
 

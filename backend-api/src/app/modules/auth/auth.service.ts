@@ -179,14 +179,42 @@ const forgotPassword = async (email: string) => {
 
   // send otp email or sms
 
-  // const resend = new Resend(config?.email?.resend_api_key);
+  const resend = new Resend(config?.email?.resend_api_key);
 
-  // await resend.emails.send({
-  //   from: `Budget Manager <${config?.email?.from}>`,
-  //   to: [email],
-  //   subject: "Budget Manager - OTP Verification",
-  //   html: `<p>Your OTP is: ${otp}</p>`,
-  // });
+  await resend.emails.send({
+    from: `Budget Manager <${config?.email?.from}>`,
+    to: [email],
+    subject: "Budget Manager - OTP Verification",
+    html: `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 8px; background-color: #ffffff;">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h2 style="color: #111827; margin: 0;">Budget Manager</h2>
+        <p style="color: #6b7280; margin: 5px 0 0 0; font-size: 14px;">Your trusted financial companion</p>
+      </div>
+      
+      <div style="background-color: #f9fafb; padding: 30px; border-radius: 8px; text-align: center;">
+        <h3 style="color: #111827; margin: 0 0 15px 0; font-size: 24px; font-weight: 600;">Verify Your Email Address</h3>
+        <p style="color: #4b5563; margin: 0 0 25px 0; font-size: 16px; line-height: 1.6;">
+          We received a request to reset the password for your account. Please use the code below to verify your identity.
+        </p>
+        
+        <div style="display: inline-block; background-color: #ffffff; padding: 15px 30px; border-radius: 6px; border: 1px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+          <span style="font-size: 32px; font-weight: 700; color: #111827; letter-spacing: 4px;">${otp}</span>
+        </div>
+        
+        <p style="color: #6b7280; margin: 25px 0 0 0; font-size: 14px;">
+          This code will expire in <strong>5 minutes</strong>
+        </p>
+      </div>
+      
+      <div style="margin-top: 30px; text-align: center;">
+        <p style="color: #9ca3af; margin: 0; font-size: 12px;">
+          If you didn't request this, please ignore this email.
+        </p>
+      </div>
+    </div>
+    `,
+  });
 
   if (otpcreate) {
     return true;
@@ -255,10 +283,7 @@ const updatePassword = async (data: UpdatePassword) => {
   });
 
   if (!otpRecord) {
-    throw new ApiError(
-      httpStatus.BAD_REQUEST,
-      "Please provide valid email or otp",
-    );
+    throw new ApiError(httpStatus.BAD_REQUEST, "Please provide valid data");
   }
   //generate password to encrypt password
   const encodedPassword = await bcrypt.hash(
