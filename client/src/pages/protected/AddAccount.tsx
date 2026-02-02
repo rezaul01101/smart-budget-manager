@@ -6,7 +6,11 @@ import IconColorModal from "../../components/modal/IconColorModal";
 import * as LucideIcons from "lucide-react";
 import type { LucideProps } from "lucide-react";
 import type { ElementType } from "react";
-import { useCreateAccountMutation, useSingleAccountQuery, useUpdateAccountMutation } from "../../redux/api/accountApi";
+import {
+  useCreateAccountMutation,
+  useSingleAccountQuery,
+  useUpdateAccountMutation,
+} from "../../redux/api/accountApi";
 
 const AddAccount = () => {
   const [openIconColorModal, setOpenIconColorModal] = useState(false);
@@ -94,8 +98,6 @@ const AddAccount = () => {
     setModalType("color");
   };
 
-
-
   const IconComponent = LucideIcons[
     formData.icon as keyof typeof LucideIcons
   ] as ElementType<LucideProps>;
@@ -145,17 +147,21 @@ const AddAccount = () => {
                   placeholder="e.g., Bank Account, Cash, Saving Account etc."
                 />
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
                   Initial Balance
                 </label>
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   required
                   value={formData.balance}
                   onChange={(e) =>
-                    setFormData({ ...formData, balance: Number(e.target.value) })
+                    setFormData({
+                      ...formData,
+                      balance: Number(e.target.value),
+                    })
                   }
                   className="w-full bg-gray-800/50 text-white px-4 py-3 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
                   placeholder="e.g., 1000"
@@ -169,9 +175,7 @@ const AddAccount = () => {
                 <div className="grid grid-cols-3 gap-4">
                   <button
                     type="button"
-                    onClick={() =>
-                      setFormData({ ...formData, type: "BANK" })
-                    }
+                    onClick={() => setFormData({ ...formData, type: "BANK" })}
                     className={`p-2 rounded-lg border-1 transition-all cursor-pointer ${
                       formData.type === "BANK"
                         ? "border-orange-500 bg-orange-500/10"
@@ -182,9 +186,7 @@ const AddAccount = () => {
                   </button>
                   <button
                     type="button"
-                    onClick={() =>
-                      setFormData({ ...formData, type: "CASH" })
-                    }
+                    onClick={() => setFormData({ ...formData, type: "CASH" })}
                     className={`p-2 rounded-lg border-1 transition-all cursor-pointer ${
                       formData.type === "CASH"
                         ? "border-orange-500 bg-orange-500/10"
@@ -195,7 +197,9 @@ const AddAccount = () => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setFormData({ ...formData, type: "SAVINGS" })}
+                    onClick={() =>
+                      setFormData({ ...formData, type: "SAVINGS" })
+                    }
                     className={`p-2 rounded-lg border-1 transition-all cursor-pointer ${
                       formData.type === "SAVINGS"
                         ? "border-green-500 bg-green-500/10"
@@ -238,7 +242,7 @@ const AddAccount = () => {
                   </button>
                 </div>
               </div>
-             
+
               <div className="flex gap-4 pt-4">
                 <button
                   type="button"
@@ -256,8 +260,8 @@ const AddAccount = () => {
                       ? "Updating..."
                       : "Update"
                     : isCreating
-                    ? "Creating..."
-                    : "Create"}
+                      ? "Creating..."
+                      : "Create"}
                 </button>
               </div>
             </form>
