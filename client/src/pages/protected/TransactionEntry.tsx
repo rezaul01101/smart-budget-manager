@@ -99,7 +99,8 @@ const TransactionEntry = () => {
                     ৳
                   </span>
                   <input
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
                     step="0.01"
                     required
                     value={formData.amount}
