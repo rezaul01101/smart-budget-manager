@@ -1,4 +1,4 @@
-import { ChevronDown} from "lucide-react";
+import {ChevronDown } from "lucide-react";
 
 import { useState } from "react";
 import LedgerCard from "../../components/LedgerCard";
@@ -9,11 +9,20 @@ const Dashboard = () => {
   // const [selectedPeriod, setSelectedPeriod] = useState("Monthly");
   const [expenseOpen, setExpenseOpen] = useState(true);
   const [incomeOpen, setIncomeOpen] = useState(true);
-  const [totalIncomeAmountTransactions, setTotalIncomeAmountTransactions] = useState(0);
-  const [totalExpenseAmountTransactions, setTotalExpenseAmountTransactions] = useState(0);
+  const [totalIncomeAmountTransactions, setTotalIncomeAmountTransactions] =
+    useState(0);
+  const [totalExpenseAmountTransactions, setTotalExpenseAmountTransactions] =
+    useState(0);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-1 gap-3 md:gap-4">
+      <div className="flex justify-between">
+        <div className="text-white flex item-center justify-center gap-2">
+          <h4 className="text-white">February</h4>
+          <ChevronDown className="w-6 h-6" />
+        </div>
+        <p className="text-white">Wed 01-02-2026</p>
+      </div>
       <div className="space-y-6 col-span-2">
         <div className="bg-[#1a2332] rounded-lg p-3 md:p-6 border border-gray-800">
           <button
@@ -34,7 +43,14 @@ const Dashboard = () => {
               }`}
             />
           </button>
-          {expenseOpen && <LedgerCard type="expense" setTotalExpenseAmountTransactions={setTotalExpenseAmountTransactions} />}
+          {expenseOpen && (
+            <LedgerCard
+              type="expense"
+              setTotalExpenseAmountTransactions={
+                setTotalExpenseAmountTransactions
+              }
+            />
+          )}
         </div>
 
         <div className="bg-[#1a2332] rounded-lg p-4 md:p-6 border border-gray-800">
@@ -56,7 +72,14 @@ const Dashboard = () => {
               }`}
             />
           </button>
-          {incomeOpen && <LedgerCard type="income" setTotalIncomeAmountTransactions={setTotalIncomeAmountTransactions} />}
+          {incomeOpen && (
+            <LedgerCard
+              type="income"
+              setTotalIncomeAmountTransactions={
+                setTotalIncomeAmountTransactions
+              }
+            />
+          )}
         </div>
       </div>
       {/* <div>

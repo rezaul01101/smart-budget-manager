@@ -80,8 +80,24 @@ const updateLedgerService = async (
 
   return result;
 };
-const getLedgersService = async (user: User, type: string) => {
+const getLedgersService = async (user: User, type: string, month: string) => {
   const { id } = user;
+
+  // Parse month parameter (format: MM-YY, e.g., "02-26" for February 2026)
+  let startDate: Date | undefined;
+  let endDate: Date | undefined;
+
+  if (month) {
+    const [monthStr, yearStr] = month.split("-");
+    const monthNum = parseInt(monthStr, 10);
+    const yearNum = 2000 + parseInt(yearStr, 10); // Convert "26" to 2026
+
+    // Start date: first day of the month at 00:00:00
+    startDate = new Date(yearNum, monthNum - 1, 1, 0, 0, 0);
+
+    // End date: last day of the month at 23:59:59
+    endDate = new Date(yearNum, monthNum, 0, 23, 59, 59);
+  }
 
   const ledgers = await prisma.ledger.findMany({
     where: {
@@ -91,6 +107,14 @@ const getLedgersService = async (user: User, type: string) => {
     },
     include: {
       transactions: {
+        where: month
+          ? {
+              date: {
+                gte: startDate,
+                lte: endDate,
+              },
+            }
+          : undefined,
         select: {
           amount: true,
           accountId: true,
