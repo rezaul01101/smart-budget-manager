@@ -49,8 +49,8 @@ const updateLedger = catchAsync(async (req: Request, res: Response) => {
 });
 const getLedgers = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;
-  const { type } = req.query;
-  const result = await LedgerService.getLedgersService(user, type as string);
+  const { type,month } = req.query;
+  const result = await LedgerService.getLedgersService(user, type as string , month as string);
   if (!result) {
     throw new ApiError(httpStatus.NOT_FOUND, "Ledger not found");
   }
