@@ -66,6 +66,13 @@ const getSingleAccountService = async (id: number, user: User) => {
       id: id,
       userId: user.id,
     },
+    include: {
+      transactions: {
+        include: {
+          ledger: true, // needed for INCOME / EXPENSE
+        },
+      },
+    },
   });
 
   return result;

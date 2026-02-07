@@ -8,24 +8,29 @@ import type { LucideProps } from "lucide-react";
 import type { ElementType } from "react";
 import {
   useCreateAccountMutation,
+  useDeleteAccountMutation,
   useSingleAccountQuery,
   useUpdateAccountMutation,
 } from "../../redux/api/accountApi";
+import GlobalDeleteModal from "../../components/modal/GlobalDeleteModal";
+import toast from "react-hot-toast";
 
 const AddAccount = () => {
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [openIconColorModal, setOpenIconColorModal] = useState(false);
   const [modalType, setModalType] = useState("icon");
   const hasInitialized = useRef(false);
 
   const navigate = useNavigate();
-  const { ledgerId } = useParams();
-  const isEditMode = Boolean(ledgerId);
+  const { accountId } = useParams();
+  const isEditMode = Boolean(accountId);
 
   //Api call
   const [createAccount, { isLoading: isCreating, error }] =
     useCreateAccountMutation();
 
   const [updateAccount, { isLoading: isUpdating }] = useUpdateAccountMutation();
+  const [deleteAccount] = useDeleteAccountMutation();
 
   const [formData, setFormData] = useState<AccountFormData>({
     name: "",
@@ -36,18 +41,17 @@ const AddAccount = () => {
     description: "",
   });
 
-  const { data: account } = useSingleAccountQuery(ledgerId!, {
+  const { data: account } = useSingleAccountQuery(accountId!, {
     skip: !isEditMode,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
     try {
       let res;
       if (isEditMode) {
         res = await updateAccount({
-          id: Number(ledgerId),
+          id: Number(accountId),
           ...formData,
         }).unwrap();
       } else {
@@ -96,6 +100,20 @@ const AddAccount = () => {
   const handleColorClick = () => {
     setOpenIconColorModal(true);
     setModalType("color");
+  };
+
+  const handleDeleteAccount = () => {
+    setDeleteModalOpen(false);
+    try {
+      toast.promise(deleteAccount(Number(accountId)), {
+        loading: "Deleting...",
+        success: <b>Account deleted!</b>,
+        error: <b>Could not delete.</b>,
+      });
+      navigate(-1);
+    } catch (error) {
+      toast.error("Failed to delete account");
+    }
   };
 
   const IconComponent = LucideIcons[
@@ -195,7 +213,7 @@ const AddAccount = () => {
                   >
                     <p className="text-white">Cash</p>
                   </button>
-                  <button
+                  {/* <button
                     type="button"
                     onClick={() =>
                       setFormData({ ...formData, type: "SAVINGS" })
@@ -207,7 +225,7 @@ const AddAccount = () => {
                     }`}
                   >
                     <p className="text-white">Savings</p>
-                  </button>
+                  </button> */}
                 </div>
               </div>
 
@@ -264,10 +282,27 @@ const AddAccount = () => {
                       : "Create"}
                 </button>
               </div>
+              <div className="flex gap-4 pt-4">
+                {isEditMode && (
+                  <button
+                    type="button"
+                    onClick={() => setDeleteModalOpen(true)}
+                    className="cursor-pointer flex-1 px-4 py-2 rounded-lg border border-red-700 text-red-300 hover:bg-red-800 transition-colors"
+                  >
+                    Delete Account
+                  </button>
+                )}
+              </div>
             </form>
           </div>
         </div>
       </div>
+      {deleteModalOpen && (
+        <GlobalDeleteModal
+          handleGlobalDelete={handleDeleteAccount}
+          onClose={() => setDeleteModalOpen(false)}
+        />
+      )}
     </>
   );
 };

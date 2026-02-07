@@ -44,7 +44,60 @@ const getAllAccounts = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getSingleAccount = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user;
+  const id = req.params.id as unknown as number;
+  console.log(id);
+  const result = await AccountService.getSingleAccountService(Number(id), user);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Account not found");
+  }
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Account retrieved successfully",
+    data: result,
+  });
+});
+
+const updateAccount = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user;
+  const id = req.params.id as unknown as number;
+  const { ...accountData } = req.body;
+  const result = await AccountService.updateAccountService(Number(id), accountData, user);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Account not found");
+  }
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Account updated successfully",
+    data: result,
+  });
+});
+
+const deleteAccount = catchAsync(async (req: Request, res: Response) => {
+  const user = req.user;
+  const id = req.params.id as unknown as number;
+  const result = await AccountService.deleteAccountService(Number(id), user);
+  if (!result) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Account not found");
+  }
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Account deleted successfully",
+    data: result,
+  });
+});
+
 export const AccountController = {
   createAccount,
-  getAllAccounts
+  getAllAccounts,
+  getSingleAccount,
+  updateAccount,
+  deleteAccount
 };

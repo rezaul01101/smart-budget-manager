@@ -3,6 +3,7 @@ import * as LucideIcons from "lucide-react";
 import {
   ledgerColorClasses
 } from "../constants/constants";
+import { Link } from "react-router";
 
 const Card = ({ item }: { item?: any }) => {
   type IconName = keyof typeof LucideIcons;
@@ -16,7 +17,7 @@ const Card = ({ item }: { item?: any }) => {
       <div
         className={`rounded-xl py-2 px-3 md:p-6 border ${colorClass} transition-all hover:scale-105  cursor-pointer relative`}
       >
-        <div className="flex flex-col items-center justify-center gap-2 md:gap-4">
+        <Link to={`/account/${item?.id}`} className="flex flex-col items-center justify-center gap-2 md:gap-4">
           <div
             className={`w-8 md:w-16 h-8 md:h-16 rounded-full flex items-center justify-center ${
               item?.color?.includes("yellow")
@@ -46,7 +47,7 @@ const Card = ({ item }: { item?: any }) => {
           <p className="text-white font-semibold text-sm md:text-xl">
             ৳{item?.balance > 0 ? item?.balance?.toLocaleString() : 0}
           </p>
-        </div>
+        </Link>
       </div>
     </>
   );
