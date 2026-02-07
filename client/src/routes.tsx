@@ -46,6 +46,7 @@ export const router = createBrowserRouter([
           { path: "/transaction-entry/:id", element: <TransactionEntry /> },
           { path: "/ledger/:ledgerId/transactions", element: <LedgerTransactions /> },
           { path: "/add-account", element: <AddAccount /> },
+          { path: "/account/:accountId", element: <AddAccount /> },
           { path: "/account-list", element: <AccountList /> },
           { path: "/profile", element: <Profile /> },
         ],

@@ -12,12 +12,12 @@ export const accountApi = baseApi.injectEndpoints({
       invalidatesTags: ['account']
     }),
     updateAccount: build.mutation({
-      query: (data) => ({
-        url: `${BaseUrl}/update`,
-        method: "POST",
+      query: ({id, ...data}) => ({
+        url: `${BaseUrl}/${id}`,
+        method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ['account']
+      invalidatesTags: ['account', 'transaction']
     }),
     singleAccount: build.query({
       query: (id) => ({
@@ -32,7 +32,14 @@ export const accountApi = baseApi.injectEndpoints({
       }),
       providesTags: ['account']
     }),
+    deleteAccount: build.mutation({
+      query: (id) => ({
+        url: `${BaseUrl}/${Number(id)}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ['account', 'transaction']
+    }),
   }),
 });
 
-export const { useCreateAccountMutation, useAccountListQuery,useUpdateAccountMutation,useSingleAccountQuery } = accountApi;
+export const { useCreateAccountMutation, useAccountListQuery,useUpdateAccountMutation,useSingleAccountQuery,useDeleteAccountMutation, } = accountApi;

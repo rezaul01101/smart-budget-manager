@@ -18,6 +18,22 @@ router.get(
   auth("user"),
   AccountController.getAllAccounts
 );
+router.get(
+  "/:id",
+  auth("user"),
+  AccountController.getSingleAccount
+);
+router.patch(
+  "/:id",
+  auth("user"),
+  validateRequest(AccountValidation.updateAccountZodSchema),
+  AccountController.updateAccount
+);
+router.delete(
+  "/:id",
+  auth("user"),
+  AccountController.deleteAccount
+);
 
 
 
