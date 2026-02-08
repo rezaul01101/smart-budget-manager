@@ -1,12 +1,10 @@
-import {ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import { useState } from "react";
 import LedgerCard from "../../components/LedgerCard";
-
-// const periods = ["Monthly", "Weekly", "Yearly"];
+import MonthYearPickerModal from "../../components/modal/MonthYearPickerModal";
 
 const Dashboard = () => {
-  // const [selectedPeriod, setSelectedPeriod] = useState("Monthly");
   const [expenseOpen, setExpenseOpen] = useState(true);
   const [incomeOpen, setIncomeOpen] = useState(true);
   const [totalIncomeAmountTransactions, setTotalIncomeAmountTransactions] =
@@ -14,14 +12,47 @@ const Dashboard = () => {
   const [totalExpenseAmountTransactions, setTotalExpenseAmountTransactions] =
     useState(0);
 
+  // Month/Year picker state
+  const [openMonthYearModal, setOpenMonthYearModal] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const monthQuery = `month=${new Date().toLocaleDateString("en-US", {
+    month: "2-digit",
+    year: "numeric",
+  })}`;
+  const [selectedMonthYear, setSelectedMonthYear] = useState(monthQuery);
+
+  const formatDate = () => {
+    const date = new Date(selectedYear, selectedMonth, 1);
+    const options: Intl.DateTimeFormatOptions = {
+      month: "long",
+      year: "numeric",
+    };
+    return date.toLocaleDateString("en-US", options);
+  };
+
+  const filterByMonthYear = () => {
+    setOpenMonthYearModal(false);
+    const date = new Date(selectedYear, selectedMonth, 1);
+    const forDb: Intl.DateTimeFormatOptions = {
+      month: "2-digit",
+      year: "numeric",
+    };
+    const query =  `month=${date.toLocaleDateString("en-US", forDb)}`;
+    setSelectedMonthYear(query);
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-1 gap-3 md:gap-4">
-      <div className="flex justify-between">
-        <div className="text-white flex item-center justify-center gap-2">
-          <h4 className="text-white">February</h4>
-          <ChevronDown className="w-6 h-6" />
-        </div>
-        <p className="text-white">Wed 01-02-2026</p>
+      <div className="flex justify-center items-center w-full">
+        <button
+          onClick={() => setOpenMonthYearModal(true)}
+          className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"
+        >
+          <h4 className="text-white font-semibold">{formatDate()}</h4>
+          <ChevronDown className="w-5 h-5 text-gray-400" />
+        </button>
+        {/* <p className="text-white text-sm">{formatDate()}</p> */}
       </div>
       <div className="space-y-6 col-span-2">
         <div className="bg-[#1a2332] rounded-lg p-3 md:p-6 border border-gray-800">
@@ -45,7 +76,7 @@ const Dashboard = () => {
           </button>
           {expenseOpen && (
             <LedgerCard
-              type="expense"
+              query={`type=expense&${selectedMonthYear}`}
               setTotalExpenseAmountTransactions={
                 setTotalExpenseAmountTransactions
               }
@@ -74,7 +105,7 @@ const Dashboard = () => {
           </button>
           {incomeOpen && (
             <LedgerCard
-              type="income"
+              query={`type=income&${selectedMonthYear}`}
               setTotalIncomeAmountTransactions={
                 setTotalIncomeAmountTransactions
               }
@@ -85,6 +116,16 @@ const Dashboard = () => {
       {/* <div>
         <ScheduleXCalendar calendarApp={calendar} />
       </div> */}
+
+      <MonthYearPickerModal
+        isOpen={openMonthYearModal}
+        selectedMonth={selectedMonth}
+        selectedYear={selectedYear}
+        onMonthChange={setSelectedMonth}
+        onYearChange={setSelectedYear}
+        onClose={() => setOpenMonthYearModal(false)}
+        onApply={filterByMonthYear}
+      />
     </div>
   );
 };

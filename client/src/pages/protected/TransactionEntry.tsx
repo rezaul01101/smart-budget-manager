@@ -5,6 +5,7 @@ import { useCreateTransactionMutation } from "../../redux/api/transactionApi";
 import { useSingleLedgerQuery } from "../../redux/api/ledgerApi";
 import AccountModal from "../../components/modal/AccountModal";
 import type { AccountModalTypes } from "../../interfaces/interface";
+import toast from "react-hot-toast";
 
 const TransactionEntry = () => {
   const navigate = useNavigate();
@@ -19,28 +20,32 @@ const TransactionEntry = () => {
   const categoryType = searchParams.get("type") || "expense";
 
   const [formData, setFormData] = useState<AccountModalTypes>({
-  amount: "",
-  description: "",
-  date: new Date().toISOString().split("T")[0],
-  subLedgerId: null,
-  accountId: null,
-  account: null,
-});
-
+    amount: "",
+    description: "",
+    date: new Date().toISOString().split("T")[0],
+    subLedgerId: null,
+    accountId: null,
+    account: null,
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    if (!formData?.accountId) {
+      toast.error("Please select an account");
+      return;
+    }
     try {
       const data = {
         amount: Number(formData?.amount),
         date: formData?.date,
         description: formData?.description,
         ledgerId: Number(id),
-        subLedgerId: formData?.subLedgerId? Number(formData?.subLedgerId):null,
+        subLedgerId: formData?.subLedgerId
+          ? Number(formData?.subLedgerId)
+          : null,
         accountId: Number(formData?.accountId),
       };
-      console.log(data,formData);
+      console.log(data, formData);
       const res = await createTransaction(data).unwrap();
       if (res) {
         navigate(-1);
@@ -160,7 +165,7 @@ const TransactionEntry = () => {
                   {ledger?.data?.subLedgers?.map(
                     (
                       subLedger: { name: string; id: number },
-                      index: number
+                      index: number,
                     ) => (
                       <button
                         key={index}
@@ -183,7 +188,7 @@ const TransactionEntry = () => {
                           {subLedger.name}
                         </p>
                       </button>
-                    )
+                    ),
                   )}
                   {/* <button
                     type="button"

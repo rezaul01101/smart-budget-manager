@@ -20,8 +20,8 @@ export const ledgerApi = baseApi.injectEndpoints({
       invalidatesTags: ["ledger"],
     }),
     LedgerList: build.query({
-      query: (type) => ({
-        url: `${BaseUrl}/list?type=${type}`,
+      query: (query) => ({
+        url: `${BaseUrl}/list?${query}`,
         method: "GET",
       }),
       providesTags: ["ledger"],
