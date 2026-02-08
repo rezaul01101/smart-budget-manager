@@ -21,14 +21,14 @@ const LedgerCard = ({
   const { data: ledgers, isLoading } = useLedgerListQuery(query);
 
   useEffect(() => {
-    if (!ledgers?.data?.totalAmount) return;
+    const amount = ledgers?.data?.totalAmount ?? 0;
 
     if (query.includes("income") && setTotalIncomeAmountTransactions) {
-      setTotalIncomeAmountTransactions(Number(ledgers.data.totalAmount));
+      setTotalIncomeAmountTransactions(Number(amount));
     }
 
     if (query.includes("expense") && setTotalExpenseAmountTransactions) {
-      setTotalExpenseAmountTransactions(Number(ledgers.data.totalAmount));
+      setTotalExpenseAmountTransactions(Number(amount));
     }
   }, [
     query,

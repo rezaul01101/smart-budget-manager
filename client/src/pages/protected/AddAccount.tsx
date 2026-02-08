@@ -26,7 +26,7 @@ const AddAccount = () => {
   const isEditMode = Boolean(accountId);
 
   //Api call
-  const [createAccount, { isLoading: isCreating, error }] =
+  const [createAccount, { isLoading: isCreating }] =
     useCreateAccountMutation();
 
   const [updateAccount, { isLoading: isUpdating }] = useUpdateAccountMutation();
@@ -58,10 +58,11 @@ const AddAccount = () => {
         res = await createAccount(formData).unwrap();
       }
       if (res) {
+        toast.success("Account created successfully");
         navigate(isEditMode ? -2 : -1);
       }
     } catch (err) {
-      console.error("Ledger Create failed:", error, err);
+      toast.error("Account Create failed");
     }
 
     setFormData({
