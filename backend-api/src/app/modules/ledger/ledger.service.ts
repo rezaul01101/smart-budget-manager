@@ -88,9 +88,9 @@ const getLedgersService = async (user: User, type: string, month: string) => {
   let endDate: Date | undefined;
 
   if (month) {
-    const [monthStr, yearStr] = month.split("-");
+    const [monthStr, yearStr] = month.split("/");
     const monthNum = parseInt(monthStr, 10);
-    const yearNum = 2000 + parseInt(yearStr, 10); // Convert "26" to 2026
+    const yearNum = parseInt(yearStr, 10);
 
     // Start date: first day of the month at 00:00:00
     startDate = new Date(yearNum, monthNum - 1, 1, 0, 0, 0);
@@ -98,6 +98,8 @@ const getLedgersService = async (user: User, type: string, month: string) => {
     // End date: last day of the month at 23:59:59
     endDate = new Date(yearNum, monthNum, 0, 23, 59, 59);
   }
+
+  console.log(startDate, endDate,month);
 
   const ledgers = await prisma.ledger.findMany({
     where: {

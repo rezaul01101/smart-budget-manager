@@ -13,33 +13,6 @@ import type { LucideProps } from "lucide-react";
 import type { ElementType } from "react";
 import SubLedgerModal from "../../components/modal/SubLedgerEntry";
 
-// const availableIcons = [
-//   { name: "Wallet", icon: Wallet },
-//   { name: "UtensilsCrossed", icon: UtensilsCrossed },
-//   { name: "Bus", icon: Bus },
-//   { name: "Droplet", icon: Droplet },
-//   { name: "Sparkles", icon: Sparkles },
-//   { name: "ShoppingBag", icon: ShoppingBag },
-//   { name: "Heart", icon: Heart },
-//   { name: "Briefcase", icon: Briefcase },
-//   { name: "TrendingUp", icon: TrendingUp },
-//   { name: "BriefcaseMedical", icon: BriefcaseMedical },
-//   { name: "House", icon: House},
-//   { name: "Clapperboard", icon: Clapperboard},
-//   { name: "Handshake", icon: Handshake},
-// ];
-
-// const availableColors = [
-//   { name: "Yellow", value: "yellow" },
-//   { name: "Blue", value: "blue" },
-//   { name: "Orange", value: "orange" },
-//   { name: "Purple", value: "purple" },
-//   { name: "Pink", value: "pink" },
-//   { name: "Emerald", value: "emerald" },
-//   { name: "Teal", value: "teal" },
-//   { name: "Cyan", value: "cyan" },
-//   { name: "Green", value: "green" },
-// ];
 
 const LedgerEntry = () => {
   const [openIconColorModal, setOpenIconColorModal] = useState(false);
@@ -71,7 +44,6 @@ const LedgerEntry = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
     try {
       let res;
       if (isEditMode) {

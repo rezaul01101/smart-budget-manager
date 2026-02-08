@@ -10,28 +10,28 @@ import {
 import { useEffect } from "react";
 
 const LedgerCard = ({
-  type,
   setTotalIncomeAmountTransactions,
   setTotalExpenseAmountTransactions,
+  query,
 }: {
-  type: string;
   setTotalIncomeAmountTransactions?: (amount: number) => void;
   setTotalExpenseAmountTransactions?: (amount: number) => void;
+  query: string;
 }) => {
-  const { data: ledgers, isLoading } = useLedgerListQuery(type);
+  const { data: ledgers, isLoading } = useLedgerListQuery(query);
 
   useEffect(() => {
     if (!ledgers?.data?.totalAmount) return;
 
-    if (type === "income" && setTotalIncomeAmountTransactions) {
+    if (query.includes("income") && setTotalIncomeAmountTransactions) {
       setTotalIncomeAmountTransactions(Number(ledgers.data.totalAmount));
     }
 
-    if (type === "expense" && setTotalExpenseAmountTransactions) {
+    if (query.includes("expense") && setTotalExpenseAmountTransactions) {
       setTotalExpenseAmountTransactions(Number(ledgers.data.totalAmount));
     }
   }, [
-    type,
+    query,
     ledgers?.data?.totalAmount,
     setTotalIncomeAmountTransactions,
     setTotalExpenseAmountTransactions,
