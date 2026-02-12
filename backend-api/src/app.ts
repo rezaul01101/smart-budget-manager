@@ -11,7 +11,18 @@ import cookieParser from "cookie-parser";
 import routes from "./app/routes";
 import path from "path";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
+import rateLimit from "express-rate-limit";
+
 const app: Application = express();
+
+// Rate limiting middleware
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: "Too many requests from this IP, please try again after 15 minutes",
+});
+
+app.use(limiter);
 
 app.use(
   cors({
