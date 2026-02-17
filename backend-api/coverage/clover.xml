@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1771293322174" clover="3.2.0">
+  <project timestamp="1771293322174" name="All files">
+    <metrics statements="48" coveredstatements="13" conditionals="21" coveredconditionals="5" methods="17" coveredmethods="3" elements="86" coveredelements="21" complexity="0" loc="48" ncloc="48" packages="1" files="1" classes="1"/>
+    <file name="ledger.service.ts" path="/Users/rezaulhoque/Rezaul/web/Contabovps/budget-manager--app/backend-api/src/app/modules/ledger/ledger.service.ts">
+      <metrics statements="48" coveredstatements="13" conditionals="21" coveredconditionals="5" methods="17" coveredmethods="3"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="5" count="9" type="stmt"/>
+      <line num="6" count="9" type="stmt"/>
+      <line num="8" count="9" type="stmt"/>
+      <line num="17" count="7" type="cond" truecount="5" falsecount="0"/>
+      <line num="18" count="4" type="stmt"/>
+      <line num="19" count="10" type="stmt"/>
+      <line num="27" count="6" type="stmt"/>
+      <line num="29" count="1" type="stmt"/>
+      <line num="33" count="0" type="stmt"/>
+      <line num="34" count="0" type="stmt"/>
+      <line num="36" count="0" type="stmt"/>
+      <line num="48" count="0" type="cond" truecount="0" falsecount="4"/>
+      <line num="49" count="0" type="stmt"/>
+      <line num="53" count="0" type="stmt"/>
+      <line num="61" count="0" type="stmt"/>
+      <line num="64" count="0" type="stmt"/>
+      <line num="65" count="0" type="stmt"/>
+      <line num="68" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="69" count="0" type="stmt"/>
+      <line num="72" count="0" type="stmt"/>
+      <line num="73" count="0" type="stmt"/>
+      <line num="81" count="0" type="stmt"/>
+      <line num="83" count="1" type="stmt"/>
+      <line num="84" count="0" type="stmt"/>
+      <line num="90" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="91" count="0" type="stmt"/>
+      <line num="92" count="0" type="stmt"/>
+      <line num="93" count="0" type="stmt"/>
+      <line num="96" count="0" type="stmt"/>
+      <line num="99" count="0" type="stmt"/>
+      <line num="102" count="0" type="stmt"/>
+      <line num="104" count="0" type="stmt"/>
+      <line num="142" count="0" type="stmt"/>
+      <line num="144" count="0" type="stmt"/>
+      <line num="148" count="0" type="stmt"/>
+      <line num="150" count="0" type="stmt"/>
+      <line num="156" count="1" type="stmt"/>
+      <line num="157" count="0" type="stmt"/>
+      <line num="173" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="174" count="0" type="stmt"/>
+      <line num="177" count="0" type="stmt"/>
+      <line num="180" count="1" type="stmt"/>
+      <line num="181" count="0" type="stmt"/>
+      <line num="182" count="0" type="stmt"/>
+      <line num="183" count="0" type="stmt"/>
+      <line num="190" count="0" type="stmt"/>
+      <line num="193" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

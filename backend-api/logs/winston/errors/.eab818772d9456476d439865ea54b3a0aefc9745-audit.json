@@ -6,61 +6,6 @@
     "auditLog": "/app/logs/winston/errors/.eab818772d9456476d439865ea54b3a0aefc9745-audit.json",
     "files": [
         {
-            "date": 1769328468434,
-            "name": "/app/logs/winston/errors/2026-25-01-08-error.log",
-            "hash": "2b799133c988c7ddf09f3759914f8ae4d6c57a21642a31a35bbc886488321ce2"
-        },
-        {
-            "date": 1769332491602,
-            "name": "/app/logs/winston/errors/2026-25-01-09-error.log",
-            "hash": "d118d731a10ad5a734b0862c3739fb4823cd1cf0ad811ff442d99933664f22b0"
-        },
-        {
-            "date": 1769395087075,
-            "name": "/app/logs/winston/errors/2026-26-01-02-error.log",
-            "hash": "741310c255ae4b5316ccb8a7bdeef962d04ba56a464b94f3fc9ec4da55cfb75a"
-        },
-        {
-            "date": 1769527042431,
-            "name": "/app/logs/winston/errors/2026-27-01-15-error.log",
-            "hash": "1d41697b0965d66e9044ac422a8cd6a7fa9ec3849e2d00a884684a845e23722d"
-        },
-        {
-            "date": 1769563829312,
-            "name": "/app/logs/winston/errors/2026-28-01-01-error.log",
-            "hash": "7a1226a2ff1b89fe7d70badb1b15cda505fbc895daf4702131c05ed7410cf184"
-        },
-        {
-            "date": 1769929180314,
-            "name": "/app/logs/winston/errors/2026-01-02-06-error.log",
-            "hash": "6ac57d505318f3ac426273314ad1f24d280276b5ef532d2dd13ac8992796baeb"
-        },
-        {
-            "date": 1769929214698,
-            "name": "/app/logs/winston/errors/2026-01-02-07-error.log",
-            "hash": "88ffbd712bbeb6b93544a0d33c4ef2b5de20d448c3d597ca38efbcca16fa1bac"
-        },
-        {
-            "date": 1769936945785,
-            "name": "/app/logs/winston/errors/2026-01-02-09-error.log",
-            "hash": "7a53346e46605a08577212ea97b9af7875bb4dd133a809c872fcc342e52e0606"
-        },
-        {
-            "date": 1769940660018,
-            "name": "/app/logs/winston/errors/2026-01-02-10-error.log",
-            "hash": "4ecd4f697362194ef34a95999fc1f7fab9fcdf3e54a865a22012cd9534d97f59"
-        },
-        {
-            "date": 1769944067657,
-            "name": "/app/logs/winston/errors/2026-01-02-11-error.log",
-            "hash": "8b3dbb541ca00808747ee432c437f78e66cd7e77c9dcae9abc64eb294d5dc9de"
-        },
-        {
-            "date": 1769995615177,
-            "name": "/app/logs/winston/errors/2026-02-02-01-error.log",
-            "hash": "c9ff155bd7e2940c0a19035975dc8032821974cf388b9750a34fdc3c96a7a5cd"
-        },
-        {
             "date": 1770082950119,
             "name": "/app/logs/winston/errors/2026-03-02-01-error.log",
             "hash": "106354a1f2edf3e3d701083ac3d4b499f6542c634e58d1ca68560135e2e0c8b3"
@@ -94,6 +39,11 @@
             "date": 1770529275542,
             "name": "/app/logs/winston/errors/2026-08-02-05-error.log",
             "hash": "16d11c5a6d044d366f5db223829c93ade239cdefe6e3581a2cd8ab07d3b9b1b6"
+        },
+        {
+            "date": 1771290316010,
+            "name": "/app/logs/winston/errors/2026-17-02-01-error.log",
+            "hash": "c1f51c659042eac0e895bff9467470bf6b093a37bf4466cf5845bf835645dcad"
         }
     ],
     "hashType": "sha256"

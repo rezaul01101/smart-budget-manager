@@ -14,8 +14,8 @@ const createLedgerService = async (ledgerData: LedgerType, user: User) => {
       color: color,
     },
   });
-  if (result && subLedger) {
-    const subLedgerResult = await prisma.subLedger.createMany({
+  if (result && subLedger && subLedger.length > 0) {
+    await prisma.subLedger.createMany({
       data: subLedger.map((subLedger) => ({
         ledgerId: result.id,
         userId: user.id,

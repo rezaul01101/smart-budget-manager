@@ -7,7 +7,10 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "studio": "prisma studio --port 5555 --browser none --hostname 0.0.0.0"
+    "studio": "prisma studio --port 5555 --browser none --hostname 0.0.0.0",
+    "test": "NODE_NO_WARNINGS=1 jest",
+    "test:watch": "NODE_NO_WARNINGS=1 jest --watch",
+    "test:coverage": "NODE_NO_WARNINGS=1 jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -37,10 +40,14 @@
     "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.10.3",
     "@types/pg": "^8.16.0",
+    "jest": "^30.2.0",
     "prisma": "^7.1.0",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.6",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
   }
